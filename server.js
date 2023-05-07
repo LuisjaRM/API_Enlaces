@@ -21,7 +21,12 @@ const { handleErrors, notFound } = require("./middlewares/middlewares");
 
 // Controllers requires ↓
 
-const { newUser, login, modifyUser } = require("./controllers/userControllers");
+const {
+  newUser,
+  login,
+  modifyUser,
+  modifyPasswrod,
+} = require("./controllers/userControllers");
 
 const {
   newUrl,
@@ -36,16 +41,21 @@ const {
 
 app.post("/users/newUser", newUser);
 app.post("/users/login", login);
-app.path("/users/modifyUser", modifyUser);
+app.patch("/users/modifyUser", modifyUser);
+app.patch("/users/modifyPassword", modifyPasswrod);
 
 // Urls routers ↓
 
 app.post("/urls/newUrl", newUrl);
 app.get("/urls", allUrls);
 app.get("/urls/:id", urlByID);
-app.path("/urls/modifyUrl", modifyUrl);
+app.patch("/urls/modifyUrl", modifyUrl);
 app.delete("/urls/:id", deleteUrl);
 app.post("urls/:id/vote", voteUrl);
+// poner un comentario
+// modificar un comentario
+// borrar un comentario
+// votar un comentario
 
 // Middleware Error y Not Found ↓
 

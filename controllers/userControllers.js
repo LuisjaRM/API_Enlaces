@@ -37,10 +37,22 @@ const modifyUser = async (req, res, next) => {
   }
 };
 
+const modifyPasswrod = async (req, res, next) => {
+  try {
+    res.send({
+      status: "ok",
+      message: "Soy un path de modifyPassword",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Exports ↓
 
 module.exports = {
   newUser,
   login,
   modifyUser,
+  modifyPasswrod,
 };

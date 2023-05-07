@@ -3,6 +3,8 @@
 require("dotenv").config();
 const { getConnection } = require("./connectionDB");
 
+// Añadir chalk
+
 // Database config ↓
 
 async function createDB() {
@@ -32,14 +34,11 @@ async function createDB() {
         role ENUM("admin", "normal") DEFAULT "normal" NOT NULL,
         deleted BOOLEAN DEFAULT false,
         lastAuthUpdate DATETIME,
+        active BOOLEAN DEFAULT false,
+        regCode CHAR(36),
+        recoverCode CHAR(36)
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
      )`);
-
-    //  CREATE TABLE users (
-    //     active BOOLEAN DEFAULT false,
-    //     regCode CHAR(36),
-    //     recoverCode CHAR(36)
-    // );
 
     await connection.query(`
      CREATE TABLE urls (
@@ -51,6 +50,9 @@ async function createDB() {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id)
      )`);
+
+    // precio
+    // descuento
 
     await connection.query(`
     CREATE TABLE comments (

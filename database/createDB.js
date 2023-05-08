@@ -36,7 +36,7 @@ async function createDB() {
         lastAuthUpdate DATETIME,
         active BOOLEAN DEFAULT false,
         regCode CHAR(36),
-        recoverCode CHAR(36)
+        recoverCode CHAR(36),
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
      )`);
 

@@ -1,14 +1,36 @@
 // Requires ↓
 
-const { a } = require("../database/userDB");
+const { generateError } = require("../services/helpers");
+
+// Requires Functions database ↓
+
+const { createNewUser } = require("../database/userDB");
+
+// Requires Jois ↓
+
+const { newUserJoi } = require("../jois/schemas");
 
 // Controllers ↓
 
 const newUser = async (req, res, next) => {
   try {
+    const { email, password, user } = req.body;
+
+    // Joi validation
+    const schema = newUserJoi;
+    const validation = schema.validate(req.body);
+
+    if (validation.error) {
+      throw generateError(validation.error.message, 401);
+    }
+
+    // Create new user
+    const id = await createNewUser(email, password, user);
+
+    // Res.send
     res.send({
       status: "ok",
-      message: "Soy un post de newUser",
+      message: `${id}`,
     });
   } catch (error) {
     next(error);
@@ -37,7 +59,7 @@ const modifyUser = async (req, res, next) => {
   }
 };
 
-const modifyPasswrod = async (req, res, next) => {
+const modifyPassword = async (req, res, next) => {
   try {
     res.send({
       status: "ok",
@@ -54,5 +76,5 @@ module.exports = {
   newUser,
   login,
   modifyUser,
-  modifyPasswrod,
+  modifyPassword,
 };

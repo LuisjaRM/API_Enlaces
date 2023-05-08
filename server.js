@@ -39,6 +39,8 @@ const {
   voteUrl,
 } = require("./controllers/urls/urlControllers");
 
+const validateUser = require("./database/validateUserDB");
+
 // Users routers ↓
 
 app.post("/users/newUser", newUser);
@@ -46,6 +48,7 @@ app.post("/users/login", login);
 app.patch("/users/modifyUser", modifyUser);
 // delete user
 app.patch("/users/modifyPassword", modifyPassword);
+app.get("/users/validate/:regCode", validateUser);
 // recoverUSerPassword
 // ResetUserPassword
 

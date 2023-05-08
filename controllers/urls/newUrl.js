@@ -1,6 +1,6 @@
 // Requires ↓
 
-const { generateError } = require("../../services/helpers");
+const { generateError } = require("../../services/generateError");
 
 // Requires Functions database ↓
 

@@ -1,6 +1,6 @@
 // Requires ↓
 
-const { generateError } = require("../../services/helpers");
+const { generateError } = require("../../services/generateError");
 
 // Requires Functions database ↓
 
@@ -30,7 +30,7 @@ const newUser = async (req, res, next) => {
     // Res.send
     res.send({
       status: "ok",
-      message: `${id}`,
+      message: `El usuario con el id:${id} se ha creado correctamente`,
     });
   } catch (error) {
     next(error);

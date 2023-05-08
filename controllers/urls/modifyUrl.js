@@ -12,15 +12,15 @@ const {} = require("../../jois/schemas");
 
 // Controller ↓
 
-const login = async (req, res, next) => {
+const modifyUrl = async (req, res, next) => {
   try {
     res.send({
       status: "ok",
-      message: "Soy un post de login",
+      message: "Soy un path de modifyUrl",
     });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { login };
+module.exports = { modifyUrl };

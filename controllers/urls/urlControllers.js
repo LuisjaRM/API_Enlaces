@@ -1,5 +1,5 @@
 // Requires ↓
-const { a } = require("../database/urlDB");
+const { a } = require("../../database/urlDB");
 
 // Controllers ↓
 

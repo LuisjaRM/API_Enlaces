@@ -28,7 +28,7 @@ const {
   login,
   modifyUser,
   modifyPassword,
-} = require("./controllers/userControllers");
+} = require("./controllers/users/userControllers");
 
 const {
   newUrl,
@@ -37,15 +37,17 @@ const {
   modifyUrl,
   deleteUrl,
   voteUrl,
-} = require("./controllers/urlControllers");
+} = require("./controllers/urls/urlControllers");
 
 // Users routers ↓
 
 app.post("/users/newUser", newUser);
 app.post("/users/login", login);
 app.patch("/users/modifyUser", modifyUser);
-app.patch("/users/modifyPassword", modifyPassword);
 // delete user
+app.patch("/users/modifyPassword", modifyPassword);
+// recoverUSerPassword
+// ResetUserPassword
 
 // Urls routers ↓
 

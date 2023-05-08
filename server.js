@@ -3,6 +3,7 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 
 // envs ↓
 
@@ -14,6 +15,7 @@ const app = express();
 
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(cors());
 
 // Middlewares requires ↓
 
@@ -25,7 +27,7 @@ const {
   newUser,
   login,
   modifyUser,
-  modifyPasswrod,
+  modifyPassword,
 } = require("./controllers/userControllers");
 
 const {
@@ -42,7 +44,8 @@ const {
 app.post("/users/newUser", newUser);
 app.post("/users/login", login);
 app.patch("/users/modifyUser", modifyUser);
-app.patch("/users/modifyPassword", modifyPasswrod);
+app.patch("/users/modifyPassword", modifyPassword);
+// delete user
 
 // Urls routers ↓
 

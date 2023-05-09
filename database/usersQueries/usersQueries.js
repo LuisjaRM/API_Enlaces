@@ -1,11 +1,11 @@
 // Requires ↓
 
 const { createNewUser } = require("./createNewUser");
-const { validateUser } = require("./validateUser");
+const { validateUserQuery } = require("./validateUserQuery");
 
 // Exports ↓
 
 module.exports = {
   createNewUser,
-  validateUser,
+  validateUserQuery,
 };

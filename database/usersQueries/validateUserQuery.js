@@ -1,14 +1,14 @@
 // Requires ↓
 
-const { getConnection } = require("../connectionDB");
+const { generateError } = require("../../services/generateError");
+const { getConnection } = require("../../database/connectionDB");
 
 // Functions ↓
 
-const validateUser = async (req, res) => {
+const validateUserQuery = async (regCode) => {
+  let connection;
   try {
     const connect = await getConnection();
-
-    const { regCode } = req.params;
 
     // Check that user exists with that regCode
     const [user] = await connect.query(
@@ -21,7 +21,7 @@ const validateUser = async (req, res) => {
     );
 
     if (user.length === 0)
-      return res.status(404).send("Ningún usuario con ese código");
+      return generateError("Ningún usuario con ese código", 404);
 
     // Active user and delete regCode
     await connect.query(
@@ -32,17 +32,9 @@ const validateUser = async (req, res) => {
             `,
       [regCode]
     );
-
-    connect.release();
-
-    res.status(200).send({
-      status: "ok",
-      message: "Usuario validado",
-    });
-  } catch (error) {
-    console.log(error);
-    res.send(error);
+  } finally {
+    if (connection) connection.release();
   }
 };
 
-module.exports = { validateUser };
+module.exports = { validateUserQuery };

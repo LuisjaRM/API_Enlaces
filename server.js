@@ -19,7 +19,11 @@ app.use(cors());
 
 // Middlewares requires ↓
 
-const { handleErrors, notFound } = require("./middlewares/middlewares");
+const {
+  handleErrors,
+  notFound,
+  userExists,
+} = require("./middlewares/middlewares");
 
 // Controllers requires ↓
 
@@ -45,7 +49,7 @@ const {
 
 // Users routers ↓
 
-app.post("/users/new-user", newUser);
+app.post("/users/new-user", userExists, newUser);
 app.get("/users/validate/:regCode", validateUser);
 app.post("/users/login", login);
 app.patch("/users/modify-user/:id", modifyUser);

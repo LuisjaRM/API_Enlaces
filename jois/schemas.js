@@ -20,4 +20,9 @@ const newUserJoi = joiPassword.object().keys({
   user: joiPassword.string().min(4).max(15).required(),
 });
 
-module.exports = { newUserJoi };
+const modifyUserJoi = joiPassword.object().keys({
+  email: joiPassword.string().email(),
+  user: joiPassword.string().min(4).max(15),
+});
+
+module.exports = { newUserJoi, modifyUserJoi };

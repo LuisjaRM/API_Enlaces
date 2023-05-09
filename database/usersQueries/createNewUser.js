@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 // Requires ↓
 
 const { getConnection } = require("../connectionDB");
-const { generateError } = require("../../services/generateError");
+// const { generateError } = require("../../services/generateError");
 const { sendMail } = require("../../services/sendMail");
 
 // Functions ↓
@@ -15,19 +15,6 @@ const createNewUser = async (email, password, user) => {
   let connection;
   try {
     connection = await getConnection();
-
-    // Check that no other user exists with that mail
-    const [userExists] = await connection.query(
-      `SELECT id FROM users WHERE email = ?`,
-      [email]
-    );
-
-    if (userExists.length > 0) {
-      throw generateError(
-        "Ya existe un usuario registrado con ese email.",
-        409
-      );
-    } // Posible Middleware
 
     // Confirmation email
 
@@ -52,7 +39,7 @@ const createNewUser = async (email, password, user) => {
       [email, passwordHash, user, regCode]
     );
 
-    // Return user
+    // Return ID
     return newUser.insertId;
   } finally {
     if (connection) connection.release();

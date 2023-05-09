@@ -1,9 +1,11 @@
-// Requires ↓
+// Requires npm ↓
 
 require("dotenv").config();
-const { getConnection } = require("./connectionDB");
+const chalk = require("chalk");
 
-// Añadir chalk
+// Requires ↓
+
+const { getConnection } = require("./connectionDB");
 
 // Database config ↓
 
@@ -15,14 +17,14 @@ async function createDB() {
 
     // await connection.query(`CREATE DATABASE enlaces`);
 
-    console.log("Borrando tablas existentes");
+    console.log(chalk.blue("Borrando tablas existentes"));
 
     await connection.query(`DROP TABLE IF EXISTS votes`);
     await connection.query(`DROP TABLE IF EXISTS comments`);
     await connection.query(`DROP TABLE IF EXISTS urls`);
     await connection.query(`DROP TABLE IF EXISTS users`);
 
-    console.log("Creando tablas");
+    console.log(chalk.blue("Creando tablas"));
 
     await connection.query(`
      CREATE TABLE users (

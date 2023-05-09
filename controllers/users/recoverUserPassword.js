@@ -12,15 +12,15 @@ const {} = require("../../jois/schemas");
 
 // Controller ↓
 
-const allUrls = async (req, res, next) => {
+const recoverUserPassword = async (req, res, next) => {
   try {
     res.send({
       status: "ok",
-      message: "Soy un get de allUrls",
+      message: "Soy un post de recoverUserPassword",
     });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { allUrls };
+module.exports = { recoverUserPassword };

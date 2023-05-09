@@ -1,10 +1,10 @@
-// Requires ↓
+// Requires Functions services ↓
 
 const { generateError } = require("../../services/generateError");
 
 // Requires Functions database ↓
 
-const { createNewUser } = require("../../database/userDB");
+const { createNewUser } = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 

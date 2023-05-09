@@ -1,4 +1,8 @@
-const { getConnection } = require("./connectionDB");
+// Requires ↓
+
+const { getConnection } = require("../connectionDB");
+
+// Functions ↓
 
 const validateUser = async (req, res) => {
   try {
@@ -6,6 +10,7 @@ const validateUser = async (req, res) => {
 
     const { regCode } = req.params;
 
+    // Check that user exists with that regCode
     const [user] = await connect.query(
       `
             SELECT id
@@ -15,11 +20,10 @@ const validateUser = async (req, res) => {
       [regCode]
     );
 
-    //si no existe retorno un error
     if (user.length === 0)
-      return res.status(404).send("Ningun usuario con ese código");
+      return res.status(404).send("Ningún usuario con ese código");
 
-    //activamos el usuario y eliminamos el codigo de registro
+    // Active user and delete regCode
     await connect.query(
       `
             UPDATE users
@@ -41,4 +45,4 @@ const validateUser = async (req, res) => {
   }
 };
 
-module.exports = validateUser;
+module.exports = { validateUser };

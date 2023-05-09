@@ -1,10 +1,13 @@
-// Requires ↓
+// Requires npm ↓
 
-const { getConnection } = require("../database/connectionDB");
-const { generateError } = require("../services/generateError");
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
-const sendMail = require("../services/sendMail");
+
+// Requires ↓
+
+const { getConnection } = require("../connectionDB");
+const { generateError } = require("../../services/generateError");
+const { sendMail } = require("../../services/sendMail");
 
 // Functions ↓
 
@@ -24,7 +27,8 @@ const createNewUser = async (email, password, user) => {
         "Ya existe un usuario registrado con ese email.",
         409
       );
-    }
+    } // Posible Middleware
+
     // Confirmation email
 
     // Generate new regCode with uuidv4
@@ -32,11 +36,11 @@ const createNewUser = async (email, password, user) => {
 
     // Write bodyMail
     const bodyMail = `
-        Te registraste en Godlinks.
-        Pulsa el enlace para activar la cuenta: ${process.env.PUBLIC_HOST}${regCode}
-        `;
-    // Call function sendMail
+          Te registraste en Godlinks.
+          Pulsa el enlace para activar la cuenta: ${process.env.PUBLIC_HOST}${regCode}
+          `;
 
+    // Call function sendMail
     sendMail(email, "Correo de verificación de Godlinks", bodyMail);
 
     // Crypt password

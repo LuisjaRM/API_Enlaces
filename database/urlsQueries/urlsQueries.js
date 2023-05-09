@@ -1,6 +1,6 @@
 // Requires ↓
 
-const { getConnection } = require("../database/connectionDB");
+const { getConnection } = require("../connectionDB");
 
 // Functions ↓
 

@@ -4,7 +4,7 @@ const { generateError } = require("../../services/generateError");
 
 // Requires Functions database ↓
 
-const {} = require("../../database/userDB");
+const {} = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 

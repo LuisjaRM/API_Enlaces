@@ -21,7 +21,7 @@ const newUser = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      throw generateError(validation.error.message, 401);
+      return generateError(validation.error.message, 401);
     }
 
     // Create new user

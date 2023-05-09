@@ -28,7 +28,7 @@ const newUser = async (req, res, next) => {
     const id = await createNewUser(email, password, user);
 
     // Res.send
-    res.send({
+    res.status(200).send({
       status: "ok",
       message: `El usuario con el id:${id} se ha creado correctamente`,
     });

@@ -23,6 +23,7 @@ const {
   handleErrors,
   notFound,
   userExists,
+  authUser,
 } = require("./middlewares/middlewares");
 
 // Controllers requires ↓
@@ -52,20 +53,20 @@ const {
 app.post("/users/new-user", userExists, newUser);
 app.get("/users/validate/:regCode", validateUser);
 app.post("/users/login", login);
-app.patch("/users/modify-user/:id", modifyUser);
-app.delete("/users/delete/:id", deleteUser);
-app.patch("/users/modify-password", modifyPassword);
-app.post("/users/recover-password", recoverUserPassword);
-app.post("/users/reset-password", ResetUserPassword);
+app.patch("/users/modify-user/:id", authUser, modifyUser);
+app.delete("/users/delete/:id", authUser, deleteUser);
+app.patch("/users/modify-password", authUser, modifyPassword);
+app.post("/users/recover-password", authUser, recoverUserPassword);
+app.post("/users/reset-password", authUser, ResetUserPassword);
 
 // Urls routers ↓
 
-app.post("/urls/new-url", newUrl);
-app.get("/urls", allUrls);
+app.post("/urls/new-url", authUser, newUrl);
+app.get("/urls", authUser, allUrls);
 app.get("/urls/:id", urlByID);
-app.patch("/urls/modify-url/:id", modifyUrl);
-app.delete("/urls/delete/:id", deleteUrl);
-app.post("urls/vote/:id", voteUrl);
+app.patch("/urls/modify-url/:id", authUser, modifyUrl);
+app.delete("/urls/delete/:id", authUser, deleteUrl);
+app.post("urls/vote/:id", authUser, voteUrl);
 // poner un comentario
 // modificar un comentario
 // borrar un comentario

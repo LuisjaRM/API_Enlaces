@@ -1,8 +1,6 @@
 // Requires Functions database ↓
 
-const {
-  validateUserQuery,
-} = require("../../database/usersQueries/usersQueries");
+const { generateRegCode } = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 
@@ -14,7 +12,7 @@ const validateUser = async (req, res) => {
   try {
     const { regCode } = req.params;
 
-    await validateUserQuery(regCode);
+    await generateRegCode(regCode);
 
     res.status(200).send({
       status: "ok",

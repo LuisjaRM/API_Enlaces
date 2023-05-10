@@ -4,7 +4,7 @@ const { generateError } = require("../../services/generateError");
 
 // Requires Functions database ↓
 
-const { modifyUserQuery } = require("../../database/usersQueries/usersQueries");
+const { updateUser } = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 
@@ -22,9 +22,8 @@ const modifyUser = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      return generateError(validation.error.message, 401);
+      throw generateError(validation.error.message, 401);
     }
-
 
     // Check id or admin role
     if (req.userInfo.id !== parseInt(id) && req.userInfo.role != "admin") {
@@ -33,10 +32,20 @@ const modifyUser = async (req, res, next) => {
         401
       );
     }
-    
-    res.send({
+
+    try {
+      // Save avatar in a var
+      const filesAvatar = req.files.avatar;
+
+      await updateUser(id, email, user, filesAvatar);
+    } catch (error) {
+      await updateUser(id, email, user);
+    }
+
+    // Res.send
+    res.status(200).send({
       status: "ok",
-      message: `El usuario con el id:${id} se ha actualizado correctamente`,
+      message: "Las modificaciones se han realizado con éxito",
     });
   } catch (error) {
     next(error);

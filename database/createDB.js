@@ -43,26 +43,28 @@ async function createDB() {
      )`);
 
     await connection.query(`
-     CREATE TABLE urls (
+     CREATE TABLE offers (
         id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
         user_id INTEGER UNSIGNED NOT NULL,
+        url VARCHAR(280),
         title VARCHAR(60) NOT NULL,
         description VARCHAR(280),
+        price decimal(10,0),
+        offer_price decimal(10,0),
+        plataform VARCHAR(60),
+        offer expiry date,
         image VARCHAR(100),
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id)
      )`);
-
-    // precio
-    // descuento
 
     await connection.query(`
     CREATE TABLE comments (
        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
        dateComments DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
        comment VARCHAR(280),
-       url_id INT UNSIGNED NOT NULL,
-       FOREIGN KEY (url_id) REFERENCES urls(id)
+       offers_id INT UNSIGNED NOT NULL,
+       FOREIGN KEY (offers_id) REFERENCES offers(id)
    )`);
 
     await connection.query(`
@@ -72,11 +74,11 @@ async function createDB() {
         vote TINYINT NOT NULL CHECK (vote IN (1,2,3,4,5)),
         user_id INT UNSIGNED NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id),
-        url_id INT UNSIGNED NOT NULL,
-        FOREIGN KEY (url_id) REFERENCES urls(id),
+        offers_id INT UNSIGNED NOT NULL,
+        FOREIGN KEY (offers_id) REFERENCES offers(id),
         comments_id INT UNSIGNED NOT NULL,
         FOREIGN KEY (comments_id) REFERENCES comments(id),
-        UNIQUE (user_id, url_id)
+        UNIQUE (user_id, offers_id)
     )`);
   } catch (error) {
     console.error(error);

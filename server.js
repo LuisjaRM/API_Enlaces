@@ -3,6 +3,7 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
+const fileUpload = require("express-fileupload");
 const cors = require("cors");
 
 // envs ↓
@@ -15,7 +16,15 @@ const app = express();
 
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(fileUpload());
 app.use(cors());
+
+// Config static dir
+
+const path = require("path");
+const staticDir = path.join(__dirname, "./uploads");
+
+app.use(express.static(staticDir));
 
 // Middlewares requires ↓
 
@@ -63,7 +72,7 @@ app.post("/users/reset-password", authUser, ResetUserPassword);
 
 app.post("/urls/new-url", authUser, newUrl);
 app.get("/urls", authUser, allUrls);
-app.get("/urls/:id", urlByID);
+app.get("/urls/:id", authUser, urlByID);
 app.patch("/urls/modify-url/:id", authUser, modifyUrl);
 app.delete("/urls/delete/:id", authUser, deleteUrl);
 app.post("urls/vote/:id", authUser, voteUrl);

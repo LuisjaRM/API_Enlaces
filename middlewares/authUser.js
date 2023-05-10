@@ -29,9 +29,6 @@ const authUser = async (req, res, next) => {
 
     connection = await getConnection();
 
-    /**Comprobamos que el token sea valido respecto a lastAuthUpdate */
-    //es decir cuand fue usado por ultima vez para saber si caducó o no
-
     // Check lastAuthUpdate
     const [user] = await connection.query(
       `

@@ -22,8 +22,9 @@ const modifyUser = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      throw generateError(validation.error.message, 401);
+      return generateError(validation.error.message, 401);
     }
+
 
     // Check id or admin role
     if (req.userInfo.id !== parseInt(id) && req.userInfo.role != "admin") {
@@ -32,7 +33,7 @@ const modifyUser = async (req, res, next) => {
         401
       );
     }
-
+    
     res.send({
       status: "ok",
       message: `El usuario con el id:${id} se ha actualizado correctamente`,

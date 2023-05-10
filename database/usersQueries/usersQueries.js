@@ -1,13 +1,14 @@
 // Requires ↓
 
 const { createNewUser } = require("./createNewUser");
-const { validateUserQuery } = require("./validateUserQuery");
-const { loginQuery } = require("./loginQuery");
-
+const { generateRegCode } = require("./generateRegCode");
+const { checkEmailandPassword } = require("./checkEmailandPassword");
+const { modifyUserQuery } = require("./modifyUserQuery");
 // Exports ↓
 
 module.exports = {
   createNewUser,
-  validateUserQuery,
-  loginQuery,
+  generateRegCode,
+  checkEmailandPassword,
+  modifyUserQuery,
 };

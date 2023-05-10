@@ -8,7 +8,9 @@ const jwt = require("jsonwebtoken");
 
 // Requires Functions database ↓
 
-const { loginQuery } = require("../../database/usersQueries/usersQueries");
+const {
+  checkEmailandPassword,
+} = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 
@@ -27,15 +29,19 @@ const login = async (req, res, next) => {
     if (validation.error) {
       return generateError(validation.error.message, 400);
     }
-    // Aqui va la query
-    const info = await loginQuery(email, password);
 
-    // Create token
+    // Check password and email
+    const info = await checkEmailandPassword(email, password);
+
+    // Check info
     if (info === undefined) {
       throw generateError("Email o contraseña incorrectos", 401);
     }
+
+    // If the info is a object, generate a token
     const token = jwt.sign(info, process.env.SECRET_TOKEN, { expiresIn: "1d" });
 
+    // Send token
     res.status(200).send({
       status: "ok",
       message: "Login",

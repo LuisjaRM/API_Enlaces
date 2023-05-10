@@ -5,7 +5,7 @@ const { getConnection } = require("../../database/connectionDB");
 
 // Functions ↓
 
-const validateUserQuery = async (regCode) => {
+const generateRegCode = async (regCode) => {
   let connection;
   try {
     const connect = await getConnection();
@@ -37,4 +37,4 @@ const validateUserQuery = async (regCode) => {
   }
 };
 
-module.exports = { validateUserQuery };
+module.exports = { generateRegCode };

@@ -25,4 +25,5 @@ const modifyUserJoi = joiPassword.object().keys({
   user: joiPassword.string().min(4).max(15),
 });
 
-module.exports = { newUserJoi, modifyUserJoi };
+
+module.exports = { newUserJoi, loginJoi, modifyUserJoi };

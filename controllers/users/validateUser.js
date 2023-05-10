@@ -1,10 +1,6 @@
-// Requires ↓
-
-const { generateError } = require("../../services/generateError");
-
 // Requires Functions database ↓
 
-const {} = require("../../database/usersQueries/usersQueries");
+const { generateRegCode } = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 
@@ -12,14 +8,19 @@ const {} = require("../../jois/schemas");
 
 // Controller ↓
 
-const validateUser = async (req, res, next) => {
+const validateUser = async (req, res) => {
   try {
-    res.send({
+    const { regCode } = req.params;
+
+    await generateRegCode(regCode);
+
+    res.status(200).send({
       status: "ok",
-      message: "Soy un path de validateUser",
+      message: `Usuario validado`,
     });
   } catch (error) {
-    next(error);
+    console.log(error);
+    res.send(error);
   }
 };
 

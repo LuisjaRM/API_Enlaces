@@ -21,14 +21,14 @@ const newUser = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      throw generateError(validation.error.message, 401);
+      return generateError(validation.error.message, 401);
     }
 
     // Create new user
     const id = await createNewUser(email, password, user);
 
     // Res.send
-    res.send({
+    res.status(200).send({
       status: "ok",
       message: `El usuario con el id:${id} se ha creado correctamente`,
     });

@@ -1,3 +1,9 @@
+// Requires ↓
+
+const chalk = require("chalk");
+
+// Function ↓
+
 const error = async (error, req, res, next) => {
   console.error(error);
 

@@ -2,21 +2,52 @@
 
 const { generateError } = require("../../services/generateError");
 
+// Requires npm  ↓
+
+const jwt = require("jsonwebtoken");
+
 // Requires Functions database ↓
 
-const {} = require("../../database/usersQueries/usersQueries");
+const {
+  checkEmailandPassword,
+} = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 
-const {} = require("../../jois/schemas");
+const { loginJoi } = require("../../jois/schemas");
 
 // Controller ↓
 
 const login = async (req, res, next) => {
   try {
-    res.send({
+    const { email, password } = req.body;
+
+    // Joi validation
+    const schema = loginJoi;
+    const validation = schema.validate(req.body);
+
+    if (validation.error) {
+      return generateError(validation.error.message, 400);
+    }
+
+    // Check password and email
+    const info = await checkEmailandPassword(email, password);
+
+    // Check info
+    if (info === undefined) {
+      throw generateError("Email o contraseña incorrectos", 401);
+    }
+
+    // If the info is a object, generate a token
+    const token = jwt.sign(info, process.env.SECRET_TOKEN, { expiresIn: "1d" });
+
+    // Send token
+    res.status(200).send({
       status: "ok",
-      message: "Soy un post de login",
+      message: "Login",
+      data: {
+        token,
+      },
     });
   } catch (error) {
     next(error);

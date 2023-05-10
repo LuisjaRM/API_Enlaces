@@ -28,7 +28,7 @@ const createNewUser = async (email, password, user) => {
           `;
 
     // Call function sendMail
-    sendMail(email, "Correo de verificación de Godlinks", bodyMail);
+    await sendMail(email, "Correo de verificación de Godlinks", bodyMail);
 
     // Crypt password
     const passwordHash = await bcrypt.hash(password, 8);

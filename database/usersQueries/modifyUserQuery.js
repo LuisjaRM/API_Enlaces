@@ -1,9 +1,13 @@
 // Requires npm ↓
 
+const { v4: uuidv4 } = require("uuid");
+
 // Requires ↓
 
 const { getConnection } = require("../../database/connectionDB");
 const { generateError } = require("../../services/generateError");
+const { sendMail } = require("../../services/sendMail");
+// const savePhoto = require("../../service/savePhoto");
 
 // Functions ↓
 
@@ -36,6 +40,30 @@ const modifyUserQuery = async (id, email, user) => {
       if (existsEmail.length > 0) {
         return generateError("Ya existe un usuario con ese email", 409);
       }
+
+      // Confirmation email
+
+      // Generate new regCode with uuidv4
+      const regCode = uuidv4();
+
+      // Write bodyMail
+      const bodyMail = `
+          Has cambiado tu email de Godlinks.
+          Pulsa el enlace para confirmar el cambio: ${process.env.PUBLIC_HOST}${regCode}
+          `;
+
+      // Call function sendMail
+      await sendMail(email, "Correo de verificación de Godlinks", bodyMail);
+
+      // Update email
+      await connect.query(
+        `
+              UPDATE users
+              SET email = ?, lastAuthUpdate = ?
+              WHERE id = ?
+            `,
+        [email, new Date()]
+      );
     }
 
     // Check if user exists and is not the same that old user
@@ -56,9 +84,18 @@ const modifyUserQuery = async (id, email, user) => {
           409
         );
       }
+
+      // Update user
+      await connect.query(
+        `
+              UPDATE users
+              SET user = ?, lastAuthUpdate = ?
+              WHERE id = ?
+            `,
+        [user, new Date()]
+      );
     }
 
-    // SendEmail y validate
     //update
   } finally {
     if (connection) connection.release();

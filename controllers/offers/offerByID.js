@@ -4,23 +4,26 @@ const { generateError } = require("../../services/generateError");
 
 // Requires Functions database ↓
 
-const {} = require("../../database/offersQueries/offersQueries");
+const {} = require("../../database/offersQueries/expOffersQueries");
 
-// Requires Jois ↓
-
-const {} = require("../../jois/offerSchemas");
 
 // Controller ↓
 
 const offerByID = async (req, res, next) => {
   try {
+
+   const offerID = await getOfferByID()
+
     res.send({
       status: "ok",
-      message: "Soy un get de urlByID",
+      message: offerID,
     });
   } catch (error) {
     next(error);
   }
 };
+
+
+
 
 module.exports = { offerByID };

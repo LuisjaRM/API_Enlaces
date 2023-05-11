@@ -3,6 +3,8 @@
 const { createOffer } = require("./createOffer");
 
 
+const {getOfferByID} = require("./offerIDQuery");
+
 
 const { getAllOffers } = require("./getOffersQuery");
 
@@ -11,8 +13,6 @@ const { getAllOffers } = require("./getOffersQuery");
 
 module.exports = {
   createOffer,
-
-
+  getOfferByID,
   getAllOffers,
-
 };

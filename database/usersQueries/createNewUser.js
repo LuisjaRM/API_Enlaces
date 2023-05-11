@@ -6,7 +6,6 @@ const { v4: uuidv4 } = require("uuid");
 // Requires ↓
 
 const { getConnection } = require("../connectionDB");
-// const { generateError } = require("../../services/generateError");
 const { sendMail } = require("../../services/sendMail");
 
 // Functions ↓
@@ -16,7 +15,7 @@ const createNewUser = async (email, password, user) => {
   try {
     connection = await getConnection();
 
-    // Confirmation email
+    // Create confirmation email
 
     // Generate new regCode with uuidv4
     const regCode = uuidv4();

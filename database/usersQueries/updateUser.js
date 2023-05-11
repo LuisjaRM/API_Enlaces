@@ -42,7 +42,7 @@ const updateUser = async (id, email, user, filesAvatar) => {
           return generateError("Ya existe un usuario con ese email", 409);
         }
 
-        // Confirmation email
+        // Create confirmation email
 
         // Generate new regCode with uuidv4
         const regCode = uuidv4();
@@ -56,11 +56,11 @@ const updateUser = async (id, email, user, filesAvatar) => {
         // Call function sendMail
         await sendMail(email, "Correo de verificación de Godlinks", bodyMail);
 
-        // Update email
+        // Update email and set active
         await connection.query(
           `
                 UPDATE users
-                SET email = ?
+                SET email = ?, active = 0
                 WHERE id = ?
               `,
           [email, id]

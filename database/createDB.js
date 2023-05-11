@@ -21,7 +21,7 @@ async function createDB() {
 
     await connection.query(`DROP TABLE IF EXISTS votes`);
     await connection.query(`DROP TABLE IF EXISTS comments`);
-    await connection.query(`DROP TABLE IF EXISTS urls`);
+    await connection.query(`DROP TABLE IF EXISTS offers`);
     await connection.query(`DROP TABLE IF EXISTS users`);
 
     console.log(chalk.blue("Creando tablas"));
@@ -52,7 +52,7 @@ async function createDB() {
         price decimal(10,0),
         offer_price decimal(10,0),
         plataform VARCHAR(60),
-        offer expiry date,
+        offer_expiry date,
         image VARCHAR(100),
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id)
@@ -80,6 +80,8 @@ async function createDB() {
         FOREIGN KEY (comments_id) REFERENCES comments(id),
         UNIQUE (user_id, offers_id)
     )`);
+
+    console.log(chalk.yellow("Base de datos creada"));
   } catch (error) {
     console.error(error);
   } finally {

@@ -37,8 +37,10 @@ const modifyUser = async (req, res, next) => {
       // Save avatar in a var
       const filesAvatar = req.files.avatar;
 
+      // Try set avatar if exists
       await updateUser(id, email, user, filesAvatar);
     } catch (error) {
+      // If not exists call updateUser without filesAvatar
       await updateUser(id, email, user);
     }
 

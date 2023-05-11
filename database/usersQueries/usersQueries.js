@@ -1,7 +1,7 @@
 // Requires ↓
 
 const { createNewUser } = require("./createNewUser");
-const { generateRegCode } = require("./generateRegCode");
+const { activateUser } = require("./activateUser");
 const { checkEmailandPassword } = require("./checkEmailandPassword");
 const { updateUser } = require("./updateUser");
 
@@ -9,7 +9,7 @@ const { updateUser } = require("./updateUser");
 
 module.exports = {
   createNewUser,
-  generateRegCode,
+  activateUser,
   checkEmailandPassword,
   updateUser,
 };

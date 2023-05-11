@@ -49,13 +49,13 @@ const {
 } = require("./controllers/users/userControllers");
 
 const {
-  newUrl,
-  allUrls,
-  urlByID,
-  modifyUrl,
-  deleteUrl,
-  voteUrl,
-} = require("./controllers/urls/urlControllers");
+  newOffer,
+  allOffers,
+  offerByID,
+  modifyOffer,
+  deleteOffer,
+  voteOffer,
+} = require("./controllers/offers/offerControllers");
 
 // Users routers ↓
 
@@ -68,14 +68,14 @@ app.patch("/users/modify-password", authUser, modifyPassword);
 app.post("/users/recover-password", authUser, recoverUserPassword);
 app.post("/users/reset-password", authUser, ResetUserPassword);
 
-// Urls routers ↓
+// Offers routers ↓
 
-app.post("/urls/new-url", authUser, newUrl);
-app.get("/urls", authUser, allUrls);
-app.get("/urls/:id", authUser, urlByID);
-app.patch("/urls/modify-url/:id", authUser, modifyUrl);
-app.delete("/urls/delete/:id", authUser, deleteUrl);
-app.post("urls/vote/:id", authUser, voteUrl);
+app.post("/offers/new-offer", authUser, newOffer);
+app.get("/offers", authUser, allOffers);
+app.get("/offers/:id", authUser, offerByID);
+app.patch("/offers/modify-offer/:id", authUser, modifyOffer);
+app.delete("/offers/delete/:id", authUser, deleteOffer);
+app.post("offers/vote/:id", authUser, voteOffer);
 // poner un comentario
 // modificar un comentario
 // borrar un comentario

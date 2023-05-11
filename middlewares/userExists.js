@@ -8,19 +8,29 @@ const { generateError } = require("../services/generateError");
 const userExists = async (req, res, next) => {
   let connection;
   try {
-    const { email } = req.body;
+    const { email, user } = req.body;
 
     connection = await getConnection();
 
     // Check that no other user exists with that mail
-    const [userExists] = await connection.query(
+    const [userEmailExists] = await connection.query(
       `SELECT id FROM users WHERE email = ?`,
       [email]
     );
 
-    if (userExists.length > 0) {
+    if (userEmailExists.length > 0) {
+      throw generateError("Ya existe un usuario registrado con ese email", 409);
+    }
+
+    // Check that no other user exists with that mail
+    const [userNameExists] = await connection.query(
+      `SELECT id FROM users WHERE user = ?`,
+      [user]
+    );
+
+    if (userNameExists.length > 0) {
       throw generateError(
-        "Ya existe un usuario registrado con ese email.",
+        "Ya existe un usuario registrado con ese user name",
         409
       );
     }

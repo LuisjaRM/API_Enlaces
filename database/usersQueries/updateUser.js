@@ -60,7 +60,7 @@ const updateUser = async (id, email, user, filesAvatar) => {
         await connection.query(
           `
                 UPDATE users
-                SET email = ?, active = 0
+                SET email = ?, active = false
                 WHERE id = ?
               `,
           [email, id]

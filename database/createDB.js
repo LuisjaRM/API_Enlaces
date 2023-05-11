@@ -46,14 +46,13 @@ async function createDB() {
      CREATE TABLE offers (
         id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
         user_id INTEGER UNSIGNED NOT NULL,
-        url VARCHAR(280),
+        url VARCHAR(280) NOT NULL,
         title VARCHAR(60) NOT NULL,
-        description VARCHAR(280),
+        descrip VARCHAR(280),
         price decimal(10,0),
         offer_price decimal(10,0),
         plataform VARCHAR(60),
         offer_expiry date,
-        image VARCHAR(100),
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id)
      )`);

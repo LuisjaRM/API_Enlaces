@@ -33,6 +33,7 @@ const {
   notFound,
   userExists,
   authUser,
+  offerUrlRepeat,
 } = require("./middlewares/middlewares");
 
 // Controllers requires ↓
@@ -70,7 +71,7 @@ app.post("/users/reset-password", authUser, ResetUserPassword);
 
 // Offers routers ↓
 
-app.post("/offers/new-offer", authUser, newOffer);
+app.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
 app.get("/offers", authUser, allOffers);
 app.get("/offers/:id", authUser, offerByID);
 app.patch("/offers/modify-offer/:id", authUser, modifyOffer);

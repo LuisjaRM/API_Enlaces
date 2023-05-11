@@ -8,7 +8,7 @@ const { updateUser } = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 
-const { modifyUserJoi } = require("../../jois/schemas");
+const { modifyUserJoi } = require("../../jois/userSchemas");
 
 // Controller ↓
 
@@ -39,7 +39,7 @@ const modifyUser = async (req, res, next) => {
 
       // Try set avatar if exists
       await updateUser(id, email, user, filesAvatar);
-    } catch (error) {
+    } catch {
       // If not exists call updateUser without filesAvatar
       await updateUser(id, email, user);
     }

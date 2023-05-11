@@ -29,27 +29,31 @@ const authUser = async (req, res, next) => {
 
     connection = await getConnection();
 
-    // Check lastAuthUpdate
-    const [user] = await connection.query(
-      `
-          SELECT lastAuthUpdate
-          FROM users
-          WHERE id = ?
-          `,
-      [tokenInfo.id]
-    );
+    try {
+      // Check lastAuthUpdate
+      const [user] = await connection.query(
+        `
+            SELECT lastAuthUpdate
+            FROM users
+            WHERE id = ?
+            `,
+        [tokenInfo.id]
+      );
 
-    // Transfrom lastAuthUpdate and timestamp to Date format
-    const lastAuthUpdate = new Date(user[0].lastAuthUpdate);
-    const timestampCreateToken = new Date(tokenInfo.iat * 1000);
+      // Transfrom lastAuthUpdate and timestamp to Date format
+      const lastAuthUpdate = new Date(user[0].lastAuthUpdate);
+      const timestampCreateToken = new Date(tokenInfo.iat * 1000);
 
-    // Check if token is expired
-    if (timestampCreateToken < lastAuthUpdate) {
-      throw generateError("Token caducado", 401);
+      // Check if token is expired
+      if (timestampCreateToken < lastAuthUpdate) {
+        throw generateError("Token caducado", 401);
+      }
+
+      // Introduces token info in req
+      req.userInfo = tokenInfo;
+    } catch {
+      throw generateError("Ningún usuario logeado", 409);
     }
-
-    // Introduces token info in req
-    req.userInfo = tokenInfo;
 
     next();
   } catch (error) {

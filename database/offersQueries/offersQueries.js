@@ -1,13 +1,9 @@
 // Requires ↓
 
-const { getConnection } = require("../connectionDB");
-
-// Functions ↓
-
-const a = async () => {};
+const { createOffer } = require("./createOffer");
 
 // Exports ↓
 
 module.exports = {
-  a,
+  createOffer,
 };

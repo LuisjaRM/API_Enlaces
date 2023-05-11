@@ -8,7 +8,7 @@ const {} = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 
-const {} = require("../../jois/schemas");
+const {} = require("../../jois/userSchemas");
 
 // Controller ↓
 

@@ -8,7 +8,7 @@ const { createNewUser } = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 
-const { newUserJoi } = require("../../jois/schemas");
+const { newUserJoi } = require("../../jois/userSchemas");
 
 // Controller ↓
 

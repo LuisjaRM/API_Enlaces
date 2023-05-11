@@ -62,8 +62,8 @@ async function createDB() {
        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
        dateComments DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
        comment VARCHAR(280),
-       offers_id INT UNSIGNED NOT NULL,
-       FOREIGN KEY (offers_id) REFERENCES offers(id)
+       offer_id INT UNSIGNED NOT NULL,
+       FOREIGN KEY (offer_id) REFERENCES offers(id)
    )`);
 
     await connection.query(`
@@ -73,11 +73,11 @@ async function createDB() {
         vote TINYINT NOT NULL CHECK (vote IN (1,2,3,4,5)),
         user_id INT UNSIGNED NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id),
-        offers_id INT UNSIGNED NOT NULL,
-        FOREIGN KEY (offers_id) REFERENCES offers(id),
-        comments_id INT UNSIGNED NOT NULL,
+        offer_id INT UNSIGNED NOT NULL,
+        FOREIGN KEY (offer_id) REFERENCES offers(id),
+        comments_id INT UNSIGNED,
         FOREIGN KEY (comments_id) REFERENCES comments(id),
-        UNIQUE (user_id, offers_id)
+        UNIQUE (user_id, offer_id)
     )`);
 
     console.log(chalk.yellow("Base de datos creada"));

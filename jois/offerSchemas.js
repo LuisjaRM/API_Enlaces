@@ -14,4 +14,8 @@ const newOfferJoi = Joi.object().keys({
   offer_expiry: Joi.date(),
 });
 
-module.exports = { newOfferJoi };
+const voteOfferJoi = Joi.object().keys({
+  vote: Joi.number().positive().min(1).max(5).required(),
+});
+
+module.exports = { newOfferJoi, voteOfferJoi };

@@ -4,7 +4,7 @@ const { generateError } = require("../../services/generateError");
 
 // Requires Functions database ↓
 
-const {} = require("../../database/usersQueries/usersQueries");
+const {} = require("../../database/offersQueries/offersQueries");
 
 // Requires Jois ↓
 
@@ -12,7 +12,7 @@ const {} = require("../../jois/schemas");
 
 // Controller ↓
 
-const deleteUrl = async (req, res, next) => {
+const deleteOffer = async (req, res, next) => {
   try {
     res.send({
       status: "ok",
@@ -23,4 +23,4 @@ const deleteUrl = async (req, res, next) => {
   }
 };
 
-module.exports = { deleteUrl };
+module.exports = { deleteOffer };

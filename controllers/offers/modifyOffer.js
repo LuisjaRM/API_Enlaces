@@ -4,7 +4,7 @@ const { generateError } = require("../../services/generateError");
 
 // Requires Functions database ↓
 
-const {} = require("../../database/usersQueries/usersQueries");
+const {} = require("../../database/offersQueries/offersQueries");
 
 // Requires Jois ↓
 
@@ -12,15 +12,15 @@ const {} = require("../../jois/schemas");
 
 // Controller ↓
 
-const allUrls = async (req, res, next) => {
+const modifyOffer = async (req, res, next) => {
   try {
     res.send({
       status: "ok",
-      message: "Soy un get de allUrls",
+      message: "Soy un path de modifyUrl",
     });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { allUrls };
+module.exports = { modifyOffer };

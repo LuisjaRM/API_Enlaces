@@ -4,7 +4,7 @@ const { generateError } = require("../../services/generateError");
 
 // Requires Functions database ↓
 
-const {} = require("../../database/usersQueries/usersQueries");
+const {} = require("../../database/offersQueries/offersQueries");
 
 // Requires Jois ↓
 
@@ -12,7 +12,7 @@ const {} = require("../../jois/schemas");
 
 // Controller ↓
 
-const urlByID = async (req, res, next) => {
+const offerByID = async (req, res, next) => {
   try {
     res.send({
       status: "ok",
@@ -23,4 +23,4 @@ const urlByID = async (req, res, next) => {
   }
 };
 
-module.exports = { urlByID };
+module.exports = { offerByID };

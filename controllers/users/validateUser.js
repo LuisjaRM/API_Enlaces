@@ -1,6 +1,6 @@
 // Requires Functions database ↓
 
-const { generateRegCode } = require("../../database/usersQueries/usersQueries");
+const { activateUser } = require("../../database/usersQueries/usersQueries");
 
 // Requires Jois ↓
 
@@ -12,7 +12,8 @@ const validateUser = async (req, res) => {
   try {
     const { regCode } = req.params;
 
-    await generateRegCode(regCode);
+    // Activate user
+    await activateUser(regCode);
 
     res.status(200).send({
       status: "ok",

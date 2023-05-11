@@ -50,7 +50,7 @@ const updateUser = async (id, email, user, filesAvatar) => {
         // Write bodyMail
         const bodyMail = `
             Has cambiado tu email de Godlinks.
-            Pulsa el enlace para confirmar el cambio: ${process.env.PUBLIC_HOST}${regCode}
+            Pulsa el enlace para validar el cambio: ${process.env.PUBLIC_HOST}${regCode}
             `;
 
         // Call function sendMail
@@ -60,10 +60,10 @@ const updateUser = async (id, email, user, filesAvatar) => {
         await connection.query(
           `
                 UPDATE users
-                SET email = ?, active = false
+                SET email = ?, active = false, regCode = ?
                 WHERE id = ?
               `,
-          [email, id]
+          [email, regCode, id]
         );
       } else {
         throw generateError("Tu cuenta ya está registrada con este email", 409);

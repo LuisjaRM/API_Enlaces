@@ -1,7 +1,7 @@
 // Controllers ↓
 
 const { newOffer } = require("./newOffer");
-const { allOffers } = require("./alloffers");
+const { getOffersController } = require("./alloffers");
 const { offerByID } = require("./offerByID");
 const { modifyOffer } = require("./modifyOffer");
 const { deleteOffer } = require("./deleteOffer");
@@ -11,7 +11,7 @@ const { voteOffer } = require("./voteOffer");
 
 module.exports = {
   newOffer,
-  allOffers,
+  getOffersController,
   offerByID,
   modifyOffer,
   deleteOffer,

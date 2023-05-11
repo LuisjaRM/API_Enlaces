@@ -1,4 +1,8 @@
+// Requires ↓
+
 const { getConnection } = require("../connectionDB");
+
+// Functions ↓
 
 const getAllOffers = async () => {
   let connection;

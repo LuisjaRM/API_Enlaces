@@ -1,18 +1,16 @@
-// Requires ↓
-
-const { generateError } = require("../../services/generateError");
-
 // Requires Functions database ↓
 
-const {} = require("../../database/offersQueries/expOffersQueries");
-
+const {
+  getOfferByID,
+} = require("../../database/offersQueries/expOffersQueries");
 
 // Controller ↓
 
 const offerByID = async (req, res, next) => {
   try {
+    const { id } = req.params;
 
-   const offerID = await getOfferByID()
+    const offerID = await getOfferByID(id);
 
     res.send({
       status: "ok",
@@ -22,8 +20,5 @@ const offerByID = async (req, res, next) => {
     next(error);
   }
 };
-
-
-
 
 module.exports = { offerByID };

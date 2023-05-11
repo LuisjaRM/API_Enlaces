@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 
 const {
   checkEmailandPassword,
-} = require("../../database/usersQueries/usersQueries");
+} = require("../../database/usersQueries/expUsersQueries");
 
 // Requires Jois ↓
 

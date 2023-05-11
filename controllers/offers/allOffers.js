@@ -6,7 +6,7 @@ const {
 
 // Controller ↓
 
-const getOffersController = async (req, res, next) => {
+const allOffers = async (req, res, next) => {
   try {
     const offers = await getAllOffers();
 
@@ -19,4 +19,4 @@ const getOffersController = async (req, res, next) => {
   }
 };
 
-module.exports = { getOffersController };
+module.exports = { allOffers };

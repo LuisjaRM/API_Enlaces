@@ -20,6 +20,10 @@ const voteOffer = async (offerId, userId, vote) => {
       [offerId]
     );
 
+    if (offer.length === 0) {
+      throw generateError("No existe una oferta con esa id", 409);
+    }
+
     // User cannot vote for their own offer
     if (offer[0].user_id === userId) {
       throw generateError("No puedes votar tu propia oferta", 403);
@@ -28,10 +32,10 @@ const voteOffer = async (offerId, userId, vote) => {
     // Check if the user has already voted this offer
     const [existsVote] = await connection.query(
       `
-      SELECT id
-      FROM votes
-      WHERE user_id = ? AND offer_id = ?
-    `,
+        SELECT id
+        FROM votes
+        WHERE user_id = ? AND offer_id = ?
+      `,
       [userId, offerId]
     );
 
@@ -42,20 +46,20 @@ const voteOffer = async (offerId, userId, vote) => {
       // Insert vote
       await connection.query(
         `
-          INSERT INTO votes (vote, user_id, offer_id)
-          VALUES (?,?,?)
-        `,
+            INSERT INTO votes (vote, user_id, offer_id)
+            VALUES (?,?,?)
+          `,
         [vote, userId, offerId]
       );
 
       // Calculate the average of votes of the offer
       const [avg] = await connection.query(
         `
-          SELECT AVG(vote) AS avgVotes
-          FROM votes v
-          INNER JOIN offers o ON (v.offer_id = o.id)
-          WHERE o.id = ?
-        `,
+            SELECT AVG(vote) AS avgVotes
+            FROM votes v
+            INNER JOIN offers o ON (v.offer_id = o.id)
+            WHERE o.id = ?
+          `,
         [offerId]
       );
 

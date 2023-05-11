@@ -8,7 +8,7 @@ const {} = require("../../database/offersQueries/offersQueries");
 
 // Requires Jois ↓
 
-const {} = require("../../jois/schemas");
+const {} = require("../../jois/offerSchemas");
 
 // Controller ↓
 

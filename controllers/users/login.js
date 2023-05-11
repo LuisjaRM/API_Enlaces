@@ -14,7 +14,7 @@ const {
 
 // Requires Jois ↓
 
-const { loginJoi } = require("../../jois/schemas");
+const { loginJoi } = require("../../jois/userSchemas");
 
 // Controller ↓
 

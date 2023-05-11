@@ -15,7 +15,7 @@ const activateUser = async (regCode) => {
       `
             SELECT id
             FROM users
-            WHERE regCode=?
+            WHERE regCode = ?
             `,
       [regCode]
     );
@@ -27,7 +27,7 @@ const activateUser = async (regCode) => {
     await connect.query(
       `
             UPDATE users
-            SET active=true, regCode=NULL
+            SET active = true, regCode = NULL
             WHERE regCode = ?
             `,
       [regCode]

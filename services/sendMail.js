@@ -1,6 +1,7 @@
 // Requires ↓
 
 const sgEmail = require("@sendgrid/mail");
+const chalk = require("chalk");
 
 // Functions ↓
 
@@ -22,7 +23,7 @@ const sendMail = async (to, subject, body) => {
     };
     await sgEmail.send(msg);
   } catch (error) {
-    console.log("No se ha podido enviar el email", error);
+    console.error(chalk.red("No se ha podido enviar el email"), error);
   }
 };
 

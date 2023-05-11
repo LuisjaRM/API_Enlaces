@@ -1,16 +1,16 @@
 // Requires Functions database ↓
 
 const {
-  getOfferByID,
+  getOfferById,
 } = require("../../database/offersQueries/expOffersQueries");
 
 // Controller ↓
 
-const offerByID = async (req, res, next) => {
+const offerById = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const offerID = await getOfferByID(id);
+    const offerID = await getOfferById(id);
 
     res.send({
       status: "ok",
@@ -21,4 +21,4 @@ const offerByID = async (req, res, next) => {
   }
 };
 
-module.exports = { offerByID };
+module.exports = { offerById };

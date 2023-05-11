@@ -52,7 +52,7 @@ const {
 const {
   newOffer,
   allOffers,
-  offerByID,
+  offerById,
   modifyOffer,
   deleteOffer,
   postVoteOffer,
@@ -73,7 +73,7 @@ app.post("/users/reset-password", authUser, ResetUserPassword);
 
 app.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
 app.get("/offers", authUser, allOffers);
-app.get("/offers/:id", authUser, offerByID);
+app.get("/offers/:id", authUser, offerById);
 app.delete("/offers/delete/:id", authUser, deleteOffer);
 app.post("/offers/vote/:id", authUser, postVoteOffer);
 app.patch("/offers/modify-offer/:id", authUser, modifyOffer);

@@ -2,7 +2,7 @@
 
 const { newOffer } = require("./newOffer");
 const { allOffers } = require("./allOffers");
-const { offerByID } = require("./offerByID");
+const { offerById } = require("./offerById");
 const { modifyOffer } = require("./modifyOffer");
 const { deleteOffer } = require("./deleteOffer");
 const { postVoteOffer } = require("./postVoteOffer");
@@ -12,7 +12,7 @@ const { postVoteOffer } = require("./postVoteOffer");
 module.exports = {
   newOffer,
   allOffers,
-  offerByID,
+  offerById,
   modifyOffer,
   deleteOffer,
   postVoteOffer,

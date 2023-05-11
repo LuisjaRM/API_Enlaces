@@ -23,7 +23,7 @@ const postVoteOffer = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      return generateError(validation.error.message, 401);
+      throw generateError(validation.error.message, 401);
     }
 
     const avg = await voteOffer(offerId, userId, vote);

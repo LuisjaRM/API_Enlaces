@@ -24,7 +24,6 @@ const newOffer = async (req, res, next) => {
     // Joi validation
     const schema = newOfferJoi;
     const validation = schema.validate(req.body);
-    console.log(validation);
 
     if (validation.error) {
       return generateError(validation.error.message, 401);

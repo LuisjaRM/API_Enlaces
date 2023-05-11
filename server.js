@@ -51,7 +51,7 @@ const {
 
 const {
   newOffer,
-  getOffersController,
+  allOffers,
   offerByID,
   modifyOffer,
   deleteOffer,
@@ -72,7 +72,7 @@ app.post("/users/reset-password", authUser, ResetUserPassword);
 // Offers routers ↓
 
 app.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
-app.get("/offers", authUser, getOffersController);
+app.get("/offers", authUser, allOffers);
 app.get("/offers/:id", authUser, offerByID);
 app.patch("/offers/modify-offer/:id", authUser, modifyOffer);
 app.delete("/offers/delete/:id", authUser, deleteOffer);

@@ -1,13 +1,8 @@
 // Requires ↓
 
 const { createOffer } = require("./createOffer");
-
-
-const {getOfferByID} = require("./offerIDQuery");
-
-
-const { getAllOffers } = require("./getOffersQuery");
-
+const { getAllOffers } = require("./getAllOffers");
+const { getOfferByID } = require("./getOfferByID");
 
 // Exports ↓
 

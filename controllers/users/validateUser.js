@@ -1,6 +1,6 @@
 // Requires Functions database ↓
 
-const { activateUser } = require("../../database/usersQueries/usersQueries");
+const { activateUser } = require("../../database/usersQueries/expUsersQueries");
 
 // Requires Jois ↓
 

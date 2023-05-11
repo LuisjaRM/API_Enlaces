@@ -55,7 +55,7 @@ const {
   offerByID,
   modifyOffer,
   deleteOffer,
-  voteOffer,
+  postVoteOffer,
 } = require("./controllers/offers/offerControllers");
 
 // Users routers ↓
@@ -74,9 +74,9 @@ app.post("/users/reset-password", authUser, ResetUserPassword);
 app.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
 app.get("/offers", authUser, allOffers);
 app.get("/offers/:id", authUser, offerByID);
-app.patch("/offers/modify-offer/:id", authUser, modifyOffer);
 app.delete("/offers/delete/:id", authUser, deleteOffer);
-app.post("offers/vote/:id", authUser, voteOffer);
+app.post("/offers/vote/:id", authUser, postVoteOffer);
+app.patch("/offers/modify-offer/:id", authUser, modifyOffer);
 // poner un comentario
 // modificar un comentario
 // borrar un comentario

@@ -2,14 +2,15 @@
 
 const { createOffer } = require("./createOffer");
 const { getAllOffers } = require("./getAllOffers");
-const { getOfferByID } = require("./getOfferByID");
+const { getOfferById } = require("./getOfferById");
 const { voteOffer } = require("./voteOffer");
-
+const { deteleOfferById } = require("./deleteOfferById");
 // Exports ↓
 
 module.exports = {
   createOffer,
-  getOfferByID,
+  getOfferById,
   getAllOffers,
   voteOffer,
+  deteleOfferById,
 };

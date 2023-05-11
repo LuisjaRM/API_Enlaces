@@ -1,26 +1,22 @@
-// Requires ↓
-
-const { generateError } = require("../../services/generateError");
-
 // Requires Functions database ↓
 
-const {} = require("../../database/offersQueries/offersQueries");
-
-// Requires Jois ↓
-
-const {} = require("../../jois/offerSchemas");
+const {
+  getAllOffers,
+} = require("../../database/offersQueries/expOffersQueries");
 
 // Controller ↓
 
-const allOffers = async (req, res, next) => {
+const getOffersController = async (req, res, next) => {
   try {
+    const offers = await getAllOffers();
+
     res.send({
       status: "ok",
-      message: "Soy un get de allUrls",
+      data: offers,
     });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { allOffers };
+module.exports = { getOffersController };

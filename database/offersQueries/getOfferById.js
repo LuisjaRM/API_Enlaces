@@ -18,7 +18,7 @@ const getOfferById = async (id) => {
     );
 
     if (offer.length === 0) {
-      throw generateError(`No se han encontrado ofertas de este usuario`, 404);
+      throw generateError(`No se han encontrado ofertas`, 404);
     }
 
     return offer[0];

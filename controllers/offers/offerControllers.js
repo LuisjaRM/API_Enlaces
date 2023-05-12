@@ -6,7 +6,7 @@ const { deleteOffer } = require("./deleteOffer");
 const { postVoteOffer } = require("./postVoteOffer");
 const { commentOffer } = require("./commentOffer");
 const { offersByVotes } = require("./offersByVotes");
-
+const { likeCommentOffer } = require("./postLikeComment");
 
 module.exports = {
   newOffer,
@@ -16,5 +16,6 @@ module.exports = {
   deleteOffer,
   postVoteOffer,
   offersByVotes,
-  commentOffer;
+  commentOffer,
+  likeCommentOffer,
 };

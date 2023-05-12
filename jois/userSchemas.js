@@ -43,4 +43,28 @@ const modifyPwdJoi = joiPassword.object().keys({
     .required(),
 });
 
-module.exports = { newUserJoi, loginJoi, modifyUserJoi, modifyPwdJoi };
+const recoverPasswordJoi = Joi.object().keys({
+  email: Joi.string().email().required(),
+});
+
+const resetPasswordJoi = joiPassword.object().keys({
+  recoverCode: joiPassword.required(),
+  newPassword: joiPassword
+    .string()
+    .min(8)
+    .max(20)
+    .noWhiteSpaces()
+    .minOfSpecialCharacters(1)
+    .minOfUppercase(1)
+    .minOfNumeric(1)
+    .required(),
+});
+
+module.exports = {
+  newUserJoi,
+  loginJoi,
+  modifyUserJoi,
+  modifyPwdJoi,
+  recoverPasswordJoi,
+  resetPasswordJoi,
+};

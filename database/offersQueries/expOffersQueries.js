@@ -3,9 +3,8 @@ const { getAllOffers } = require("./getAllOffers");
 const { getOfferById } = require("./getOfferById");
 const { voteOffer } = require("./voteOffer");
 const { deteleOfferById } = require("./deleteOfferById");
-const { orderOffersByVotes } = require("./orderOffersByVotes");
-const { modifyOfferQuery } = require("./modifyOfferQ");
-
+const { orderByVotes } = require("./orderByVotes");
+const { updateOffer } = require("./updateOffer");
 
 module.exports = {
   createOffer,
@@ -13,6 +12,6 @@ module.exports = {
   getAllOffers,
   voteOffer,
   deteleOfferById,
-  orderOffersByVotes,
-  modifyOfferQuery,
+  orderByVotes,
+  updateOffer,
 };

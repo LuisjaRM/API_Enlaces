@@ -6,8 +6,8 @@ const { modifyUser } = require("./modifyUser");
 const { modifyPassword } = require("./modifyPassword");
 const { validateUser } = require("./validateUser");
 const { deleteUser } = require("./deleteUser");
-const { recoverUserPassword } = require("./recoverUserPassword");
-const { ResetUserPassword } = require("./ResetUserPassword");
+const { recoverPassword } = require("./recoverPassword");
+const { resetPassword } = require("./resetPassword");
 
 // Exports ↓
 
@@ -18,6 +18,6 @@ module.exports = {
   modifyPassword,
   validateUser,
   deleteUser,
-  recoverUserPassword,
-  ResetUserPassword,
+  recoverPassword,
+  resetPassword,
 };

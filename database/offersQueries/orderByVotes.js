@@ -4,7 +4,7 @@ const { getConnection } = require("../connectionDB");
 
 // Query ↓
 
-const orderOffersByVotes = async () => {
+const orderByVotes = async () => {
   let connection;
   try {
     connection = await getConnection();
@@ -22,4 +22,4 @@ const orderOffersByVotes = async () => {
   }
 };
 
-module.exports = { orderOffersByVotes };
+module.exports = { orderByVotes };

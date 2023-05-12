@@ -2,7 +2,7 @@
 
 const { generateError } = require("../../services/generateError");
 const {
-  modifyOfferQuery,
+  updateOffer,
   getOfferById,
 } = require("../../database/offersQueries/expOffersQueries");
 
@@ -37,7 +37,7 @@ const modifyOffer = async (req, res, next) => {
       );
     }
 
-    await modifyOfferQuery(
+    await updateOffer(
       id,
       url,
       title,

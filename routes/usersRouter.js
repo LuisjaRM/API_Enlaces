@@ -15,8 +15,8 @@ const {
   modifyPassword,
   validateUser,
   deleteUser,
-  recoverUserPassword,
-  ResetUserPassword,
+  recoverPassword,
+  resetPassword,
 } = require("../controllers/users/userControllers");
 
 // Routes ↓
@@ -29,7 +29,7 @@ router.post("/users/login", login);
 router.patch("/users/modify-user/:id", authUser, modifyUser);
 router.delete("/users/delete/:id", authUser, deleteUser);
 router.patch("/users/modify-password/:id", authUser, modifyPassword);
-router.post("/users/recover-password", authUser, recoverUserPassword);
-router.post("/users/reset-password", authUser, ResetUserPassword);
+router.post("/users/recover-password", recoverPassword);
+router.post("/users/reset-password", resetPassword);
 
 module.exports = router;

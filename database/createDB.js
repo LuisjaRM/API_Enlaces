@@ -49,10 +49,11 @@ async function createDB() {
         url VARCHAR(280) NOT NULL,
         title VARCHAR(60) NOT NULL,
         descrip VARCHAR(280),
-        price decimal(10,0),
-        offer_price decimal(10,0),
+        price decimal(10,2),
+        offer_price decimal(10,2),
         plataform VARCHAR(60),
         offer_expiry date,
+        avgVotes decimal(10,8),
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id)
      )`);

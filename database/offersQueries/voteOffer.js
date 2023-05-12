@@ -63,8 +63,21 @@ const voteOffer = async (offerId, userId, vote) => {
         [offerId]
       );
 
+      // Save average of votes
+      const avgVotes = avg[0].avgVotes;
+
+      // Update AvgVotes in offers
+      const [offer] = await connection.query(
+        `
+        UPDATE offers
+        SET avgVotes = ?
+        WHERE id = ?
+        `,
+        [avgVotes, offerId]
+      );
+
       // Return avg
-      return avg[0].avgVotes;
+      return avgVotes;
     }
   } finally {
     if (connection) connection.release();

@@ -63,6 +63,7 @@ async function createDB() {
        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
        dateComments DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
        comment VARCHAR(280),
+       addLikes INT NOT NULL,
        user_id INT UNSIGNED NOT NULL,
        FOREIGN KEY (user_id) REFERENCES users(id),
        offer_id INT UNSIGNED NOT NULL,
@@ -74,12 +75,9 @@ async function createDB() {
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
         dateVote DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         vote TINYINT NOT NULL CHECK (vote IN (1,2,3,4,5)),
-        user_id INT UNSIGNED NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES users(id),
-        offer_id INT UNSIGNED NOT NULL,
-        FOREIGN KEY (offer_id) REFERENCES offers(id),
-        comments_id INT UNSIGNED,
-        FOREIGN KEY (comments_id) REFERENCES comments(id),
+        like TINYINT NOT NULL CHECK (like IN (1)),
+        comment_id INT UNSIGNED NOT NULL,
+        FOREIGN KEY (comment_id) REFERENCES comments(id),
         UNIQUE (user_id, offer_id)
     )`);
 

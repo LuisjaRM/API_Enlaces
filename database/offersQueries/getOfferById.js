@@ -20,7 +20,7 @@ const getOfferById = async (id) => {
     if (offer.length === 0) {
       throw generateError(`No se han encontrado ofertas`, 404);
     }
-
+    console.log(offer);
     return offer[0];
   } finally {
     if (connection) connection.release();

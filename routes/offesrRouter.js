@@ -19,6 +19,8 @@ const {
   commentOffer,
   commentsById,
   modifyComment,
+  likeCommentOffer,
+
 } = require("../controllers/offers/offerControllers");
 
 // Routes ↓
@@ -35,8 +37,10 @@ router.get("/offers/order-by-votes", authUser, offersByVotes);
 router.post("/offers/comment/:id", authUser, commentOffer);
 router.get("/offers/comments-by-id/:id", authUser, commentsById);
 router.patch("/offers/modify-comment/:id", authUser, modifyComment);
-// modificar un comentario
+router.post("/offers/like-to-comment/:id", authUser, likeCommentOffer);
+
+
+
 // borrar un comentario
-// votar un comentario
 
 module.exports = router;

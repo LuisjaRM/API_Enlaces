@@ -5,6 +5,4 @@ const notFound = async (req, res) => {
   });
 };
 
-// Falta un next en alguno de los dos
-
 module.exports = notFound;

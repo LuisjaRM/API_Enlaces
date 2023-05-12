@@ -1,26 +1,25 @@
-// Requires ↓
+// Functions requires ↓
 
 const { generateError } = require("../../services/generateError");
-
-// Requires Functions database ↓
-
-const {deletUser} = require("../../database/usersQueries/expUsersQueries");
-
+const {
+  queryDeleteUser,
+} = require("../../database/usersQueries/expUsersQueries");
 
 // Controller ↓
 
 const deleteUser = async (req, res, next) => {
   try {
-    const {id} = req.params;
-    
-     //Añadir getUserById o modificar el if
-    if (req.userInfo.id !== offer.user_id && req.userInfo.role != "admin") {
+    const { id } = req.params;
+
+    // Check id or admin role
+    if (req.userInfo.id !== parseInt(id) && req.userInfo.role != "admin") {
       throw generateError("No tienes permiso para borrar este usuario", 401);
     }
 
-    await deletUser(id)
+    await queryDeleteUser(id);
 
-    res.send({
+    // Res.send
+    res.status(200).send({
       status: "ok",
       message: `El usuario con el id:${id} ha sido borrado.`,
     });

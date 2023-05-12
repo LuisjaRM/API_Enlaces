@@ -1,13 +1,13 @@
-// Requires npm ↓
+// Npm require ↓
 
 const bcrypt = require("bcrypt");
 
-// Requires ↓
+// Functions requires ↓
 
 const { getConnection } = require("../../database/connectionDB");
 const { generateError } = require("../../services/generateError");
 
-// Functions ↓
+// Query ↓
 
 const checkEmailandPassword = async (email, password) => {
   let connection;
@@ -29,9 +29,10 @@ const checkEmailandPassword = async (email, password) => {
       validPassword = await bcrypt.compare(password, user[0].password);
     }
 
-    // If the password is correct, create object in info
+    // If the password is correct, create object
     let info;
     if (validPassword) {
+      // Check if the user is activated
       if (user[0].active === 0) {
         throw generateError("Usuario no verificado", 401);
       } else {

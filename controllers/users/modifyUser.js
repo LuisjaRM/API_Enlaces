@@ -1,12 +1,9 @@
-// Requires ↓
+// Functions requires ↓
 
 const { generateError } = require("../../services/generateError");
-
-// Requires Functions database ↓
-
 const { updateUser } = require("../../database/usersQueries/expUsersQueries");
 
-// Requires Jois ↓
+// Joi require ↓
 
 const { modifyUserJoi } = require("../../jois/userSchemas");
 
@@ -33,6 +30,7 @@ const modifyUser = async (req, res, next) => {
       );
     }
 
+    // Query:
     try {
       // Save avatar in a var
       const filesAvatar = req.files.avatar;

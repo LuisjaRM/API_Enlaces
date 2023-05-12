@@ -21,7 +21,7 @@ const activateUser = async (regCode) => {
     );
 
     if (user.length === 0)
-      return generateError("Ningún usuario con ese código", 404);
+      throw generateError("No existe ningún usuario con ese código", 404);
 
     // Active user and delete regCode
     await connect.query(

@@ -1,18 +1,14 @@
-// Requires Functions database ↓
+// Functions require ↓
 
 const { activateUser } = require("../../database/usersQueries/expUsersQueries");
 
-// Requires Jois ↓
-
-const {} = require("../../jois/userSchemas");
-
 // Controller ↓
 
-const validateUser = async (req, res) => {
+const validateUser = async (req, res, next) => {
   try {
     const { regCode } = req.params;
 
-    // Activate user
+    // Query: Activate user
     await activateUser(regCode);
 
     res.status(200).send({
@@ -20,8 +16,7 @@ const validateUser = async (req, res) => {
       message: `Usuario validado`,
     });
   } catch (error) {
-    console.log(error);
-    res.send(error);
+    next(error);
   }
 };
 

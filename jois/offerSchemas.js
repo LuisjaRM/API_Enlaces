@@ -1,8 +1,8 @@
-// Require ↓
+// Npm require ↓
 
 const Joi = require("joi");
 
-// Jois ↓
+// Schemas ↓
 
 const newOfferJoi = Joi.object().keys({
   url: Joi.string().max(280).required(),

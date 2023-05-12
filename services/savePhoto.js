@@ -1,8 +1,10 @@
-// Requires npm ↓
+// Npm requires ↓
 
 const sharp = require("sharp");
 const uuid = require("uuid");
 const path = require("path");
+
+// Function ↓
 
 const savePhoto = async (dataPhoto) => {
   // Create image with Sharp

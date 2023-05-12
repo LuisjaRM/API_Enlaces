@@ -1,13 +1,13 @@
-// Requires npm ↓
+// Npm requires ↓
 
 const jwt = require("jsonwebtoken");
 
-// Requires ↓
+// Functions requires ↓
 
 const { generateError } = require("../services/generateError");
 const { getConnection } = require("../database/connectionDB");
 
-// Functions ↓
+// Middleware ↓
 
 const authUser = async (req, res, next) => {
   let connection;
@@ -15,7 +15,10 @@ const authUser = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) {
-      throw generateError("Falta la cabecera de Authorization", 401);
+      throw generateError(
+        "No se ha introducido la cabecera de Authorization",
+        401
+      );
     }
 
     // Check if token is correct
@@ -52,7 +55,7 @@ const authUser = async (req, res, next) => {
       // Introduces token info in req
       req.userInfo = tokenInfo;
     } catch {
-      throw generateError("Ningún usuario logeado", 409);
+      throw generateError("Usuario no logueado", 409);
     }
 
     next();

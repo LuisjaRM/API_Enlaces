@@ -1,14 +1,14 @@
-// Requires npm ↓
+// Npm requires ↓
 
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
 
-// Requires ↓
+// Functions requires ↓
 
 const { getConnection } = require("../connectionDB");
 const { sendMail } = require("../../services/sendMail");
 
-// Functions ↓
+// Query ↓
 
 const createNewUser = async (email, password, user) => {
   let connection;
@@ -32,7 +32,7 @@ const createNewUser = async (email, password, user) => {
     // Crypt password
     const passwordHash = await bcrypt.hash(password, 8);
 
-    // Create a new user
+    // Create a new user, but ative = false (default)
     const [newUser] = await connection.query(
       `INSERT INTO users (email, password, user, regCode) VALUES(?, ?, ?, ?)`,
       [email, passwordHash, user, regCode]
@@ -44,8 +44,6 @@ const createNewUser = async (email, password, user) => {
     if (connection) connection.release();
   }
 };
-
-// Exports ↓
 
 module.exports = {
   createNewUser,

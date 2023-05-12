@@ -1,8 +1,8 @@
-// Requires ↓
+// Function require ↓
 
 const { getConnection } = require("../connectionDB");
 
-// Functions ↓
+// Query ↓
 
 const createOffer = async (
   id,
@@ -20,7 +20,8 @@ const createOffer = async (
 
     // Insert data
     const [offer] = await connection.query(
-      `INSERT INTO offers (user_id, url, title, descrip, price, offer_price, plataform, offer_expiry ) VALUES(?, ?, ?, ?, ?, ?, ?, DATE ?)`,
+      `INSERT INTO offers (user_id, url, title, descrip, price, offer_price, plataform, offer_expiry )
+       VALUES(?, ?, ?, ?, ?, ?, ?, DATE ?)`,
       [id, url, title, descrip, price, offer_price, plataform, offer_expiry]
     );
 

@@ -1,9 +1,9 @@
-// Requires ↓
+// Functions requires ↓
 
 const { getConnection } = require("../database/connectionDB");
 const { generateError } = require("../services/generateError");
 
-// Functions ↓
+// Middleware ↓
 
 const offerUrlRepeat = async (req, res, next) => {
   let connection;
@@ -21,7 +21,7 @@ const offerUrlRepeat = async (req, res, next) => {
 
     if (urlRepeat.length > 0) {
       throw generateError(
-        "Este usuario ya tiene publicado una oferta similar",
+        "Este usuario ya tiene publicada una oferta del mismo enlace",
         409
       );
     }

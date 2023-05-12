@@ -3,7 +3,8 @@
 const { generateError } = require("../../services/generateError");
 const {
   modifyOfferQuery,
-} = require("../../database/offersQueries/modifyOfferQ");
+  getOfferById,
+} = require("../../database/offersQueries/expOffersQueries");
 
 // Requires Jois ↓
 
@@ -14,17 +15,8 @@ const { modifyOfferJoi } = require("../../jois/offerSchemas");
 const modifyOffer = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const {
-      place,
-      description,
-      url,
-      title,
-      descrip,
-      price,
-      offer_price,
-      platform,
-      offer_expiry,
-    } = req.body;
+    const { url, title, descrip, price, offer_price, plataform, offer_expiry } =
+      req.body;
 
     // Joi validation
     const schema = modifyOfferJoi;
@@ -45,27 +37,20 @@ const modifyOffer = async (req, res, next) => {
       );
     }
 
-    const modify = await modifyOfferQuery(
+    await modifyOfferQuery(
       id,
-      place,
-      description,
       url,
       title,
       descrip,
       price,
       offer_price,
-      platform,
+      plataform,
       offer_expiry
     );
 
-    res.send({
+    res.status(200).send({
       status: "ok",
-      message: "Enlace correctamente actualizado",
-      data: {
-        id,
-        place,
-        description,
-      },
+      message: `La oferta con id: ${id} ha sido modificada correctamente`,
     });
   } catch (error) {
     next(error);

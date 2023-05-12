@@ -32,6 +32,7 @@ const modifyPassword = async (req, res, next) => {
       );
     }
 
+    // Query: Change password
     await changePassword(oldPassword, newPassword, id);
 
     res.status(200).send({

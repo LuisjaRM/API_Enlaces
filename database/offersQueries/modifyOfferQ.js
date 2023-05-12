@@ -2,28 +2,44 @@ const { getConnection } = require("../connectionDB");
 
 const modifyOfferQuery = async (
   id,
-  place,
-  description,
   url,
   title,
   descrip,
   price,
   offer_price,
-  platform,
+  plataform,
   offer_expiry
 ) => {
   let connection;
   try {
     connection = await getConnection();
 
-    await connection.query(
-      `UPDATE entries SET place=?, description=? WHERE id=?`,
-      [place, description, id]
-    );
+    const params = {
+      id: id,
+      url: url,
+      title: title,
+      descrip: descrip,
+      price: price,
+      offer_price: offer_price,
+      plataform: plataform,
+      offer_expiry: offer_expiry,
+    };
 
-    connect.release();
-  } finally  {
-    if (connection) connection.release()
+    for (let i = 0; i < Object.keys(params).length; i++) {
+      const key = Object.keys(params)[i];
+      const data = params[key];
+
+      if (data !== undefined) {
+        await connection.query(
+          `UPDATE offers
+           SET ${key} = ?
+           WHERE id = ?`,
+          [data, id]
+        );
+      }
+    }
+  } finally {
+    if (connection) connection.release();
   }
 };
 

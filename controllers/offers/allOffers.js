@@ -1,4 +1,4 @@
-// Requires Functions database ↓
+// Function require ↓
 
 const {
   getAllOffers,
@@ -8,9 +8,11 @@ const {
 
 const allOffers = async (req, res, next) => {
   try {
+    // Query: get all offers
     const offers = await getAllOffers();
 
-    res.send({
+    // Res.send
+    res.status(200).send({
       status: "ok",
       data: offers,
     });

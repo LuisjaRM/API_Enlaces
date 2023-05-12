@@ -1,4 +1,4 @@
-// Requires Functions database ↓
+// Function require ↓
 
 const {
   getOfferById,
@@ -10,9 +10,11 @@ const offerById = async (req, res, next) => {
   try {
     const { id } = req.params;
 
+    // Query: get offer by id
     const offerID = await getOfferById(id);
 
-    res.send({
+    // Res.send
+    res.status(200).send({
       status: "ok",
       message: offerID,
     });

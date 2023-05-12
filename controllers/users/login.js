@@ -1,18 +1,15 @@
-// Requires ↓
-
-const { generateError } = require("../../services/generateError");
-
-// Requires npm  ↓
+// Npm require  ↓
 
 const jwt = require("jsonwebtoken");
 
-// Requires Functions database ↓
+// Functions requires ↓
 
+const { generateError } = require("../../services/generateError");
 const {
   checkEmailandPassword,
 } = require("../../database/usersQueries/expUsersQueries");
 
-// Requires Jois ↓
+// Joi require ↓
 
 const { loginJoi } = require("../../jois/userSchemas");
 
@@ -27,10 +24,10 @@ const login = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      return generateError(validation.error.message, 400);
+      throw generateError(validation.error.message, 400);
     }
 
-    // Check password and email
+    // Query: Check password and email
     const info = await checkEmailandPassword(email, password);
 
     // Check info

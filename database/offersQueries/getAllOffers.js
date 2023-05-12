@@ -1,12 +1,11 @@
-// Requires ↓
+// Function require ↓
 
 const { getConnection } = require("../connectionDB");
 
-// Functions ↓
+// Query ↓
 
 const getAllOffers = async () => {
   let connection;
-
   try {
     connection = await getConnection();
 

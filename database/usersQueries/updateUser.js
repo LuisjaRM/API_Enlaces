@@ -1,15 +1,15 @@
-// Requires npm ↓
+// Npm require ↓
 
 const { v4: uuidv4 } = require("uuid");
 
-// Requires ↓
+// Functions requires ↓
 
 const { getConnection } = require("../../database/connectionDB");
 const { generateError } = require("../../services/generateError");
 const { sendMail } = require("../../services/sendMail");
 const { savePhoto } = require("../../services/savePhoto");
 
-// Functions ↓
+// Query ↓
 
 const updateUser = async (id, email, user, filesAvatar) => {
   let connection;
@@ -25,13 +25,18 @@ const updateUser = async (id, email, user, filesAvatar) => {
       [id]
     );
 
-    // Check if email exists and is not the same that old email
-    if (email) {
+    if (email && user) {
+      throw generateError(
+        "No puedes modificar el email y el nombre de usuario al mismo tiempo"
+      );
+      // Check if email exists
+    } else if (email && !user) {
+      // Check is not the same that old email
       if (email !== userSelected[0].email) {
         // Check that new email is not used by other user
         const [existsEmail] = await connection.query(
           `
-                    SELECT *
+                    SELECT id
                     FROM users
                     WHERE email = ?
                   `,
@@ -39,7 +44,10 @@ const updateUser = async (id, email, user, filesAvatar) => {
         );
 
         if (existsEmail.length > 0) {
-          return generateError("Ya existe un usuario con ese email", 409);
+          throw generateError(
+            "Ya existe un usuario registrado con ese email",
+            409
+          );
         }
 
         // Create confirmation email
@@ -68,24 +76,23 @@ const updateUser = async (id, email, user, filesAvatar) => {
       } else {
         throw generateError("Tu cuenta ya está registrada con este email", 409);
       }
-    }
-
-    // Check if user exists and is not the same that old user
-    if (user) {
+      // Check if user exists
+    } else if (user && !email) {
+      // Check is not the same that old user
       if (user !== userSelected[0].user) {
         // Check that new user is not used by other user
         const [existsUser] = await connection.query(
           `
-                        SELECT *
-                        FROM users
-                        WHERE user = ?
-                      `,
+                      SELECT *
+                      FROM users
+                      WHERE user = ?
+                    `,
           [user]
         );
 
         if (existsUser.length > 0) {
-          return generateError(
-            "Ya existe un usuario con ese nombre de usuario",
+          throw generateError(
+            "Ya existe un usuario registrado con ese nombre de usuario",
             409
           );
         }
@@ -93,21 +100,21 @@ const updateUser = async (id, email, user, filesAvatar) => {
         // Update user
         await connection.query(
           `
-                UPDATE users
-                SET user = ?
-                WHERE id = ?
-              `,
+              UPDATE users
+              SET user = ?
+              WHERE id = ?
+            `,
           [user, id]
         );
       } else {
         throw generateError(
-          "Tu cuenta ya está registrada con ese user name",
+          "Tu cuenta ya está registrada con ese nombre de usuario",
           409
         );
       }
     }
 
-    // Check if exists a avatar in body
+    // Check if exists a avatar
     if (filesAvatar) {
       // Save avatar
       const userAvatar = await savePhoto(filesAvatar);

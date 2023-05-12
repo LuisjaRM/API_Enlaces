@@ -1,9 +1,9 @@
-// Requires ↓
+// Functions requires ↓
 
 const { getConnection } = require("../database/connectionDB");
 const { generateError } = require("../services/generateError");
 
-// Functions ↓
+// Middleware ↓
 
 const userExists = async (req, res, next) => {
   let connection;
@@ -19,7 +19,10 @@ const userExists = async (req, res, next) => {
     );
 
     if (userEmailExists.length > 0) {
-      throw generateError("Ya existe un usuario registrado con ese email", 409);
+      throw generateError(
+        "Ya existe un usuario registrado con el mismo email",
+        409
+      );
     }
 
     // Check that no other user exists with that mail
@@ -30,7 +33,7 @@ const userExists = async (req, res, next) => {
 
     if (userNameExists.length > 0) {
       throw generateError(
-        "Ya existe un usuario registrado con ese user name",
+        "Ya existe un usuario registrado con el mismo user name",
         409
       );
     }

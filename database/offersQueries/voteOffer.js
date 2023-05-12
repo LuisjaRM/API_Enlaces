@@ -3,7 +3,7 @@
 const { generateError } = require("../../services/generateError");
 const { getConnection } = require("../connectionDB");
 
-// Functions ↓
+// Controller ↓
 
 const voteOffer = async (offerId, userId, vote) => {
   let connection;

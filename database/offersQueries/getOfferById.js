@@ -1,13 +1,12 @@
-// Require ↓
+// Functions requires ↓
 
 const { getConnection } = require("../connectionDB");
 const { generateError } = require("../../services/generateError");
 
-// Function ↓
+// Query ↓
 
 const getOfferById = async (id) => {
   let connection;
-
   try {
     connection = await getConnection();
 
@@ -19,7 +18,7 @@ const getOfferById = async (id) => {
     );
 
     if (offer.length === 0) {
-      throw generateError(`No se ha encontrado ofertas de este usuario`, 404);
+      throw generateError(`No se han encontrado ofertas de este usuario`, 404);
     }
 
     return offer[0];

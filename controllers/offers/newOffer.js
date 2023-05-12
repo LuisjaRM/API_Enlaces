@@ -1,14 +1,11 @@
-// Requires ↓
+// Functions requires ↓
 
 const { generateError } = require("../../services/generateError");
-
-// Requires Functions database ↓
-
 const {
   createOffer,
 } = require("../../database/offersQueries/expOffersQueries");
 
-// Requires Jois ↓
+// Joi require ↓
 
 const { newOfferJoi } = require("../../jois/offerSchemas");
 
@@ -26,10 +23,10 @@ const newOffer = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      return generateError(validation.error.message, 401);
+      throw generateError(validation.error.message, 401);
     }
 
-    // Create offer
+    // Query: Create offer
     const OfferId = await createOffer(
       id,
       url,

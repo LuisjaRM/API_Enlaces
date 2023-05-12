@@ -1,14 +1,11 @@
-// Requires Functions services ↓
+// Functions requires ↓
 
 const { generateError } = require("../../services/generateError");
-
-// Requires Functions database ↓
-
 const {
   createNewUser,
 } = require("../../database/usersQueries/expUsersQueries");
 
-// Requires Jois ↓
+// Joi require ↓
 
 const { newUserJoi } = require("../../jois/userSchemas");
 
@@ -23,16 +20,16 @@ const newUser = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      return generateError(validation.error.message, 401);
+      throw generateError(validation.error.message, 401);
     }
 
-    // Create new user
+    // Query: Create new user
     const id = await createNewUser(email, password, user);
 
     // Res.send
     res.status(200).send({
       status: "ok",
-      message: `El usuario con el id:${id} se ha creado correctamente`,
+      message: `El usuario con el id: ${id} se ha creado correctamente`,
     });
   } catch (error) {
     next(error);

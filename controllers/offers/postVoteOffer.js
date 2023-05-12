@@ -1,12 +1,9 @@
-// Requires ↓
+// Functions requires ↓
 
 const { generateError } = require("../../services/generateError");
-
-// Requires Functions database ↓
-
 const { voteOffer } = require("../../database/offersQueries/expOffersQueries");
 
-// Requires Jois ↓
+// Joi require ↓
 
 const { voteOfferJoi } = require("../../jois/offerSchemas");
 

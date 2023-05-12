@@ -1,9 +1,6 @@
-// Requires ↓
+// Functions requires ↓
 
 const { generateError } = require("../../services/generateError");
-
-// Requires Functions database ↓
-
 const {
   getOfferById,
   deteleOfferById,
@@ -15,7 +12,7 @@ const deleteOffer = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    // Get information of the offer that we want delete
+    // Query: Get information of the offer that we want delete
     const offer = await getOfferById(id);
 
     // Check if the user is creator of the offer or is an admin
@@ -23,10 +20,11 @@ const deleteOffer = async (req, res, next) => {
       throw generateError("No estás autorizado para borrar esta oferta", 401);
     }
 
-    // Delete offer
+    // Query: Delete offer
     await deteleOfferById(id);
 
-    res.send({
+    // Res.send
+    res.status(200).send({
       status: "ok",
       message: `La oferta con id: ${id} fue borrada`,
     });

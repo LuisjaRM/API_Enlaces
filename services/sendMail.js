@@ -1,9 +1,9 @@
-// Requires ↓
+// Npm requires ↓
 
 const sgEmail = require("@sendgrid/mail");
 const chalk = require("chalk");
 
-// Functions ↓
+// Function ↓
 
 sgEmail.setApiKey(process.env.SENDGRID_API_KEY);
 

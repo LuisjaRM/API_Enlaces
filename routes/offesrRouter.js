@@ -16,6 +16,7 @@ const {
   deleteOffer,
   postVoteOffer,
   offersByVotesOrder,
+  commentOffer,
 } = require("../controllers/offers/offerControllers");
 
 // Routes ↓
@@ -29,6 +30,7 @@ router.patch("/offers/modify-offer/:id", authUser, modifyOffer);
 router.delete("/offers/delete/:id", authUser, deleteOffer);
 router.post("/offers/vote/:id", authUser, postVoteOffer);
 router.get("/offers/order-by-votes", authUser, offersByVotesOrder);
+router.post("/offers/comment/:id", authUser, commentOffer);
 // Ordenar por votos
 // poner un comentario
 // modificar un comentario

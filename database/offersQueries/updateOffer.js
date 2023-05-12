@@ -1,6 +1,6 @@
 const { getConnection } = require("../connectionDB");
 
-const modifyOfferQuery = async (
+const updateOffer = async (
   id,
   url,
   title,
@@ -43,4 +43,4 @@ const modifyOfferQuery = async (
   }
 };
 
-module.exports = { modifyOfferQuery };
+module.exports = { updateOffer };

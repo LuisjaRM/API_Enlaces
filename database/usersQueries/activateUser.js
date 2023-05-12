@@ -1,9 +1,9 @@
-// Requires ↓
+// Function requires ↓
 
 const { generateError } = require("../../services/generateError");
 const { getConnection } = require("../../database/connectionDB");
 
-// Functions ↓
+// Query ↓
 
 const activateUser = async (regCode) => {
   let connection;

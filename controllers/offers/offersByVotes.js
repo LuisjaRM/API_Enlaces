@@ -1,15 +1,15 @@
 // Function require ↓
 
 const {
-  orderOffersByVotes,
+  orderByVotes,
 } = require("../../database/offersQueries/expOffersQueries");
 
 // Controller ↓
 
-const offersByVotesOrder = async (req, res, next) => {
+const offersByVotes = async (req, res, next) => {
   try {
     // Query: get all offers
-    const offers = await orderOffersByVotes();
+    const offers = await orderByVotes();
 
     // Res.send
     res.status(200).send({
@@ -21,4 +21,4 @@ const offersByVotesOrder = async (req, res, next) => {
   }
 };
 
-module.exports = { offersByVotesOrder };
+module.exports = { offersByVotes };

@@ -24,6 +24,14 @@ const modifyPassword = async (req, res, next) => {
       throw generateError(validation.error.message, 401);
     }
 
+    // Check the newPasswrod
+    if (oldPassword === newPassword) {
+      throw generateError(
+        "No puedes introducir la misma contraseña que ya tienes",
+        401
+      );
+    }
+
     await changePassword(oldPassword, newPassword, id);
 
     res.status(200).send({

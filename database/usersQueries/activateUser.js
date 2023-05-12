@@ -8,10 +8,10 @@ const { getConnection } = require("../../database/connectionDB");
 const activateUser = async (regCode) => {
   let connection;
   try {
-    const connect = await getConnection();
+    connection = await getConnection();
 
     // Check that user exists with that regCode
-    const [user] = await connect.query(
+    const [user] = await connection.query(
       `
             SELECT id
             FROM users
@@ -24,7 +24,7 @@ const activateUser = async (regCode) => {
       throw generateError("No existe ningún usuario con ese código", 404);
 
     // Active user and delete regCode
-    await connect.query(
+    await connection.query(
       `
             UPDATE users
             SET active = true, regCode = NULL

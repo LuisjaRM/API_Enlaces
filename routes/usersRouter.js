@@ -28,7 +28,7 @@ router.get("/users/validate/:regCode", validateUser);
 router.post("/users/login", login);
 router.patch("/users/modify-user/:id", authUser, modifyUser);
 router.delete("/users/delete/:id", authUser, deleteUser);
-router.patch("/users/modify-password", authUser, modifyPassword);
+router.patch("/users/modify-password/:id", authUser, modifyPassword);
 router.post("/users/recover-password", authUser, recoverUserPassword);
 router.post("/users/reset-password", authUser, ResetUserPassword);
 

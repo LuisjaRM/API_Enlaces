@@ -24,13 +24,13 @@ const router = express.Router();
 router.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
 router.get("/offers", authUser, allOffers);
 router.get("/offers/:id", authUser, offerById);
+router.patch("/offers/modify-offer/:id", authUser, modifyOffer);
 router.delete("/offers/delete/:id", authUser, deleteOffer);
 router.post("/offers/vote/:id", authUser, postVoteOffer);
-router.patch("/offers/modify-offer/:id", authUser, modifyOffer);
+// Ordenar por votos
 // poner un comentario
 // modificar un comentario
 // borrar un comentario
 // votar un comentario
-// Ordenar por votos
 
 module.exports = router;

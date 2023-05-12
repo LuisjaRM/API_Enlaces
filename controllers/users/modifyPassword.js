@@ -1,22 +1,34 @@
-// Requires ↓
+// Function requires ↓
 
 const { generateError } = require("../../services/generateError");
+const {
+  changePassword,
+} = require("../../database/usersQueries/expUsersQueries");
 
-// Requires Functions database ↓
+// Joi Require  ↓
 
-const {} = require("../../database/usersQueries/expUsersQueries");
-
-// Requires Jois ↓
-
-const {} = require("../../jois/userSchemas");
+const { modifyPwdJoi } = require("../../jois/userSchemas");
 
 // Controller ↓
 
 const modifyPassword = async (req, res, next) => {
   try {
-    res.send({
+    const { oldPassword, newPassword } = req.body;
+    const { id } = req.params;
+
+    // Joi validation
+    const schema = modifyPwdJoi;
+    const validation = schema.validate(req.body);
+
+    if (validation.error) {
+      throw generateError(validation.error.message, 401);
+    }
+
+    await changePassword(oldPassword, newPassword, id);
+
+    res.status(200).send({
       status: "ok",
-      message: "Soy un path de modifyPassword",
+      message: `Contraseña del usuario con id: ${id} modificada`,
     });
   } catch (error) {
     next(error);

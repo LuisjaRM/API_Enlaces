@@ -3,6 +3,7 @@ const { activateUser } = require("./activateUser");
 const { checkEmailandPassword } = require("./checkEmailandPassword");
 const { updateUser } = require("./updateUser");
 const { queryDeleteUser } = require("./queryDeleteUser");
+const { changePassword } = require("./changePassword");
 
 module.exports = {
   createNewUser,
@@ -10,4 +11,5 @@ module.exports = {
   checkEmailandPassword,
   updateUser,
   queryDeleteUser,
+  changePassword,
 };

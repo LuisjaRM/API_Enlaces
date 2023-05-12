@@ -39,7 +39,7 @@ const changePassword = async (oldPassword, newPassword, id) => {
       }
 
       // Crypt newPassword
-      const newPasswordHash = await bcrypt.hash(oldPassword, 8);
+      const newPasswordHash = await bcrypt.hash(newPassword, 8);
 
       // Update Password
       await connection.query(
@@ -47,7 +47,7 @@ const changePassword = async (oldPassword, newPassword, id) => {
           SET password = ?, lastAuthUpdate = ?
           WHERE id = ?
           `,
-        [newPassword, new Date(), id]
+        [newPasswordHash, new Date(), id]
       );
     }
   } finally {

@@ -6,7 +6,11 @@ const { deteleOfferById } = require("./deleteOfferById");
 const { postCommentOffer } = require("./addCommentOffer");
 const { orderByVotes } = require("./orderByVotes");
 const { updateOffer } = require("./updateOffer");
+const { getCommentsById } = require("./getCommentsById");
+const { updateComment } = require("./updateComment");
+const { getSingleCommentOffer } = require("./getSingleCommentOffer");
 const { likeComment } = require("./likeComment");
+
 
 module.exports = {
   createOffer,
@@ -17,5 +21,8 @@ module.exports = {
   orderByVotes,
   updateOffer,
   postCommentOffer,
+  getCommentsById,
+  updateComment,
+  getSingleCommentOffer
   likeComment,
 };

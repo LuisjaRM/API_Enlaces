@@ -63,6 +63,8 @@ async function createDB() {
        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
        dateComments DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
        comment VARCHAR(280),
+       user_id INT UNSIGNED NOT NULL,
+       FOREIGN KEY (user_id) REFERENCES users(id),
        offer_id INT UNSIGNED NOT NULL,
        FOREIGN KEY (offer_id) REFERENCES offers(id)
    )`);

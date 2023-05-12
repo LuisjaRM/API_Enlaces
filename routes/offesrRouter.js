@@ -15,6 +15,7 @@ const {
   modifyOffer,
   deleteOffer,
   postVoteOffer,
+  offersByVotesOrder,
 } = require("../controllers/offers/offerControllers");
 
 // Routes ↓
@@ -22,11 +23,12 @@ const {
 const router = express.Router();
 
 router.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
-router.get("/offers", authUser, allOffers);
-router.get("/offers/:id", authUser, offerById);
+router.get("/offers/all-offers", authUser, allOffers);
+router.get("/offers/get-by-id/:id", authUser, offerById);
 router.patch("/offers/modify-offer/:id", authUser, modifyOffer);
 router.delete("/offers/delete/:id", authUser, deleteOffer);
 router.post("/offers/vote/:id", authUser, postVoteOffer);
+router.get("/offers/order-by-votes", authUser, offersByVotesOrder);
 // Ordenar por votos
 // poner un comentario
 // modificar un comentario

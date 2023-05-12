@@ -1,0 +1,58 @@
+// Npm requires ↓
+
+const bcrypt = require("bcrypt");
+
+// Function Requires ↓
+
+const { getConnection } = require("../connectionDB");
+const { generateError } = require("../../services/generateError");
+
+// Query ↓
+
+const changePassword = async (oldPassword, newPassword, id) => {
+  let connection;
+  try {
+    connection = await getConnection();
+
+    const [user] = await connection.query(
+      `
+             SELECT password
+             FROM users
+             WHERE id = ? 
+               `,
+      [id]
+    );
+
+    // Check oldPassword
+
+    if (user.length === 0) {
+      throw generateError(
+        "No existe ningún usuario registrado con este id",
+        409
+      );
+    } else {
+      // Check oldPassword
+      const validPassword = await bcrypt.compare(oldPassword, user[0].password);
+
+      if (!validPassword) {
+        throw generateError("Contraseña incorrecta", 401);
+      }
+
+      // Crypt newPassword
+      const newPasswordHash = await bcrypt.hash(oldPassword, 8);
+
+      // Update Password
+      await connection.query(
+        `UPDATE users
+          SET password = ?, lastAuthUpdate = ?
+          WHERE id = ?
+          `,
+        [newPassword, new Date(), id]
+      );
+    }
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+module.exports = { changePassword };

@@ -30,4 +30,17 @@ const modifyUserJoi = Joi.object().keys({
   user: Joi.string().min(4).max(15),
 });
 
-module.exports = { newUserJoi, loginJoi, modifyUserJoi };
+const modifyPwdJoi = joiPassword.object().keys({
+  oldPassword: joiPassword.required(),
+  newPassword: joiPassword
+    .string()
+    .min(8)
+    .max(20)
+    .noWhiteSpaces()
+    .minOfSpecialCharacters(1)
+    .minOfUppercase(1)
+    .minOfNumeric(1)
+    .required(),
+});
+
+module.exports = { newUserJoi, loginJoi, modifyUserJoi, modifyPwdJoi };

@@ -28,6 +28,10 @@ const voteOfferJoi = Joi.object().keys({
   vote: Joi.number().positive().min(1).max(5).required(),
 });
 
+const newCommentOfferJoi = Joi.object().keys({
+  comment: Joi.string().max(280).required(),
+});
+
 const commentOfferJoi = Joi.object().keys({
   commentId: Joi.number().positive().required(),
   newComment: Joi.string().max(280).required(),
@@ -37,4 +41,10 @@ const likeCommentJoi = Joi.object().keys({
   like: Joi.number().positive().min(1).max(1).required(),
 });
 
-module.exports = { newOfferJoi, voteOfferJoi, modifyOfferJoi, commentOfferJoi };
+module.exports = {
+  newOfferJoi,
+  voteOfferJoi,
+  modifyOfferJoi,
+  commentOfferJoi,
+  newCommentOfferJoi,
+};

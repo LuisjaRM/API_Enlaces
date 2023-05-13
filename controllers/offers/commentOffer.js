@@ -8,7 +8,7 @@ const {
 
 // Joi require ↓
 
-const { commentOfferJoi } = require("../../jois/offerSchemas");
+const { newCommentOfferJoi } = require("../../jois/offerSchemas");
 
 // Controller ↓
 
@@ -19,7 +19,7 @@ const commentOffer = async (req, res, next) => {
     const { comment } = req.body;
 
     // Joi validation
-    const schema = commentOfferJoi;
+    const schema = newCommentOfferJoi;
     const validation = schema.validate(req.body);
 
     if (validation.error) {

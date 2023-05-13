@@ -18,9 +18,11 @@ const getOfferById = async (id) => {
     );
 
     if (offer.length === 0) {
-      throw generateError(`No se han encontrado ofertas`, 404);
+      throw generateError(
+        `No se ha encontrado una oferta con el id : ${id}`,
+        404
+      );
     }
-    console.log(offer);
     return offer[0];
   } finally {
     if (connection) connection.release();

@@ -10,4 +10,5 @@ module.exports = {
   userExists,
   authUser,
   offerUrlRepeat,
+  userExists,
 };

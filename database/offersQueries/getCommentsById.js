@@ -17,11 +17,21 @@ const getCommentsById = async (offerId) => {
       [offerId]
     );
 
+    // Check if exists comments
     if (comments.length === 0) {
       throw generateError(`No existen comentarios en esta oferta`, 404);
     }
 
-    return comments;
+    // Save the comments in a array
+    let commentsOffer = [];
+    for (let i = 0; i < comments.length; i++) {
+      commentsOffer.push(
+        `${comments[i].comment}. user_id: ${comments[i].user_id}. ${comments[i].dateComments}`
+      );
+    }
+
+    // Return array
+    return commentsOffer;
   } finally {
     if (connection) connection.release();
   }

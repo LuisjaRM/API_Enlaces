@@ -1,7 +1,9 @@
 // Functions requires ↓
 
+const { generateError } = require("../../services/generateError");
 const {
-  postCommentOffer,
+  getOfferById,
+  addCommentOffer,
 } = require("../../database/offersQueries/expOffersQueries");
 
 // Joi require ↓
@@ -24,7 +26,11 @@ const commentOffer = async (req, res, next) => {
       throw generateError(validation.error.message, 401);
     }
 
-    await postCommentOffer(offerId, userId, comment);
+    // Query: Get information of the offer that we want to comment
+    await getOfferById(offerId);
+
+    // Query: Add comment
+    await addCommentOffer(offerId, userId, comment);
 
     res.status(200).send({
       status: "ok",

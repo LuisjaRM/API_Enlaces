@@ -1,5 +1,8 @@
+// Function require ↓
+
 const { getConnection } = require("../connectionDB");
-const { getCommentsById } = require("./getCommentsById");
+
+// Query ↓
 
 const deleteComment = async (offerId, commentId) => {
   let connection;
@@ -7,8 +10,8 @@ const deleteComment = async (offerId, commentId) => {
     connection = await getConnection();
 
     await connection.query(
-      ` DELETE comments
-         WHERE offer_id = ? AND id = ? `,
+      ` DELETE FROM comments
+        WHERE offer_id = ? AND id = ? `,
       [offerId, commentId]
     );
   } finally {

@@ -8,6 +8,7 @@ const { orderByVotes } = require("./orderByVotes");
 const { updateOffer } = require("./updateOffer");
 const { getCommentsById } = require("./getCommentsById");
 const { updateComment } = require("./updateComment");
+const { deleteComment } = require("./deleteComment");
 const { getSingleCommentOffer } = require("./getSingleCommentOffer");
 const { likeComment } = require("./likeComment");
 
@@ -22,6 +23,7 @@ module.exports = {
   addCommentOffer,
   getCommentsById,
   updateComment,
+  deleteComment,
   getSingleCommentOffer,
   likeComment,
 };

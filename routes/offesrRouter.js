@@ -19,6 +19,7 @@ const {
   commentOffer,
   commentsById,
   modifyComment,
+  commentDelete,
   likeCommentOffer,
 } = require("../controllers/offers/offerControllers");
 
@@ -36,7 +37,7 @@ router.get("/offers/order-by-votes", authUser, offersByVotes);
 router.post("/offers/comment/:id", authUser, commentOffer);
 router.get("/offers/comments-of-offer/:id", authUser, commentsById);
 router.patch("/offers/modify-comment/:id", authUser, modifyComment);
-// borrar un comentario
+router.delete("/offers/delete-comment/:offerId/:commentId", authUser, commentDelete);
 router.post("/offers/like-to-comment/:id", authUser, likeCommentOffer);
 
 module.exports = router;

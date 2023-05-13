@@ -20,10 +20,6 @@ const voteOffer = async (offerId, userId, vote) => {
       [offerId]
     );
 
-    if (offer.length === 0) {
-      throw generateError("No existe una oferta con esa id", 409);
-    }
-
     // User cannot vote for their own offer
     if (offer[0].user_id === userId) {
       throw generateError("No puedes votar tu propia oferta", 403);
@@ -41,7 +37,7 @@ const voteOffer = async (offerId, userId, vote) => {
 
     // User cannot vote the same offer multiple times
     if (existsVote.length > 0) {
-      throw generateError("Ya votaste esta oferta", 403);
+      throw generateError("Ya has votado esta oferta", 403);
     } else {
       // Insert vote
       await connection.query(
@@ -67,7 +63,7 @@ const voteOffer = async (offerId, userId, vote) => {
       const avgVotes = avg[0].avgVotes;
 
       // Update AvgVotes in offers
-      const [offer] = await connection.query(
+      await connection.query(
         `
         UPDATE offers
         SET avgVotes = ?

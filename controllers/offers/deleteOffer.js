@@ -15,7 +15,7 @@ const deleteOffer = async (req, res, next) => {
     // Query: Get information of the offer that we want delete
     const offer = await getOfferById(id);
 
-    // Check if the user is creator of the offer or is an admin
+    // Check if the user is the creator of the offer or is an admin
     if (req.userInfo.id !== offer.user_id && req.userInfo.role != "admin") {
       throw generateError("No estás autorizado para borrar esta oferta", 401);
     }

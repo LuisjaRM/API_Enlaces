@@ -26,7 +26,12 @@ const modifyOffer = async (req, res, next) => {
       throw generateError(validation.error.message, 401);
     }
 
-    // Query: Get information of the offer that we want delete
+    // Check if exists changes in body
+    if (Object.entries(req.body).length === 0) {
+      throw generateError("No hay ninguna modificación realizada", 409);
+    }
+
+    // Query: Get information of the offer that we want modify
     const offer = await getOfferById(id);
 
     // Check if the user is creator of the offer or is an admin

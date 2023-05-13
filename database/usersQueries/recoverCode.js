@@ -25,7 +25,7 @@ const recoverCode = async (email) => {
       [email]
     );
 
-    if (currentMail === 0)
+    if (currentMail.length === 0)
       throw generateError(
         "No hay ningún usuario registrado con ese email",
         404

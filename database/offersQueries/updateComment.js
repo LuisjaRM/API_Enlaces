@@ -1,17 +1,16 @@
 const { getConnection } = require("../connectionDB");
 
-const updateComment = async ( offerId, commentId, newComment) => {
+const updateComment = async (offerId, commentId, newComment) => {
   let connection;
   try {
     connection = await getConnection();
 
     await connection.query(
-        `UPDATE comments
+      `UPDATE comments
          SET comment = ?
-         WHERE offer_id = ? AND comment_id = ? `,
-        [newcomment, offerId, commentId ]
-      );
-
+         WHERE offer_id = ? AND id = ? `,
+      [newComment, offerId, commentId]
+    );
   } finally {
     if (connection) connection.release();
   }

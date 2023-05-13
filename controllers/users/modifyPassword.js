@@ -24,12 +24,17 @@ const modifyPassword = async (req, res, next) => {
       throw generateError(validation.error.message, 401);
     }
 
-    // Check the newPasswrod
-    if (oldPassword === newPassword) {
+    // Check id or admin role
+    if (req.userInfo.id !== parseInt(id) && req.userInfo.role != "admin") {
       throw generateError(
-        "No puedes introducir la misma contraseña que ya tienes",
+        "No tienes permisos para modificar este usuario",
         401
       );
+    }
+
+    // Check the newPasswrod
+    if (oldPassword === newPassword) {
+      throw generateError("La nueva contraseña es igual a la anterior", 401);
     }
 
     // Query: Change password
@@ -37,7 +42,7 @@ const modifyPassword = async (req, res, next) => {
 
     res.status(200).send({
       status: "ok",
-      message: `Contraseña del usuario con id: ${id} modificada`,
+      message: `Contraseña del usuario con id: ${id} modificada correctamente`,
     });
   } catch (error) {
     next(error);

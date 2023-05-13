@@ -2,9 +2,10 @@
 
 const { generateError } = require("../../services/generateError");
 const {
-  updateComment,
+  getOfferById,
   getCommentsById,
   getSingleCommentOffer,
+  updateComment,
 } = require("../../database/offersQueries/expOffersQueries");
 
 // Requires Jois ↓
@@ -15,9 +16,9 @@ const { commentOfferJoi } = require("../../jois/offerSchemas");
 
 const modifyComment = async (req, res, next) => {
   try {
-    const { offerId } = req.params.id;
-    const {commentId, newComment} = req.body;
-      
+    const offerId = req.params.id;
+    const { commentId, newComment } = req.body;
+
     // Joi validation
     const schema = commentOfferJoi;
     const validation = schema.validate(req.body);
@@ -26,22 +27,26 @@ const modifyComment = async (req, res, next) => {
       throw generateError(validation.error.message, 401);
     }
 
-    //Query: Get information of the offer that we want update
-    const comments = await getCommentsById(offerId);
-    const oldComment = await  getSingleCommentOffer(commentId);
-    
+    // Query: Check if exists the offer
+    await getOfferById(offerId);
 
-    // Check if the user is creator of the offer or is an admin
-    if (req.userInfo.id !== oldComment.user_id && req.userInfo.role != "admin") {
+    //Query: Check if exists comments in the offer
+    await getCommentsById(offerId);
+
+    const oldComment = await getSingleCommentOffer(commentId);
+
+    // Check if the user is the creator of the offer or is an admin
+    if (
+      req.userInfo.id !== oldComment.user_id &&
+      req.userInfo.role != "admin"
+    ) {
       throw generateError(
         "No estás autorizado para modificar esta oferta",
         401
       );
     }
 
-    await updateComment(
-        offerId, commentId, newComment
-    );
+    await updateComment(offerId, commentId, newComment);
 
     res.status(200).send({
       status: "ok",

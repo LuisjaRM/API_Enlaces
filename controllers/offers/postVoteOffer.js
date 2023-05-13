@@ -1,7 +1,10 @@
 // Functions requires ↓
 
 const { generateError } = require("../../services/generateError");
-const { voteOffer } = require("../../database/offersQueries/expOffersQueries");
+const {
+  getOfferById,
+  voteOffer,
+} = require("../../database/offersQueries/expOffersQueries");
 
 // Joi require ↓
 
@@ -22,6 +25,9 @@ const postVoteOffer = async (req, res, next) => {
     if (validation.error) {
       throw generateError(validation.error.message, 401);
     }
+
+    // Query: Get information of the offer that we want to vote
+    await getOfferById(offerId);
 
     const avg = await voteOffer(offerId, userId, vote);
 

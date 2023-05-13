@@ -24,32 +24,23 @@ const changePassword = async (oldPassword, newPassword, id) => {
     );
 
     // Check oldPassword
+    const validPassword = await bcrypt.compare(oldPassword, user[0].password);
 
-    if (user.length === 0) {
-      throw generateError(
-        "No existe ningún usuario registrado con este id",
-        409
-      );
-    } else {
-      // Check oldPassword
-      const validPassword = await bcrypt.compare(oldPassword, user[0].password);
+    if (!validPassword) {
+      throw generateError("Contraseña incorrecta", 401);
+    }
 
-      if (!validPassword) {
-        throw generateError("Contraseña incorrecta", 401);
-      }
+    // Crypt newPassword
+    const newPasswordHash = await bcrypt.hash(newPassword, 8);
 
-      // Crypt newPassword
-      const newPasswordHash = await bcrypt.hash(newPassword, 8);
-
-      // Update Password
-      await connection.query(
-        `UPDATE users
+    // Update Password
+    await connection.query(
+      `UPDATE users
           SET password = ?, lastAuthUpdate = ?
           WHERE id = ?
           `,
-        [newPasswordHash, new Date(), id]
-      );
-    }
+      [newPasswordHash, new Date(), id]
+    );
   } finally {
     if (connection) connection.release();
   }

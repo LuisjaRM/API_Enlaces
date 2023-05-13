@@ -1,5 +1,6 @@
 const { createOffer } = require("./createOffer");
 const { getAllOffers } = require("./getAllOffers");
+const { getTodayOffers } = require("./getTodayOffers");
 const { getOfferById } = require("./getOfferById");
 const { voteOffer } = require("./voteOffer");
 const { deteleOfferById } = require("./deleteOfferById");
@@ -14,6 +15,7 @@ const { likeComment } = require("./likeComment");
 module.exports = {
   createOffer,
   getOfferById,
+  getTodayOffers,
   getAllOffers,
   voteOffer,
   deteleOfferById,

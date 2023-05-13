@@ -20,6 +20,7 @@ const {
   commentsById,
   modifyComment,
   likeCommentOffer,
+  dailyOffers,
 } = require("../controllers/offers/offerControllers");
 
 // Routes ↓
@@ -28,6 +29,7 @@ const router = express.Router();
 
 router.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
 router.get("/offers/all-offers", authUser, allOffers);
+router.get("/offers/daily-offers", authUser, dailyOffers);
 router.get("/offers/get-by-id/:id", authUser, offerById);
 router.patch("/offers/modify-offer/:id", authUser, modifyOffer);
 router.delete("/offers/delete/:id", authUser, deleteOffer);

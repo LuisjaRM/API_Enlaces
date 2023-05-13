@@ -9,6 +9,7 @@ const { offersByVotes } = require("./offersByVotes");
 const { commentsById } = require("./commentsById");
 const { modifyComment } = require("./modifyComment");
 const { likeCommentOffer } = require("./postLikeComment");
+const { dailyOffers } = require("./dailyOffers");
 
 module.exports = {
   newOffer,
@@ -19,7 +20,8 @@ module.exports = {
   postVoteOffer,
   offersByVotes,
   commentOffer,
-  commentsById, 
+  commentsById,
   modifyComment,
   likeCommentOffer,
+  dailyOffers,
 };

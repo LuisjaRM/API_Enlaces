@@ -33,7 +33,6 @@ const newCommentOfferJoi = Joi.object().keys({
 });
 
 const commentOfferJoi = Joi.object().keys({
-  commentId: Joi.number().positive().required(),
   newComment: Joi.string().max(280).required(),
 });
 

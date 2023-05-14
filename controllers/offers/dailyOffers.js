@@ -1,7 +1,7 @@
 // Function require ↓
 
 const {
-  getTodayOffers,
+  getDayOffers,
 } = require("../../database/offersQueries/expOffersQueries");
 
 // Controller ↓
@@ -9,7 +9,7 @@ const {
 const dailyOffers = async (req, res, next) => {
   try {
     // Query: get today offers
-    const offers = await getTodayOffers();
+    const offers = await getDayOffers();
 
     // Res.send
     res.status(200).send({

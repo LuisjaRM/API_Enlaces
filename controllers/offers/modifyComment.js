@@ -16,8 +16,8 @@ const { commentOfferJoi } = require("../../jois/offerSchemas");
 
 const modifyComment = async (req, res, next) => {
   try {
-    const offerId = req.params.id;
-    const { commentId, newComment } = req.body;
+    const { offerId, commentId } = req.params;
+    const { newComment } = req.body;
 
     // Joi validation
     const schema = commentOfferJoi;

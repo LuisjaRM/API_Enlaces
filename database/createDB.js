@@ -19,6 +19,7 @@ async function createDB() {
 
     console.log(chalk.blue("Borrando tablas existentes"));
 
+    await connection.query(`DROP TABLE IF EXISTS likes`);
     await connection.query(`DROP TABLE IF EXISTS votes`);
     await connection.query(`DROP TABLE IF EXISTS comments`);
     await connection.query(`DROP TABLE IF EXISTS offers`);
@@ -53,7 +54,7 @@ async function createDB() {
         offer_price decimal(10,2),
         plataform VARCHAR(60),
         offer_expiry date,
-        avgVotes decimal(10,8),
+        avgVotes decimal(10,8) DEFAULT 0,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id)
      )`);

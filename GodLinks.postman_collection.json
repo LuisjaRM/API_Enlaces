@@ -21,7 +21,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"luisjaroma@gmail.com\",\n    \"password\": \"1234.5678A\",\n    \"user\": \"Lugia\"\n}",
+							"raw": "{\n    \"email\": \"\",\n    \"password\": \"sting, mín(8), máx(20), sin espacios, 1 caracter especial, 1 mayúscula, 1 número\",\n    \"user\": \"mín(4), máx(15)\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -112,7 +112,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"luisjaroma@hotmail.com\",\n    \"password\": \"1234.5678A\"\n}",
+							"raw": "{\n    \"email\": \"\",\n    \"password\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -162,7 +162,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": \"Lugia5\"\n}",
+							"raw": "{\n    \"email\": \"\",\n    \"user\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -216,7 +216,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{HOST}}/users/delete/:id",
+							"raw": "http://{{HOST}}/users/delete/1",
 							"protocol": "http",
 							"host": [
 								"{{HOST}}"
@@ -224,13 +224,7 @@
 							"path": [
 								"users",
 								"delete",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
+								"1"
 							]
 						}
 					},
@@ -254,7 +248,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"oldPassword\": \"1234.5678A\",\n  \"newPassword\": \"1234.5678B\"\n}",
+							"raw": "{\n  \"oldPassword\": \"\",\n  \"newPassword\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -262,7 +256,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{HOST}}/users/modify-password/:id",
+							"raw": "http://{{HOST}}/users/modify-password/2",
 							"protocol": "http",
 							"host": [
 								"{{HOST}}"
@@ -270,19 +264,13 @@
 							"path": [
 								"users",
 								"modify-password",
-								":id"
+								"2"
 							],
 							"query": [
 								{
 									"key": "",
 									"value": null,
 									"disabled": true
-								}
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
 								}
 							]
 						}
@@ -307,7 +295,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"luisjaroma@gmail.com\"\n}",
+							"raw": "{\n    \"email\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -346,7 +334,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"recoverCode\": \"2668b11a-26a7-40af-8c05-da096d9d15a4\",\n\"newPassword\": \"1234.5678B\"\n}",
+							"raw": "{\n\"recoverCode\": \"\",\n\"newPassword\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -390,7 +378,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"url\": \"ue.com\",\n    \"title\": \"primera url\",\n    \"descrip\": \"oferta güeníjima\",\n    \"price\": 50.50555,\n    \"offer_price\": 25.25,\n    \"plataform\": \"ps4\",\n    \"offer_expiry\": \"2023-09-05\"\n}\n",
+							"raw": "{\n    \"url\": \"joi.uri()\",\n    \"title\": \"máx(280)\",\n    \"descrip\": \"\",\n    \"price\": 50.50,\n    \"offer_price\": 25.25,\n    \"plataform\": \"\",\n    \"offer_expiry\": \"\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -488,7 +476,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://{{HOST}}/offers/get-by-id/:id",
+							"raw": "http://{{HOST}}/offers/get-by-id/2",
 							"protocol": "http",
 							"host": [
 								"{{HOST}}"
@@ -496,43 +484,7 @@
 							"path": [
 								"offers",
 								"get-by-id",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Offers order by votes",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{TOKEN}}",
-								"type": "default"
-							},
-							{
-								"key": "Host",
-								"value": "{{HOST}}",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "http://{{HOST}}/offers/order-by-votes",
-							"protocol": "http",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"offers",
-								"order-by-votes"
+								"2"
 							]
 						}
 					},
@@ -556,7 +508,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Luisja id 55\"\n}",
+							"raw": "{\n    \"url\": \"\",\n    \"title\": \"\",\n    \"descrip\": \"\",\n    \"price\": 50.50,\n    \"offer_price\": 25.25,\n    \"plataform\": \"\",\n    \"offer_expiry\": \"\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -639,7 +591,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"vote\": 4\n}",
+							"raw": "{\n    \"vote\": \"mín(1), máx(5)\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -668,6 +620,36 @@
 					"response": []
 				},
 				{
+					"name": "Offers order by votes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "default"
+							},
+							{
+								"key": "Host",
+								"value": "{{HOST}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST}}/offers/order-by-votes",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"offers",
+								"order-by-votes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Comment offer",
 					"request": {
 						"method": "POST",
@@ -685,7 +667,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"comment\": \"Hola2\"\n}",
+							"raw": "{\n    \"comment\": \"máx(280)\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -693,7 +675,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{HOST}}/offers/comment/:id",
+							"raw": "http://{{HOST}}/offers/comment/1",
 							"protocol": "http",
 							"host": [
 								"{{HOST}}"
@@ -701,13 +683,7 @@
 							"path": [
 								"offers",
 								"comment",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
+								"1"
 							]
 						}
 					},
@@ -730,7 +706,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://{{HOST}}/offers/comments-of-offer/:id",
+							"raw": "http://{{HOST}}/offers/comments-of-offer/1",
 							"protocol": "http",
 							"host": [
 								"{{HOST}}"
@@ -738,13 +714,7 @@
 							"path": [
 								"offers",
 								"comments-of-offer",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
+								"1"
 							]
 						}
 					},
@@ -768,7 +738,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"newComment\": \"Luisja\"\n}",
+							"raw": "{\n    \"newComment\": \"máx(280)\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

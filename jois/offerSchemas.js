@@ -5,7 +5,7 @@ const Joi = require("joi");
 // Schemas ↓
 
 const newOfferJoi = Joi.object().keys({
-  url: Joi.string().max(280).required(),
+  url: Joi.string().uri().max(280).required(),
   title: Joi.string().max(60).required(),
   descrip: Joi.string().max(280),
   price: Joi.number().positive().precision(2),
@@ -15,7 +15,7 @@ const newOfferJoi = Joi.object().keys({
 });
 
 const modifyOfferJoi = Joi.object().keys({
-  url: Joi.string().max(280),
+  url: Joi.string().uri().max(280),
   title: Joi.string().max(60),
   descrip: Joi.string().max(280),
   price: Joi.number().positive().precision(2),

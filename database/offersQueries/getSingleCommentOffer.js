@@ -1,5 +1,6 @@
 // Function require ↓
 
+const { generateError } = require("../../services/generateError");
 const { getConnection } = require("../connectionDB");
 
 // Query ↓
@@ -15,6 +16,13 @@ const getSingleCommentOffer = async (commentId) => {
     `,
       [commentId]
     );
+
+    if (user.length === 0) {
+      throw generateError(
+        `No existen comentarios con el id: ${commentId}`,
+        404
+      );
+    }
 
     return user[0];
   } finally {

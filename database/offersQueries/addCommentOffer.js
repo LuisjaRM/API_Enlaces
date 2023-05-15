@@ -10,13 +10,15 @@ const addCommentOffer = async (offerId, userId, comment) => {
     connection = await getConnection();
 
     // Insert comment
-    await connection.query(
+    const [newComment] = await connection.query(
       `
             INSERT INTO comments (comment, user_id, offer_id, dateComments)
             VALUES (?, ?, ?, ?)
           `,
       [comment, userId, offerId, new Date()]
     );
+
+    return newComment.insertId;
   } finally {
     if (connection) connection.release();
   }

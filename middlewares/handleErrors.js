@@ -6,7 +6,7 @@ const chalk = require("chalk");
 
 const error = async (error, req, res, next) => {
   console.error(chalk.red(error));
-  console.error(error); // Borrar al final del proyecto
+  
 
   res.status(error.httpStatus || 500).send({
     status: "error",

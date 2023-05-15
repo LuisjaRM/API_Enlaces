@@ -13,22 +13,22 @@ const likeComment = async (commentId, userId, like) => {
     // Check the user_id of the comment
     const [comment] = await connection.query(
       `
-      SELECT user_id
-      FROM offers
+      SELECT *
+      FROM comments
       WHERE id = ?
     `,
       [commentId]
     );
 
-    if (offer.length === 0) {
-      throw generateError("No existe una comentario con esa id", 409);
+    if (comment.length === 0) {
+      throw generateError("No existe una comentario con ese id", 409);
     }
 
-    // Check if the user has already voted this offer
+    // Check if the user has already liked this comment
     const [existsLike] = await connection.query(
       `
-        SELECT id
-        FROM votes
+        SELECT *
+        FROM likes
         WHERE user_id = ? AND comment_id = ?
       `,
       [userId, commentId]
@@ -41,19 +41,18 @@ const likeComment = async (commentId, userId, like) => {
       // Insert vote
       await connection.query(
         `
-            INSERT INTO votes (like, user_id, comment_id)
-            VALUES (?,?,?)
+            INSERT INTO likes (like_, user_id, comment_id)
+            VALUES (?, ?, ?)
           `,
         [like, userId, commentId]
       );
 
-      // Calculate the add of votes of the comment
+      // Calculate the add of likes of the comment
       const [add] = await connection.query(
         `
-            SELECT sum(likes) AS addlikes
-            FROM comments c
-            INNER JOIN votes v ON (v.comment_id = c.id)
-            WHERE c.id = ?
+            SELECT sum(like_) AS addLikes
+            FROM likes 
+            WHERE comment_id = ?
           `,
         [commentId]
       );
@@ -62,7 +61,7 @@ const likeComment = async (commentId, userId, like) => {
       const addLikes = add[0].addLikes;
 
       // Update AvgVotes in offers
-      const [comment] = await connection.query(
+      await connection.query(
         `
         UPDATE comments
         SET addLikes = ?
@@ -71,8 +70,8 @@ const likeComment = async (commentId, userId, like) => {
         [addLikes, commentId]
       );
 
-      // Return avg
-      return avgVotes;
+      // Return addLikes
+      return addLikes;
     }
   } finally {
     if (connection) connection.release();

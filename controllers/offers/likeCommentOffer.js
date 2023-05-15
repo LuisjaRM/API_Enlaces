@@ -13,7 +13,7 @@ const { likeCommentJoi } = require("../../jois/offerSchemas");
 
 const likeCommentOffer = async (req, res, next) => {
   try {
-    const offerId = req.params.id;
+    const commentId = req.params.id;
     const userId = req.userInfo.id;
     const { like } = req.body;
 
@@ -25,11 +25,13 @@ const likeCommentOffer = async (req, res, next) => {
       throw generateError(validation.error.message, 401);
     }
 
-    await likeComment(commentId, userId, like);
+    // Query: like comment
+    const likes = await likeComment(commentId, userId, like);
 
     res.status(200).send({
       status: "ok",
-      message: `Like registrado en la oferta con id:${offerId}`,
+      message: `Like registrado`,
+      data: { numeroLikes: likes },
     });
   } catch (error) {
     next(error);

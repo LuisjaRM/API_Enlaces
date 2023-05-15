@@ -43,7 +43,7 @@ const voteOffer = async (offerId, userId, vote) => {
       await connection.query(
         `
             INSERT INTO votes (vote, user_id, offer_id)
-            VALUES (?,?,?)
+            VALUES (?, ?, ?)
           `,
         [vote, userId, offerId]
       );
@@ -52,9 +52,8 @@ const voteOffer = async (offerId, userId, vote) => {
       const [avg] = await connection.query(
         `
             SELECT AVG(vote) AS avgVotes
-            FROM votes v
-            INNER JOIN offers o ON (v.offer_id = o.id)
-            WHERE o.id = ?
+            FROM votes 
+            WHERE offer_id = ?
           `,
         [offerId]
       );

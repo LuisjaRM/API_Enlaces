@@ -26,8 +26,8 @@ const loginJoi = Joi.object().keys({
 });
 
 const modifyUserJoi = Joi.object().keys({
-  email: Joi.string().email(),
-  user: Joi.string().min(4).max(15),
+  user: Joi.string().min(4).max(15).required(),
+  email: Joi.string().email().required(),
 });
 
 const modifyPwdJoi = joiPassword.object().keys({

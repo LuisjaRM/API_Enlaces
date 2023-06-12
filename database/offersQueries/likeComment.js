@@ -5,7 +5,7 @@ const { getConnection } = require("../connectionDB");
 
 // Controller ↓
 
-const likeComment = async (commentId, userId, like) => {
+const likeComment = async (commentId, userId) => {
   let connection;
   try {
     connection = await getConnection();
@@ -24,55 +24,77 @@ const likeComment = async (commentId, userId, like) => {
       throw generateError("No existe una comentario con ese id", 409);
     }
 
-    // Check if the user has already liked this comment
-    const [existsLike] = await connection.query(
+    try {
+      // Check if the user has already liked this comment
+      const [likeInfo] = await connection.query(
+        `
+          SELECT like_
+          FROM likes
+          WHERE user_id = ? AND comment_id = ?
+        `,
+        [userId, commentId]
+      );
+
+      const like = likeInfo[0].like_;
+
+      if (like === 0) {
+        // Update like
+        await connection.query(
+          `
+            UPDATE likes
+            SET like_ = true
+            WHERE user_id = ? AND comment_id = ?
+          `,
+          [userId, commentId]
+        );
+      } else if (like === 1) {
+        // Update like
+        await connection.query(
+          `
+                UPDATE likes
+                SET like_ = false
+                WHERE user_id = ? AND comment_id = ?
+              `,
+          [userId, commentId]
+        );
+      }
+    } catch {
+      // Insert like
+      await connection.query(
+        `
+        INSERT INTO likes (user_id, comment_id)
+        VALUES (?, ?)
+      `,
+        [userId, commentId]
+      );
+    }
+
+    // Calculate the add of likes of the comment
+    const [add] = await connection.query(
       `
-        SELECT *
+            SELECT SUM(like_) AS addLikes
+            FROM likes
+            WHERE comment_id = ?
+          `,
+      [commentId]
+    );
+
+    // Save add of likes
+    const addLikes = add[0].addLikes;
+
+    // Check if user give like or dislike
+    const [likeInfo] = await connection.query(
+      `
+        SELECT like_
         FROM likes
         WHERE user_id = ? AND comment_id = ?
       `,
       [userId, commentId]
     );
 
-    // User cannot vote the same offer multiple times
-    if (existsLike.length > 0) {
-      throw generateError("Ya diste like a este comentario", 403);
-    } else {
-      // Insert vote
-      await connection.query(
-        `
-            INSERT INTO likes (like_, user_id, comment_id)
-            VALUES (?, ?, ?)
-          `,
-        [like, userId, commentId]
-      );
+    const like = likeInfo[0].like_ === 1 ? "like" : "dislike";
 
-      // Calculate the add of likes of the comment
-      const [add] = await connection.query(
-        `
-            SELECT sum(like_) AS addLikes
-            FROM likes 
-            WHERE comment_id = ?
-          `,
-        [commentId]
-      );
-
-      // Save add of likes
-      const addLikes = add[0].addLikes;
-
-      // Update AvgVotes in offers
-      await connection.query(
-        `
-        UPDATE comments
-        SET addLikes = ?
-        WHERE id = ?
-        `,
-        [addLikes, commentId]
-      );
-
-      // Return addLikes
-      return addLikes;
-    }
+    return { addLikes, like };
   } finally {
     if (connection) connection.release();
   }

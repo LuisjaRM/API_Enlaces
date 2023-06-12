@@ -26,9 +26,9 @@ const router = express.Router();
 router.post("/users/new-user", userExists, newUser);
 router.get("/users/validate/:regCode", validateUser);
 router.post("/users/login", login);
-router.patch("/users/modify-user/:id", authUser, modifyUser);
-router.delete("/users/delete/:id", authUser, deleteUser);
-router.patch("/users/modify-password/:id", authUser, modifyPassword);
+router.patch("/users/modify-user", authUser, modifyUser);
+router.delete("/users/delete/:id", authUser, userExists, deleteUser);
+router.patch("/users/modify-password", authUser, modifyPassword);
 router.post("/users/recover-password", recoverPassword);
 router.post("/users/reset-password", resetPassword);
 

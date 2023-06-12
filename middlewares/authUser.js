@@ -15,31 +15,26 @@ const authUser = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) {
-      throw generateError(
-        "No se ha introducido la cabecera de Authorization",
-        401
-      );
-    }
+      throw generateError("Usuario no logueado", 409);
+    } else {
+      // Check if token is correct
+      let tokenInfo;
 
-    // Check if token is correct
-    let tokenInfo;
+      try {
+        tokenInfo = jwt.verify(authorization, process.env.SECRET_TOKEN);
+      } catch {
+        throw generateError("Token incorrecto", 401);
+      }
 
-    try {
-      tokenInfo = jwt.verify(authorization, process.env.SECRET_TOKEN);
-    } catch {
-      throw generateError("Token incorrecto", 401);
-    }
+      connection = await getConnection();
 
-    connection = await getConnection();
-
-    try {
       // Check lastAuthUpdate
       const [user] = await connection.query(
         `
-            SELECT lastAuthUpdate
-            FROM users
-            WHERE id = ?
-            `,
+              SELECT lastAuthUpdate
+              FROM users
+              WHERE id = ?
+              `,
         [tokenInfo.id]
       );
 
@@ -54,8 +49,6 @@ const authUser = async (req, res, next) => {
 
       // Introduces token info in req
       req.userInfo = tokenInfo;
-    } catch {
-      throw generateError("Usuario no logueado", 409);
     }
 
     next();

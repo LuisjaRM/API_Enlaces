@@ -8,9 +8,22 @@ const { generateError } = require("../services/generateError");
 const userExists = async (req, res, next) => {
   let connection;
   try {
+    const { id } = req.params;
     const { email, user } = req.body;
 
     connection = await getConnection();
+
+    if (id) {
+      // Check that no other user exists with that mail
+      const [userIdExists] = await connection.query(
+        `SELECT id FROM users WHERE id = ?`,
+        [id]
+      );
+
+      if (userIdExists.length === 0) {
+        throw generateError("No existe un usuario con esa id.", 404);
+      }
+    }
 
     // Check that no other user exists with that mail
     const [userEmailExists] = await connection.query(

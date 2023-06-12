@@ -39,9 +39,9 @@ const newOffer = async (req, res, next) => {
     );
 
     // Res.send
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
-      message: `Oferta con id (${OfferId}) subida con éxito`,
+      message: `Oferta con id (${OfferId}) creada con éxito`,
     });
   } catch (error) {
     next(error);

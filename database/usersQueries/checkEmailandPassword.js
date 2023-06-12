@@ -16,7 +16,7 @@ const checkEmailandPassword = async (email, password) => {
 
     const [user] = await connection.query(
       `
-          SELECT id, role, active, password
+          SELECT id, role, active, user, password
           FROM users
           WHERE email = ?
           `,
@@ -39,6 +39,7 @@ const checkEmailandPassword = async (email, password) => {
         info = {
           id: user[0].id,
           role: user[0].role,
+          user: user[0].user,
         };
       }
     }

@@ -36,7 +36,9 @@ const login = async (req, res, next) => {
     }
 
     // If the info is a object, generate a token
-    const token = jwt.sign(info, process.env.SECRET_TOKEN, { expiresIn: "1d" });
+    const token = jwt.sign(info, process.env.SECRET_TOKEN, {
+      expiresIn: "30d",
+    });
 
     // Send token
     res.status(200).send({
@@ -44,6 +46,7 @@ const login = async (req, res, next) => {
       message: "Login",
       data: {
         token,
+        info,
       },
     });
   } catch (error) {

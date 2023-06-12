@@ -46,11 +46,12 @@ const modifyComment = async (req, res, next) => {
       );
     }
 
-    await updateComment(offerId, commentId, newComment);
+    const comments = await updateComment(offerId, commentId, newComment);
 
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
       message: `El comentario con id: ${commentId} de la oferta con id: ${offerId} ha sido modificado`,
+      data: comments,
     });
   } catch (error) {
     next(error);

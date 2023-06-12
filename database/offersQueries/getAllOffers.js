@@ -9,11 +9,22 @@ const getAllOffers = async () => {
   try {
     connection = await getConnection();
 
-    const [result] = await connection.query(`
-        SELECT * FROM offers ORDER BY created_at DESC
+    const [offers] = await connection.query(`
+        SELECT *
+        FROM offers 
+        WHERE id NOT IN (SELECT offer_id FROM votes);
+  `);
+
+    const [offersWithVotes] = await connection.query(`
+        SELECT o.*,u.user, AVG(v.vote)
+        FROM offers o
+        INNER JOIN votes v ON v.offer_id = o.id
+        INNER JOIN users u ON o.user_id  = u.id
+        GROUP BY o.id
+        ORDER BY o.created_at DESC;
       `);
 
-    return result;
+    return { offers, offersWithVotes };
   } finally {
     if (connection) connection.release();
   }

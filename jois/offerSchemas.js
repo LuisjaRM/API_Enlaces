@@ -11,7 +11,7 @@ const newOfferJoi = Joi.object().keys({
   price: Joi.number().positive().precision(2),
   offer_price: Joi.number().positive().precision(2),
   plataform: Joi.string().max(60),
-  offer_expiry: Joi.date(),
+  offer_expiry: Joi.date().required(),
 });
 
 const modifyOfferJoi = Joi.object().keys({
@@ -21,7 +21,7 @@ const modifyOfferJoi = Joi.object().keys({
   price: Joi.number().positive().precision(2),
   offer_price: Joi.number().positive().precision(2),
   plataform: Joi.string().max(60),
-  offer_expiry: Joi.date(),
+  offer_expiry: Joi.date().required(),
 });
 
 const voteOfferJoi = Joi.object().keys({
@@ -36,15 +36,10 @@ const commentOfferJoi = Joi.object().keys({
   newComment: Joi.string().max(280).required(),
 });
 
-const likeCommentJoi = Joi.object().keys({
-  like: Joi.number().min(1).max(1).required(),
-});
-
 module.exports = {
   newOfferJoi,
   voteOfferJoi,
   modifyOfferJoi,
   commentOfferJoi,
   newCommentOfferJoi,
-  likeCommentJoi,
 };

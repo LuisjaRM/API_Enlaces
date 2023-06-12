@@ -26,7 +26,7 @@ const resetPassword = async (req, res, next) => {
     //Query: swithPassword
     await swithPassword(recoverCode, newPassword);
 
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
       message: "Se ha reestablecido la contraseña correctamente",
     });

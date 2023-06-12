@@ -15,8 +15,6 @@ async function createDB() {
   try {
     connection = await getConnection();
 
-    // await connection.query(`CREATE DATABASE enlaces`);
-
     console.log(chalk.blue("Borrando tablas existentes"));
 
     await connection.query(`DROP TABLE IF EXISTS likes`);
@@ -54,9 +52,9 @@ async function createDB() {
         offer_price decimal(10,2),
         plataform VARCHAR(60),
         offer_expiry date,
-        avgVotes decimal(10,8) DEFAULT 0,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users(id)
+        FOREIGN KEY (user_id) REFERENCES users(id),
+        UNIQUE (user_id, url)
      )`);
 
     await connection.query(`
@@ -64,7 +62,6 @@ async function createDB() {
        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
        dateComments DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
        comment VARCHAR(280),
-       addLikes INT,
        user_id INT UNSIGNED NOT NULL,
        FOREIGN KEY (user_id) REFERENCES users(id),
        offer_id INT UNSIGNED NOT NULL,
@@ -87,7 +84,7 @@ async function createDB() {
     CREATE TABLE likes (
        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
        dateLike DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-       like_ TINYINT CHECK (like_ IN (1)),
+       like_ BOOLEAN DEFAULT TRUE,
        user_id INT UNSIGNED NOT NULL,
        FOREIGN KEY (user_id) REFERENCES users(id),
        comment_id INT UNSIGNED,

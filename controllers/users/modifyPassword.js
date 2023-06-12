@@ -13,8 +13,8 @@ const { modifyPwdJoi } = require("../../jois/userSchemas");
 
 const modifyPassword = async (req, res, next) => {
   try {
+    const id = req.userInfo.id;
     const { oldPassword, newPassword } = req.body;
-    const { id } = req.params;
 
     // Joi validation
     const schema = modifyPwdJoi;
@@ -24,8 +24,8 @@ const modifyPassword = async (req, res, next) => {
       throw generateError(validation.error.message, 401);
     }
 
-    // Check id or admin role
-    if (req.userInfo.id !== parseInt(id) && req.userInfo.role != "admin") {
+    // Check id
+    if (req.userInfo.id !== parseInt(id)) {
       throw generateError(
         "No tienes permisos para modificar este usuario",
         401
@@ -40,7 +40,7 @@ const modifyPassword = async (req, res, next) => {
     // Query: Change password
     await changePassword(oldPassword, newPassword, id);
 
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
       message: `Contraseña del usuario con id: ${id} modificada correctamente`,
     });

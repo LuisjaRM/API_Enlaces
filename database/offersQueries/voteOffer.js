@@ -47,32 +47,6 @@ const voteOffer = async (offerId, userId, vote) => {
           `,
         [vote, userId, offerId]
       );
-
-      // Calculate the average of votes of the offer
-      const [avg] = await connection.query(
-        `
-            SELECT AVG(vote) AS avgVotes
-            FROM votes 
-            WHERE offer_id = ?
-          `,
-        [offerId]
-      );
-
-      // Save average of votes
-      const avgVotes = avg[0].avgVotes;
-
-      // Update AvgVotes in offers
-      await connection.query(
-        `
-        UPDATE offers
-        SET avgVotes = ?
-        WHERE id = ?
-        `,
-        [avgVotes, offerId]
-      );
-
-      // Return avg
-      return avgVotes;
     }
   } finally {
     if (connection) connection.release();

@@ -29,12 +29,11 @@ const postVoteOffer = async (req, res, next) => {
     // Query: Get information of the offer that we want to vote
     await getOfferById(offerId);
 
-    const avg = await voteOffer(offerId, userId, vote);
+    await voteOffer(offerId, userId, vote);
 
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
       message: "Voto registrado",
-      data: { mediaVotos: avg },
     });
   } catch (error) {
     next(error);

@@ -30,12 +30,12 @@ const commentOffer = async (req, res, next) => {
     await getOfferById(offerId);
 
     // Query: Add comment
-    const commentId = await addCommentOffer(offerId, userId, comment);
+    const info = await addCommentOffer(offerId, userId, comment);
 
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
-      message: `Comentario registrado con el id:${commentId}`,
-      data: comment,
+      message: `Comentario registrado con el id: ${info.newCommentId}`,
+      data: info.comments,
     });
   } catch (error) {
     next(error);

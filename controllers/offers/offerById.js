@@ -11,12 +11,12 @@ const offerById = async (req, res, next) => {
     const { id } = req.params;
 
     // Query: get offer by id
-    const offerID = await getOfferById(id);
+    const offerInfo = await getOfferById(id);
 
     // Res.send
     res.status(200).send({
       status: "ok",
-      message: offerID,
+      data: offerInfo,
     });
   } catch (error) {
     next(error);

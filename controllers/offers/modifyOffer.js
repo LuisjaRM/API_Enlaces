@@ -53,7 +53,7 @@ const modifyOffer = async (req, res, next) => {
       offer_expiry
     );
 
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
       message: `La oferta con id: ${id} ha sido modificada correctamente`,
     });

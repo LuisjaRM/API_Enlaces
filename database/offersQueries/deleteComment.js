@@ -10,6 +10,12 @@ const deleteComment = async (offerId, commentId) => {
     connection = await getConnection();
 
     await connection.query(
+      ` DELETE FROM likes
+        WHERE comment_id = ?`,
+      [commentId]
+    );
+
+    await connection.query(
       ` DELETE FROM comments
         WHERE offer_id = ? AND id = ? `,
       [offerId, commentId]

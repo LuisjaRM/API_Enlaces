@@ -11,6 +11,16 @@ const updateComment = async (offerId, commentId, newComment) => {
          WHERE offer_id = ? AND id = ? `,
       [newComment, offerId, commentId]
     );
+
+    // Get offer comments
+    const [comments] = await connection.query(
+      `
+          SELECT * FROM comments WHERE offer_id = ?;
+          `,
+      [offerId]
+    );
+
+    return comments;
   } finally {
     if (connection) connection.release();
   }

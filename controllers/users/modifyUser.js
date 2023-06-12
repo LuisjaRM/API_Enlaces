@@ -11,7 +11,7 @@ const { modifyUserJoi } = require("../../jois/userSchemas");
 
 const modifyUser = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const id = req.userInfo.id;
     const { email, user } = req.body;
 
     // Joi validation
@@ -22,8 +22,8 @@ const modifyUser = async (req, res, next) => {
       throw generateError(validation.error.message, 401);
     }
 
-    // Check id or admin role
-    if (req.userInfo.id !== parseInt(id) && req.userInfo.role != "admin") {
+    // Check id
+    if (req.userInfo.id !== parseInt(id)) {
       throw generateError(
         "No tienes permisos para modificar este usuario",
         401
@@ -43,7 +43,7 @@ const modifyUser = async (req, res, next) => {
     }
 
     // Res.send
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
       message: "Las modificaciones se han realizado con éxito",
     });

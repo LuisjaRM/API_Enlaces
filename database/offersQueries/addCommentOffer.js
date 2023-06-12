@@ -18,7 +18,17 @@ const addCommentOffer = async (offerId, userId, comment) => {
       [comment, userId, offerId, new Date()]
     );
 
-    return newComment.insertId;
+    const newCommentId = newComment.insertId;
+
+    // Get offer comments
+    const [comments] = await connection.query(
+      `
+          SELECT * FROM comments WHERE offer_id = ?;
+          `,
+      [offerId]
+    );
+
+    return { newCommentId, comments };
   } finally {
     if (connection) connection.release();
   }

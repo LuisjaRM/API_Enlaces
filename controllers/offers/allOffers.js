@@ -2,14 +2,28 @@
 
 const {
   getAllOffers,
+  getDayOffers,
+  orderByVotes,
 } = require("../../database/offersQueries/expOffersQueries");
 
 // Controller ↓
 
 const allOffers = async (req, res, next) => {
   try {
-    // Query: get all offers
-    const offers = await getAllOffers();
+    const { filter } = req.query;
+
+    let offers;
+
+    if (filter === "all") {
+      // Query: get all offers
+      offers = await getAllOffers();
+    } else if (filter === "daily") {
+      // Query: get today offers
+      offers = await getDayOffers();
+    } else if (filter === "by-votes") {
+      // Query: get all offers
+      offers = await orderByVotes();
+    }
 
     // Res.send
     res.status(200).send({

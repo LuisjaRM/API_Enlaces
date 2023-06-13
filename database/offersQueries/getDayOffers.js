@@ -12,16 +12,26 @@ const getDayOffers = async () => {
     // Generate date in format YYYY-MM-DD
     const dateToday = new Date().toISOString().slice(0, 10);
 
-    const [offers] = await connection.query(
+    const [offersWithVotes] = await connection.query(
       `
-        SELECT * 
-        FROM offers 
-        WHERE created_at BETWEEN '${dateToday} 00:00:00' AND '${dateToday} 23:59:59' 
+        SELECT o.*, u.user, AVG(v.vote) AS avgVotes
+        FROM offers o
+        INNER JOIN votes v ON v.offer_id = o.id
+        INNER JOIN users u ON o.user_id = u.id
+        WHERE o.created_at BETWEEN '${dateToday} 00:00:00' AND '${dateToday} 23:59:59' 
+        GROUP BY o.id
         `
     );
 
+    const [offers] = await connection.query(`
+    SELECT o.*, u.user
+    FROM offers o
+    INNER JOIN users u ON o.user_id = u.id
+    WHERE o.id NOT IN (SELECT offer_id FROM votes);
+`);
+
     // Return offers
-    return offers;
+    return { offersWithVotes, offers };
   } finally {
     if (connection) connection.release();
   }

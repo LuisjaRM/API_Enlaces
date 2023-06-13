@@ -10,7 +10,7 @@ const { authUser, offerUrlRepeat } = require("../middlewares/expMiddlewares");
 
 const {
   newOffer,
-  allOffers,
+  filterOffers,
   offerById,
   modifyOffer,
   deleteOffer,
@@ -27,7 +27,7 @@ const {
 const router = express.Router();
 
 router.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
-router.get("/offers", authUser, allOffers);
+router.get("/offers", filterOffers);
 router.get("/offers/get-by-id/:id", authUser, offerById);
 router.patch("/offers/modify-offer/:id", authUser, modifyOffer);
 router.delete("/offers/delete/:id", authUser, deleteOffer);

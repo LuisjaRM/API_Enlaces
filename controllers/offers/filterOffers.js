@@ -8,7 +8,7 @@ const {
 
 // Controller ↓
 
-const allOffers = async (req, res, next) => {
+const filterOffers = async (req, res, next) => {
   try {
     const { filter } = req.query;
 
@@ -35,4 +35,4 @@ const allOffers = async (req, res, next) => {
   }
 };
 
-module.exports = { allOffers };
+module.exports = { filterOffers };

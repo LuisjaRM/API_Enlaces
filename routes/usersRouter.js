@@ -26,6 +26,7 @@ const router = express.Router();
 router.post("/users/new-user", userExists, newUser);
 router.get("/users/validate/:regCode", validateUser);
 router.post("/users/login", login);
+router.get("/users/:id", authUser, getUserById);
 router.patch("/users/modify-user", authUser, modifyUser);
 router.delete("/users/delete/:id", authUser, userExists, deleteUser);
 router.patch("/users/modify-password", authUser, modifyPassword);

@@ -15,6 +15,7 @@ const createOffer = async (
   offer_expiry
 ) => {
   let connection;
+
   try {
     const connection = await getConnection();
 

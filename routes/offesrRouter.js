@@ -10,6 +10,7 @@ const { authUser, offerUrlRepeat } = require("../middlewares/expMiddlewares");
 
 const {
   newOffer,
+  modifyPhoto,
   filterOffers,
   offerById,
   modifyOffer,
@@ -27,6 +28,7 @@ const {
 const router = express.Router();
 
 router.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
+router.patch("/offers/new-offer/modifiy-photo/:id", authUser, modifyPhoto);
 router.get("/offers", filterOffers);
 router.get("/offers/get-by-id/:id", authUser, offerById);
 router.patch("/offers/modify-offer/:id", authUser, modifyOffer);

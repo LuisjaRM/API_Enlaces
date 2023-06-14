@@ -13,28 +13,28 @@ const modifyUser = async (req, res, next) => {
   try {
     const id = req.userInfo.id;
     const { email, user } = req.body;
+    const filesAvatar = req.files.avatar;
 
-    // Joi validation
-    const schema = modifyUserJoi;
-    const validation = schema.validate(req.body);
+    if (!filesAvatar) {
+      // Joi validation
+      const schema = modifyUserJoi;
+      const validation = schema.validate(req.body);
 
-    if (validation.error) {
-      throw generateError(validation.error.message, 401);
-    }
+      if (validation.error) {
+        throw generateError(validation.error.message, 401);
+      }
 
-    // Check id
-    if (req.userInfo.id !== parseInt(id)) {
-      throw generateError(
-        "No tienes permisos para modificar este usuario",
-        401
-      );
+      // Check id
+      if (req.userInfo.id !== parseInt(id)) {
+        throw generateError(
+          "No tienes permisos para modificar este usuario",
+          401
+        );
+      }
     }
 
     // Query:
     try {
-      // Save avatar in a var
-      const filesAvatar = req.files.avatar;
-
       // Try set avatar if exists
       await updateUser(id, email, user, filesAvatar);
     } catch {

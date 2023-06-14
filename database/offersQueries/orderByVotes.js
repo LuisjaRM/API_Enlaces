@@ -11,7 +11,7 @@ const orderByVotes = async () => {
 
     const [offersWithVotes] = await connection.query(
       `
-        SELECT o.*, u.user, AVG(v.vote) AS avgVotes
+        SELECT o.*, u.user, u.avatar, AVG(v.vote) AS avgVotes
         FROM offers o
         INNER JOIN votes v ON o.id = v.offer_id
         INNER JOIN users u ON o.user_id  = u.id
@@ -21,7 +21,7 @@ const orderByVotes = async () => {
     );
 
     const [offers] = await connection.query(`
-      SELECT o.*, u.user
+      SELECT o.*, u.user, u.avatar
       FROM offers o
       INNER JOIN users u ON o.user_id = u.id
       WHERE o.id NOT IN (SELECT offer_id FROM votes);

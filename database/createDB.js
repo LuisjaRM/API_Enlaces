@@ -31,7 +31,7 @@ async function createDB() {
         email VARCHAR(100) UNIQUE NOT NULL,
         password VARCHAR(100) NOT NULL,
         user VARCHAR(100) UNIQUE NOT NULL,
-        avatar VARCHAR(100),
+        avatar VARCHAR(250),
         role ENUM("admin", "normal") DEFAULT "normal" NOT NULL,
         deleted BOOLEAN DEFAULT false,
         lastAuthUpdate DATETIME,
@@ -52,6 +52,7 @@ async function createDB() {
         offer_price decimal(10,2),
         plataform VARCHAR(60),
         offer_expiry date,
+        photo VARCHAR(250),
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id),
         UNIQUE (user_id, url)

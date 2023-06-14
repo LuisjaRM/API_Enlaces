@@ -1,4 +1,5 @@
 const { createOffer } = require("./createOffer");
+const { changePhoto } = require("./changePhoto");
 const { getAllOffers } = require("./getAllOffers");
 const { getDayOffers } = require("./getDayOffers");
 const { getOfferById } = require("./getOfferById");
@@ -15,6 +16,7 @@ const { likeComment } = require("./likeComment");
 
 module.exports = {
   createOffer,
+  changePhoto,
   getOfferById,
   getDayOffers,
   getAllOffers,

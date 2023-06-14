@@ -25,7 +25,7 @@ app.use(cors());
 const path = require("path");
 const staticDir = path.join(__dirname, "./uploads");
 
-app.use(express.static(staticDir));
+app.use("/uploads", express.static(staticDir));
 
 // Routers ↓
 

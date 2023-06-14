@@ -11,6 +11,7 @@ const { userExists, authUser } = require("../middlewares/expMiddlewares");
 const {
   newUser,
   login,
+  getUserById,
   modifyUser,
   modifyPassword,
   validateUser,

@@ -8,6 +8,7 @@ const { validateUser } = require("./validateUser");
 const { deleteUser } = require("./deleteUser");
 const { recoverPassword } = require("./recoverPassword");
 const { resetPassword } = require("./resetPassword");
+const { getUserById } = require("./getUserById");
 
 // Exports ↓
 
@@ -20,4 +21,5 @@ module.exports = {
   deleteUser,
   recoverPassword,
   resetPassword,
+  getUserById,
 };

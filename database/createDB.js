@@ -20,6 +20,7 @@ async function createDB() {
     await connection.query(`DROP TABLE IF EXISTS likes`);
     await connection.query(`DROP TABLE IF EXISTS votes`);
     await connection.query(`DROP TABLE IF EXISTS comments`);
+    await connection.query(`DROP TABLE IF EXISTS favorites`);
     await connection.query(`DROP TABLE IF EXISTS offers`);
     await connection.query(`DROP TABLE IF EXISTS users`);
 
@@ -57,6 +58,15 @@ async function createDB() {
         FOREIGN KEY (user_id) REFERENCES users(id),
         UNIQUE (user_id, url)
      )`);
+
+    await connection.query(`
+    CREATE TABLE favorites (
+      user_id INTEGER UNSIGNED NOT NULL,
+      offer_id INT UNSIGNED NOT NULL,
+      favorite BOOLEAN,
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (offer_id) REFERENCES offers(id)
+    )`);
 
     await connection.query(`
     CREATE TABLE comments (

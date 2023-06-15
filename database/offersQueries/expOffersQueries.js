@@ -4,6 +4,7 @@ const { getAllOffers } = require("./getAllOffers");
 const { getDayOffers } = require("./getDayOffers");
 const { getOfferById } = require("./getOfferById");
 const { orderByVotes } = require("./orderByVotes");
+const { updateFavoritesOffers } = require("./updateFavoritesOffers");
 const { voteOffer } = require("./voteOffer");
 const { deteleOfferById } = require("./deleteOfferById");
 const { addCommentOffer } = require("./addCommentOffer");
@@ -21,6 +22,7 @@ module.exports = {
   getDayOffers,
   getAllOffers,
   orderByVotes,
+  updateFavoritesOffers,
   voteOffer,
   deteleOfferById,
   updateOffer,

@@ -1,6 +1,7 @@
 const { newOffer } = require("./newOffer");
 const { modifyPhoto } = require("./modifyPhoto");
 const { filterOffers } = require("./filterOffers");
+const { favoriteOffers } = require("./favoriteOffers");
 const { offerById } = require("./offerById");
 const { modifyOffer } = require("./modifyOffer");
 const { deleteOffer } = require("./deleteOffer");
@@ -15,6 +16,7 @@ module.exports = {
   newOffer,
   modifyPhoto,
   filterOffers,
+  favoriteOffers,
   offerById,
   modifyOffer,
   deleteOffer,

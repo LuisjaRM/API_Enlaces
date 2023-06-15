@@ -22,7 +22,8 @@ const getAllOffers = async () => {
         SELECT o.*, u.user, u.avatar
         FROM offers o
         INNER JOIN users u ON o.user_id = u.id
-        WHERE o.id NOT IN (SELECT offer_id FROM votes);
+        WHERE o.id NOT IN (SELECT offer_id FROM votes)
+        ORDER BY o.created_at DESC;
   `);
 
     return { offersWithVotes, offers };

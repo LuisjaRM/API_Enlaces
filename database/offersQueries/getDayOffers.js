@@ -24,10 +24,10 @@ const getDayOffers = async () => {
     );
 
     const [offers] = await connection.query(`
-    SELECT o.*, u.user, u.avatar
-    FROM offers o
-    INNER JOIN users u ON o.user_id = u.id
-    WHERE o.id NOT IN (SELECT offer_id FROM votes);
+        SELECT o.*, u.user, u.avatar
+        FROM offers o
+        INNER JOIN users u ON o.user_id = u.id
+        WHERE o.id NOT IN (SELECT offer_id FROM votes) AND o.created_at BETWEEN '${dateToday} 00:00:00' AND '${dateToday} 23:59:59'
 `);
 
     // Return offers

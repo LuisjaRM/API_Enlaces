@@ -71,8 +71,8 @@ async function createDB() {
     await connection.query(`
     CREATE TABLE comments (
        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-       dateComments DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
        comment VARCHAR(280),
+       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
        user_id INT UNSIGNED NOT NULL,
        FOREIGN KEY (user_id) REFERENCES users(id),
        offer_id INT UNSIGNED NOT NULL,

@@ -18,7 +18,6 @@ const {
   deleteOffer,
   postVoteOffer,
   commentOffer,
-  commentsById,
   modifyComment,
   commentDelete,
   likeCommentOffer,
@@ -32,12 +31,11 @@ router.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
 router.patch("/offers/new-offer/modifiy-photo/:id", authUser, modifyPhoto);
 router.get("/offers", filterOffers);
 router.patch("/offers/favorite/:id", authUser, favoriteOffers);
-router.get("/offers/get-by-id/:id", authUser, offerById);
+router.get("/offers/get-by-id/:id", offerById);
 router.patch("/offers/modify-offer/:id", authUser, modifyOffer);
 router.delete("/offers/delete/:id", authUser, deleteOffer);
 router.post("/offers/vote/:id", authUser, postVoteOffer);
 router.post("/offers/comment/:id", authUser, commentOffer);
-router.get("/offers/comments-of-offer/:id", authUser, commentsById);
 router.patch(
   "/offers/modify-comment/:offerId/:commentId",
   authUser,

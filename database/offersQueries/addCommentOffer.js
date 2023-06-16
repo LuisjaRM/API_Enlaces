@@ -12,10 +12,10 @@ const addCommentOffer = async (offerId, userId, comment) => {
     // Insert comment
     const [newComment] = await connection.query(
       `
-            INSERT INTO comments (comment, user_id, offer_id, dateComments)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO comments (comment, user_id, offer_id)
+            VALUES (?, ?, ?)
           `,
-      [comment, userId, offerId, new Date()]
+      [comment, userId, offerId]
     );
 
     const newCommentId = newComment.insertId;

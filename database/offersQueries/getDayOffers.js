@@ -19,21 +19,32 @@ const getDayOffers = async () => {
         INNER JOIN votes v ON v.offer_id = o.id
         INNER JOIN users u ON o.user_id = u.id
         WHERE o.created_at BETWEEN '${dateToday} 00:00:00' AND '${dateToday} 23:59:59' 
-        GROUP BY o.id
-        ORDER BY o.created_at DESC;
+        GROUP BY o.id;
         `
     );
 
-    const [offers] = await connection.query(`
+    const [offersWithoutVotes] = await connection.query(`
         SELECT o.*, u.user, u.avatar
         FROM offers o
         INNER JOIN users u ON o.user_id = u.id
-        WHERE o.id NOT IN (SELECT offer_id FROM votes) AND o.created_at BETWEEN '${dateToday} 00:00:00' AND '${dateToday} 23:59:59'
-        ORDER BY o.created_at DESC;
+        WHERE o.id NOT IN (SELECT offer_id FROM votes) AND o.created_at BETWEEN '${dateToday} 00:00:00' AND '${dateToday} 23:59:59';
 `);
 
+    const offers = [];
+
+    offersWithVotes.map((offer) => offers.push(offer));
+    offersWithoutVotes.map((offer) => offers.push(offer));
+
+    offers
+      .sort((a, b) => {
+        return b.created_at - a.created_at;
+      })
+      .map((offer) => {
+        return offer;
+      });
+
     // Return offers
-    return { offersWithVotes, offers };
+    return { offers };
   } finally {
     if (connection) connection.release();
   }

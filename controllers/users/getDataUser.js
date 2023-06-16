@@ -1,4 +1,4 @@
-// Returns private information of a user.
+// Returns private information of a user
 
 const { getUserInfo } = require("../../database/usersQueries/getUserInfo");
 
@@ -10,7 +10,7 @@ const getDataUser = async (req, res, next) => {
 
     res.status(201).send({
       status: "ok",
-      message: `Información del usuario`,
+      message: `Información privada del usuario`,
       data: dataUser,
     });
   } catch (error) {

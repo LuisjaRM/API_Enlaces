@@ -26,7 +26,7 @@ const filterOffers = async (req, res, next) => {
     }
 
     // Res.send
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
       data: offers,
     });

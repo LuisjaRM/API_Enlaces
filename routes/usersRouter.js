@@ -11,13 +11,14 @@ const { userExists, authUser } = require("../middlewares/expMiddlewares");
 const {
   newUser,
   login,
-  getUserById,
+  getDataUser,
   modifyUser,
   modifyPassword,
   validateUser,
   deleteUser,
   recoverPassword,
   resetPassword,
+  getUserById,
 } = require("../controllers/users/userControllers");
 
 // Routes ↓
@@ -27,6 +28,7 @@ const router = express.Router();
 router.post("/users/new-user", userExists, newUser);
 router.get("/users/validate/:regCode", validateUser);
 router.post("/users/login", login);
+router.get("/users", authUser, getDataUser);
 router.get("/users/:id", authUser, getUserById);
 router.patch("/users/modify-user", authUser, modifyUser);
 router.delete("/users/delete/:id", authUser, userExists, deleteUser);

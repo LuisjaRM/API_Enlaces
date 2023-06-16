@@ -1,9 +1,9 @@
-// Query to returns the public information of a user by his id
+// Query to returns the private information of a user
 
 const { getConnection } = require("../connectionDB");
 const { generateError } = require("../../services/generateError");
 
-const getUserByIdQuerie = async (id) => {
+const getUserInfo = async (id) => {
   let connection;
 
   try {
@@ -11,7 +11,7 @@ const getUserByIdQuerie = async (id) => {
 
     const [result] = await connection.query(
       `
-        SELECT user, avatar, created_at FROM users WHERE id = ?
+        SELECT * FROM users WHERE id = ?
       `,
       [id]
     );
@@ -26,4 +26,4 @@ const getUserByIdQuerie = async (id) => {
   }
 };
 
-module.exports = { getUserByIdQuerie };
+module.exports = { getUserInfo };

@@ -1,16 +1,14 @@
 // Returns the public information of a user by his id
 
-const {
-  getUserByIdQuerie,
-} = require("../../database/usersQueries/getUserByIdQuerie");
+const { offersOfUser } = require("../../database/usersQueries/offersOfUser");
 
 const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const dataUser = await getUserByIdQuerie(id);
+    const dataUser = await offersOfUser(id);
 
-    res.status(200).send({
+    res.status(201).send({
       status: "ok",
       message: `Información del usuario`,
       data: dataUser,

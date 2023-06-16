@@ -6,6 +6,8 @@ const { queryDeleteUser } = require("./queryDeleteUser");
 const { changePassword } = require("./changePassword");
 const { recoverCode } = require("./recoverCode");
 const { swithPassword } = require("./swithPassword");
+const { getUserInfo } = require("./getUserInfo");
+const { offersOfUser } = require("./offersOfUser");
 
 module.exports = {
   createNewUser,
@@ -16,4 +18,6 @@ module.exports = {
   changePassword,
   recoverCode,
   swithPassword,
+  getUserInfo,
+  offersOfUser,
 };

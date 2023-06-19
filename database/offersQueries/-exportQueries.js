@@ -1,7 +1,9 @@
 const { deleteCommentQuery } = require("./deleteCommentQuery");
 const { deleteOfferQuery } = require("./deleteOfferQuery");
 const { getAllOffersQuery } = require("./getAllOffersQuery");
+const { getCheckIsFavoriteQuery } = require("./getCheckIsFavoriteQuery");
 const { getDailyOffersQuery } = require("./getDailyOffersQuery");
+const { getFavoritesOffersQuery } = require("./getFavoritesOffersQuery");
 const { getOffersOrderByVotesQuery } = require("./getOffersOrderByVotesQuery");
 const { getSingleOfferQuery } = require("./getSingleOfferQuery");
 const { getSingleCommentQuery } = require("./getSingleCommentQuery");
@@ -18,7 +20,9 @@ module.exports = {
   deleteCommentQuery,
   deleteOfferQuery,
   getAllOffersQuery,
+  getCheckIsFavoriteQuery,
   getDailyOffersQuery,
+  getFavoritesOffersQuery,
   getOffersOrderByVotesQuery,
   getSingleOfferQuery,
   getSingleCommentQuery,

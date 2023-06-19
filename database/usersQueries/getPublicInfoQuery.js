@@ -9,14 +9,14 @@ const getPublicInfoQuery = async (id) => {
   try {
     connection = await getConnection();
 
-    const [result] = await connection.query(
+    const [userInfo] = await connection.query(
       `
         SELECT * FROM users WHERE id = ?
       `,
       [id]
     );
 
-    if (result.length === 0) {
+    if (userInfo.length === 0) {
       throw generateError("No hay ningún usuario con esa id", 404);
     }
 
@@ -57,7 +57,7 @@ const getPublicInfoQuery = async (id) => {
         return offer;
       });
 
-    return { offers };
+    return { userInfo, offers };
   } finally {
     if (connection) connection.release();
   }

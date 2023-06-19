@@ -4,48 +4,43 @@ const express = require("express");
 
 // Middlewares requires ↓
 
-const { authUser, offerUrlRepeat } = require("../middlewares/expMiddlewares");
+const {
+  authUser,
+  offerUrlRepeat,
+} = require("../middlewares/-exportMiddlewares");
 
 // Controllers requires ↓
 
 const {
-  newOffer,
-  modifyPhoto,
-  filterOffers,
-  favoriteOffers,
-  offerById,
-  modifyOffer,
+  deleteComment,
   deleteOffer,
-  postVoteOffer,
-  commentOffer,
-  modifyComment,
-  commentDelete,
-  likeCommentOffer,
-} = require("../controllers/offers/offerControllers");
+  getOffers,
+  getSingleOffer,
+  patchComment,
+  patchFavorite,
+  patchOffer,
+  patchOfferImage,
+  postComment,
+  postLike,
+  postOffer,
+  postVote,
+} = require("../controllers/offers/-exportControllers");
 
 // Routes ↓
 
 const router = express.Router();
 
-router.post("/offers/new-offer", authUser, offerUrlRepeat, newOffer);
-router.patch("/offers/new-offer/modifiy-photo/:id", authUser, modifyPhoto);
-router.get("/offers", filterOffers);
-router.patch("/offers/favorite/:id", authUser, favoriteOffers);
-router.get("/offers/get-by-id/:id", offerById);
-router.patch("/offers/modify-offer/:id", authUser, modifyOffer);
-router.delete("/offers/delete/:id", authUser, deleteOffer);
-router.post("/offers/vote/:id", authUser, postVoteOffer);
-router.post("/offers/comment/:id", authUser, commentOffer);
-router.patch(
-  "/offers/modify-comment/:offerId/:commentId",
-  authUser,
-  modifyComment
-);
-router.delete(
-  "/offers/delete-comment/:offerId/:commentId",
-  authUser,
-  commentDelete
-);
-router.post("/offers/like-to-comment/:id", authUser, likeCommentOffer);
+router.delete("/comment/:offerId/:commentId", authUser, deleteComment);
+router.delete("/offers/:id", authUser, deleteOffer);
+router.get("/offers", getOffers);
+router.get("/offers/:id", getSingleOffer);
+router.patch("/comment/:offerId/:commentId", authUser, patchComment);
+router.patch("/favorite/:offerId", authUser, patchFavorite);
+router.patch("/offers/:id", authUser, patchOffer);
+router.patch("/image/:offerId", authUser, patchOfferImage);
+router.post("/comment/:offerId", authUser, postComment);
+router.post("/like/:commentId", authUser, postLike);
+router.post("/offers", authUser, offerUrlRepeat, postOffer);
+router.post("/vote/:offerId", authUser, postVote);
 
 module.exports = router;

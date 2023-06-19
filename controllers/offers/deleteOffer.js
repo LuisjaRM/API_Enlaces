@@ -1,10 +1,13 @@
 // Functions requires ↓
 
 const { generateError } = require("../../services/generateError");
+
+// Queries Requires ↓
+
 const {
-  getOfferById,
-  deteleOfferById,
-} = require("../../database/offersQueries/expOffersQueries");
+  getSingleOfferQuery,
+  deleteOfferQuery,
+} = require("../../database/offersQueries/-exportQueries");
 
 // Controller ↓
 
@@ -13,7 +16,7 @@ const deleteOffer = async (req, res, next) => {
     const { id } = req.params;
 
     // Query: Get information of the offer that we want delete
-    const offer = await getOfferById(id);
+    const offer = await getSingleOfferQuery(id);
 
     // Check if the user is the creator of the offer or is an admin
     if (
@@ -24,12 +27,12 @@ const deleteOffer = async (req, res, next) => {
     }
 
     // Query: Delete offer
-    await deteleOfferById(id);
+    await deleteOfferQuery(id);
 
     // Res.send
     res.status(200).send({
       status: "ok",
-      message: `La oferta con id: ${id} fue borrada`,
+      message: `La oferta con id: ${id} fue borrada correctamente`,
     });
   } catch (error) {
     next(error);

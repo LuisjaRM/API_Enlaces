@@ -1,9 +1,12 @@
 // Functions requires ↓
 
 const { generateError } = require("../../services/generateError");
+
+// Querie require ↓
+
 const {
-  queryDeleteUser,
-} = require("../../database/usersQueries/expUsersQueries");
+  deleteUserQuery,
+} = require("../../database/usersQueries/-exportQueries");
 
 // Controller ↓
 
@@ -16,12 +19,12 @@ const deleteUser = async (req, res, next) => {
       throw generateError("No tienes permiso para borrar este usuario", 401);
     }
 
-    await queryDeleteUser(id);
+    await deleteUserQuery(id);
 
     // Res.send
     res.status(200).send({
       status: "ok",
-      message: `El usuario con el id:${id} ha sido borrado.`,
+      message: `El usuario con el id:${id} fue borrado con éxito`,
     });
   } catch (error) {
     next(error);

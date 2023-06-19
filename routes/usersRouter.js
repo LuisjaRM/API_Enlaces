@@ -4,36 +4,36 @@ const express = require("express");
 
 // Middlewares requires ↓
 
-const { userExists, authUser } = require("../middlewares/expMiddlewares");
+const { userExists, authUser } = require("../middlewares/-exportMiddlewares");
 
 // Controllers requires ↓
 
 const {
-  newUser,
-  login,
-  getDataUser,
-  modifyUser,
-  modifyPassword,
-  validateUser,
   deleteUser,
-  recoverPassword,
-  resetPassword,
-  getUserById,
-} = require("../controllers/users/userControllers");
+  getPrivateInfo,
+  getPublicInfo,
+  getValidate,
+  patchPassword,
+  patchUser,
+  postLogin,
+  postRecoverPassword,
+  postResetPassword,
+  postUser,
+} = require("../controllers/users/-exportControllers");
 
 // Routes ↓
 
 const router = express.Router();
 
-router.post("/users/new-user", userExists, newUser);
-router.get("/users/validate/:regCode", validateUser);
-router.post("/users/login", login);
-router.get("/users", authUser, getDataUser);
-router.get("/users/:id", authUser, getUserById);
-router.patch("/users/modify-user", authUser, modifyUser);
-router.delete("/users/delete/:id", authUser, userExists, deleteUser);
-router.patch("/users/modify-password", authUser, modifyPassword);
-router.post("/users/recover-password", recoverPassword);
-router.post("/users/reset-password", resetPassword);
+router.delete("/user/:id", authUser, userExists, deleteUser);
+router.get("/user", authUser, getPrivateInfo);
+router.get("/user/:id", authUser, getPublicInfo);
+router.get("/validate/:regCode", getValidate);
+router.patch("/password", authUser, patchPassword);
+router.patch("/user/", authUser, patchUser);
+router.post("/login", postLogin);
+router.post("/password/recover", postRecoverPassword);
+router.post("/password/reset", postResetPassword);
+router.post("/user", userExists, postUser);
 
 module.exports = router;

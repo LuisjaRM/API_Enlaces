@@ -30,7 +30,7 @@ router.get("/user", authUser, getPrivateInfo);
 router.get("/user/:id", authUser, getPublicInfo);
 router.get("/validate/:regCode", getValidate);
 router.patch("/password", authUser, patchPassword);
-router.patch("/user/", authUser, patchUser);
+router.patch("/user", authUser, patchUser);
 router.post("/login", postLogin);
 router.post("/password/recover", postRecoverPassword);
 router.post("/password/reset", postResetPassword);

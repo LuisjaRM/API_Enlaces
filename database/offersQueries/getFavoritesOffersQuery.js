@@ -31,11 +31,10 @@ const getFavoritesOffersQuery = async (user_id) => {
 
       const [offersWithVotesQuery] = await connection.query(
         `
-           SELECT o.*, u.user, u.avatar, f.favorite, AVG(v.vote) AS avgVotes
+           SELECT o.*, u.user, u.avatar, AVG(v.vote) AS avgVotes
            FROM offers o
            INNER JOIN votes v ON v.offer_id = o.id
            INNER JOIN users u ON o.user_id  = u.id
-           INNER JOIN favorites f ON f.offer_id = o.id
            WHERE o.id = ?
            GROUP BY o.id;
          `,
@@ -44,10 +43,9 @@ const getFavoritesOffersQuery = async (user_id) => {
 
       const [offersWithoutVotesQuery] = await connection.query(
         `
-           SELECT o.*, u.user, u.avatar, f.favorite
+           SELECT o.*, u.user, u.avatar
            FROM offers o
            INNER JOIN users u ON o.user_id = u.id
-           INNER JOIN favorites f ON f.offer_id = o.id
            WHERE o.id = ?;
      `,
         [offer_id]

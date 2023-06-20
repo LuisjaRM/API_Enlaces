@@ -103,10 +103,6 @@ async function createDB() {
        UNIQUE (user_id, comment_id)
    )`);
 
-    await connection.query(`
-    SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))
-  `);
-
     console.log(chalk.yellow("Base de datos creada"));
   } catch (error) {
     console.error(error);

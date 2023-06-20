@@ -12,9 +12,9 @@ const getSingleOfferQuery = async (id) => {
 
     // Get Offer Info
 
-    let offerInfo;
+    let offerInfo = [];
 
-    [offerWithVotes] = await connection.query(
+    const [offerWithVotes] = await connection.query(
       `
       SELECT o.*, u.user, u.avatar, AVG(v.vote) AS avgVotes
       FROM offers o
@@ -39,7 +39,7 @@ const getSingleOfferQuery = async (id) => {
         [id]
       );
 
-      offerInfo = offerWithoutVotes[0];
+      offerInfo.push(offerWithoutVotes[0]);
 
       if (offerWithoutVotes.length === 0) {
         throw generateError(
@@ -48,7 +48,7 @@ const getSingleOfferQuery = async (id) => {
         );
       }
     } else {
-      offerInfo = offerWithVotes[0];
+      offerInfo.push(offerWithVotes[0]);
     }
 
     // Get offer comments

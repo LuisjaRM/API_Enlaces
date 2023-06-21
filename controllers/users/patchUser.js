@@ -15,7 +15,13 @@ const patchUser = async (req, res, next) => {
   try {
     const id = req.userInfo.id;
     const { email, user } = req.body;
-    const filesAvatar = req.files.avatar;
+
+    let filesAvatar;
+    try {
+      filesAvatar = req.files.avatar;
+    } catch (error) {
+      filesAvatar = null;
+    }
 
     if (!filesAvatar) {
       // Joi validation
@@ -36,12 +42,12 @@ const patchUser = async (req, res, next) => {
     }
 
     // Query:
-    try {
-      // Try set avatar if exists
-      await patchUserQuery(id, email, user, filesAvatar);
-    } catch {
-      // If not exists call updateUser without filesAvatar
-      await patchUserQuery(id, email, user);
+    if (filesAvatar) {
+      await patchUserQuery({ id, filesAvatar });
+    } else if (email) {
+      await patchUserQuery({ id, email });
+    } else {
+      await patchUserQuery({ id, user });
     }
 
     // Res.send

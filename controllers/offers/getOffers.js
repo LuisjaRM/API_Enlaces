@@ -12,17 +12,25 @@ const getOffers = async (req, res, next) => {
   try {
     const { filter } = req.query;
 
+    let isLogin = false;
+    let userId;
+
+    if (req.userInfo != undefined) {
+      isLogin = true;
+      userId = req.userInfo.id;
+    }
+
     let offers;
 
     if (filter === "all") {
       // Query: get all offers
-      offers = await getAllOffersQuery();
+      offers = await getAllOffersQuery(isLogin, userId);
     } else if (filter === "daily") {
       // Query: get today offers
-      offers = await getDailyOffersQuery();
+      offers = await getDailyOffersQuery(isLogin, userId);
     } else if (filter === "by-votes") {
       // Query: get all offers
-      offers = await getOffersOrderByVotesQuery();
+      offers = await getOffersOrderByVotesQuery(isLogin, userId);
     }
 
     // Res.send

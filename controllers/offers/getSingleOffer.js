@@ -9,9 +9,10 @@ const {
 const getSingleOffer = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const userId = req.userInfo.id;
 
     // Query: get offer by id
-    const offerInfo = await getSingleOfferQuery(id);
+    const offerInfo = await getSingleOfferQuery(id, userId);
 
     // Res.send
     res.status(200).send({

@@ -3,7 +3,7 @@
 const { getConnection } = require("../connectionDB");
 const { generateError } = require("../../services/generateError");
 
-const getPublicInfoQuery = async (id) => {
+const getPublicInfoQuery = async (id, user_id) => {
   let connection;
 
   try {
@@ -42,6 +42,15 @@ const getPublicInfoQuery = async (id) => {
       [id]
     );
 
+    const [favoriteOffer] = await connection.query(
+      `
+      SELECT offer_id
+      FROM favorites
+      WHERE user_id = ? AND favorite = 1;
+`,
+      [user_id]
+    );
+
     // Save the offers with and without votes in the array offers
 
     const offers = [];
@@ -56,6 +65,15 @@ const getPublicInfoQuery = async (id) => {
       .map((offer) => {
         return offer;
       });
+
+    offers.map((offer) => {
+      offer.favorite = false;
+      for (let i = 0; i < favoriteOffer.length; i++) {
+        if (favoriteOffer[i].offer_id === offer.id) {
+          offer.favorite = true;
+        }
+      }
+    });
 
     return { userInfo, offers };
   } finally {

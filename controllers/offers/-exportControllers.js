@@ -1,6 +1,5 @@
 const { deleteComment } = require("./deleteComment");
 const { deleteOffer } = require("./deleteOffer");
-const { getCheckIsFavorite } = require("./getCheckIsFavorite");
 const { getFavoritesOffers } = require("./getFavoritesOffers");
 const { getOffers } = require("./getOffers");
 const { getSingleOffer } = require("./getSingleOffer");
@@ -16,7 +15,6 @@ const { postVote } = require("./postVote");
 module.exports = {
   deleteComment,
   deleteOffer,
-  getCheckIsFavorite,
   getFavoritesOffers,
   getOffers,
   getSingleOffer,

@@ -42,7 +42,7 @@ const patchFavoriteQuery = async (offer_id, user_id) => {
             `,
           [user_id, offer_id]
         );
-      } else {
+      } else if (isFavorite === 0) {
         await connection.query(
           `
             UPDATE favorites

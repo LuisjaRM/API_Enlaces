@@ -29,6 +29,16 @@ const postOffer = async (req, res, next) => {
       throw generateError(validation.error.message, 401);
     }
 
+    const offerExpiry = new Date(offer_expiry);
+    const date = new Date();
+
+    if (date.getTime() > offerExpiry.getTime()) {
+      throw generateError(
+        "La fecha de caducidad no puede ser anterior a hoy",
+        401
+      );
+    }
+
     // Query: Create offer
     const offerId = await postOfferQuery(
       id,

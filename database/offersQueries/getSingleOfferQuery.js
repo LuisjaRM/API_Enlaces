@@ -60,7 +60,11 @@ const getSingleOfferQuery = async (id, user_id) => {
       [user_id, id]
     );
 
-    offerInfo[0].favorite = favoriteOffer[0].favorite;
+    if (favoriteOffer.length < 1) {
+      offerInfo[0].favorite = false;
+    } else {
+      offerInfo[0].favorite = favoriteOffer[0].favorite;
+    }
 
     // Get offer comments
 

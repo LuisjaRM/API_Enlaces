@@ -30,7 +30,7 @@ const postOffer = async (req, res, next) => {
     }
 
     // Query: Create offer
-    const OfferId = await postOfferQuery(
+    const offerId = await postOfferQuery(
       id,
       url,
       title,
@@ -44,7 +44,10 @@ const postOffer = async (req, res, next) => {
     // Res.send
     res.status(201).send({
       status: "ok",
-      message: `Oferta con id (${OfferId}) creada con éxito`,
+      message: `Oferta con id (${offerId}) creada con éxito`,
+      data: {
+        id: offerId,
+      },
     });
   } catch (error) {
     next(error);

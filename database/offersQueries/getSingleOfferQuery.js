@@ -5,7 +5,7 @@ const { generateError } = require("../../services/generateError");
 
 // Query ↓
 
-const getSingleOfferQuery = async (id) => {
+const getSingleOfferQuery = async (id, user_id) => {
   let connection;
   try {
     connection = await getConnection();
@@ -51,6 +51,17 @@ const getSingleOfferQuery = async (id) => {
       offerInfo.push(offerWithVotes[0]);
     }
 
+    const [favoriteOffer] = await connection.query(
+      `
+          SELECT favorite
+          FROM favorites
+          WHERE user_id = ? AND offer_id = ?;
+`,
+      [user_id, id]
+    );
+
+    offerInfo[0].favorite = favoriteOffer[0].favorite;
+
     // Get offer comments
 
     const [commentsWithLikes] = await connection.query(
@@ -78,8 +89,6 @@ const getSingleOfferQuery = async (id) => {
     // Save the comments with and without likes in the array comments
 
     const comments = [];
-
-    console.log(commentsWithLikes);
 
     commentsWithLikes.map((comment) => comments.push(comment));
     commentsWithoutLikes.map((comment) => comments.push(comment));

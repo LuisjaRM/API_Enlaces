@@ -19,10 +19,6 @@ const getFavoritesOffersQuery = async (user_id) => {
       [user_id]
     );
 
-    // if (favoriteOffers < 1) {
-    //   throw generateError("No existen ofertas añadidas a favoritos", 404);
-    // }
-
     let offersWithVotes = [];
     let offersWithoutVotes = [];
 
@@ -69,6 +65,15 @@ const getFavoritesOffersQuery = async (user_id) => {
       .map((offer) => {
         return offer;
       });
+
+    offers.map((offer) => {
+      offer.favorite = false;
+      for (let i = 0; i < favoriteOffers.length; i++) {
+        if (favoriteOffers[i].offer_id === offer.id) {
+          offer.favorite = true;
+        }
+      }
+    });
 
     // Return offers
     return { offers };

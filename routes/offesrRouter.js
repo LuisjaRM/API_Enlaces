@@ -7,6 +7,7 @@ const express = require("express");
 const {
   authUser,
   offerUrlRepeat,
+  checkIsLogin,
 } = require("../middlewares/-exportMiddlewares");
 
 // Controllers requires ↓
@@ -14,7 +15,6 @@ const {
 const {
   deleteComment,
   deleteOffer,
-  getCheckIsFavorite,
   getFavoritesOffers,
   getOffers,
   getSingleOffer,
@@ -34,9 +34,8 @@ const router = express.Router();
 
 router.delete("/comment/:offerId/:commentId", authUser, deleteComment);
 router.delete("/offer/:id", authUser, deleteOffer);
-router.get("/isFavorite/:offerId", authUser, getCheckIsFavorite);
 router.get("/favorites", authUser, getFavoritesOffers);
-router.get("/offers", getOffers);
+router.get("/offers", checkIsLogin, getOffers);
 router.get("/offer/:id", authUser, getSingleOffer);
 router.patch("/comment/:offerId/:commentId", authUser, patchComment);
 router.patch("/favorite/:offerId", authUser, patchFavorite);

@@ -11,7 +11,7 @@ const patchOfferImage = async (req, res, next) => {
     const { offerId } = req.params;
 
     //  Save offerPhoto in a var
-    const filesOfferPhoto = req.files.photo;
+    const filesOfferPhoto = req.files.image;
 
     // Query : Change Photo
     await patchOfferImageQuery(offerId, filesOfferPhoto);

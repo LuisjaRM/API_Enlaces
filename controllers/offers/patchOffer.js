@@ -38,7 +38,10 @@ const patchOffer = async (req, res, next) => {
     const offer = await getSingleOfferQuery(id);
 
     // Check if the user is creator of the offer or is an admin
-    if (req.userInfo.id !== offer.user_id && req.userInfo.role != "admin") {
+    if (
+      req.userInfo.id !== offer.offerInfo[0].user_id &&
+      req.userInfo.role != "admin"
+    ) {
       throw generateError(
         "No estás autorizado para modificar esta oferta",
         401

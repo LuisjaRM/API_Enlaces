@@ -21,7 +21,7 @@ const modifyOfferJoi = Joi.object().keys({
   price: Joi.number().positive().precision(2),
   offer_price: Joi.number().positive().precision(2),
   plataform: Joi.string().max(60),
-  offer_expiry: Joi.date().required(),
+  offer_expiry: Joi.date(),
 });
 
 const voteOfferJoi = Joi.object().keys({

@@ -8,7 +8,7 @@ const {
 
 const postLike = async (req, res, next) => {
   try {
-    const commentId = req.params.id;
+    const commentId = req.params.commentId;
     const userId = req.userInfo.id;
 
     // Query: like comment

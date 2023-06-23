@@ -20,7 +20,7 @@ const deleteOffer = async (req, res, next) => {
 
     // Check if the user is the creator of the offer or is an admin
     if (
-      req.userInfo.id !== offer.offerInfo.user_id &&
+      req.userInfo.id !== offer.offerInfo[0].user_id &&
       req.userInfo.role != "admin"
     ) {
       throw generateError("No estás autorizado para borrar esta oferta", 401);

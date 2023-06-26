@@ -32,12 +32,12 @@ const {
 
 const router = express.Router();
 
-router.delete("/comment/:offerId/:commentId", authUser, deleteComment);
+router.delete("/comment/:commentId", authUser, deleteComment);
 router.delete("/offer/:id", authUser, deleteOffer);
 router.get("/favorites", authUser, getFavoritesOffers);
 router.get("/offers", checkIsLogin, getOffers);
 router.get("/offer/:id", authUser, getSingleOffer);
-router.patch("/comment/:offerId/:commentId", authUser, patchComment);
+router.patch("/comment/:commentId", authUser, patchComment);
 router.patch("/favorite/:offerId", authUser, patchFavorite);
 router.patch("/offer/:id", authUser, patchOffer);
 router.patch("/image/:offerId", authUser, patchOfferImage);

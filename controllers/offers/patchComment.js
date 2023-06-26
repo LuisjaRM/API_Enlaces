@@ -5,7 +5,6 @@ const { generateError } = require("../../services/generateError");
 // Queries requires ↓
 
 const {
-  getSingleOfferQuery,
   getSingleCommentQuery,
   patchCommentQuery,
 } = require("../../database/offersQueries/-exportQueries");
@@ -18,7 +17,7 @@ const { commentOfferJoi } = require("../../jois/offerSchemas");
 
 const patchComment = async (req, res, next) => {
   try {
-    const { offerId, commentId } = req.params;
+    const { commentId } = req.params;
     const { newComment } = req.body;
 
     // Joi validation
@@ -29,9 +28,6 @@ const patchComment = async (req, res, next) => {
       throw generateError(validation.error.message, 401);
     }
 
-    // Query: Check if exists the offer
-    await getSingleOfferQuery(offerId);
-
     // Query: check if comment id exists in offer
     const oldComment = await getSingleCommentQuery(commentId);
 
@@ -41,17 +37,16 @@ const patchComment = async (req, res, next) => {
       req.userInfo.role != "admin"
     ) {
       throw generateError(
-        "No estás autorizado para modificar esta oferta",
+        "No estás autorizado para modificar este comentario",
         401
       );
     }
 
-    const comments = await patchCommentQuery(offerId, commentId, newComment);
+    await patchCommentQuery(commentId, newComment);
 
     res.status(201).send({
       status: "ok",
-      message: `El comentario con id: ${commentId} de la oferta con id: ${offerId} fue modificado con éxito`,
-      data: comments,
+      message: `El comentario con id: ${commentId} fue modificado con éxito`,
     });
   } catch (error) {
     next(error);

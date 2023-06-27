@@ -26,7 +26,49 @@ const postOffer = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      throw generateError(validation.error.message, 401);
+      if (
+        validation.error.message ===
+        `"url" length must be less than or equal to 280 characters long`
+      )
+        throw generateError(
+          "El enlace no puede superar los 280 carácteres",
+          401
+        );
+
+      if (
+        validation.error.message ===
+        `"title" length must be less than or equal to 60 characters long`
+      )
+        throw generateError(
+          "El título no puede superar los 60 carácteres",
+          401
+        );
+
+      if (
+        validation.error.message ===
+        `"descrip" length must be less than or equal to 280 characters long`
+      )
+        throw generateError(
+          "La descripción no puede superar los 280 carácteres",
+          401
+        );
+
+      if (
+        validation.error.message === `"offer_price" must be a positive number`
+      )
+        throw generateError("El precio no puede ser negativo", 401);
+
+      if (validation.error.message === `"price" must be a positive number`)
+        throw generateError("El precio no puede ser negativo", 401);
+
+      if (
+        validation.error.message ===
+        `"plataform" length must be less than or equal to 60 characters long`
+      )
+        throw generateError(
+          "La plataforma no puede superar los 60 carácteres",
+          401
+        );
     }
 
     const offerExpiry = new Date(offer_expiry);

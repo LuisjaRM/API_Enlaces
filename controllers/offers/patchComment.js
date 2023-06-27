@@ -25,7 +25,14 @@ const patchComment = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      throw generateError(validation.error.message, 401);
+      if (
+        validation.error.message ===
+        `"newComment" length must be less than or equal to 280 characters long`
+      )
+        throw generateError(
+          "El comentario no puede superar los 280 carácteres",
+          401
+        );
     }
 
     // Query: check if comment id exists in offer

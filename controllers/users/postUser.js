@@ -21,7 +21,77 @@ const postUser = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      throw generateError(validation.error.message, 401);
+      if (
+        validation.error.message ===
+        `"password" length must be at least 8 characters long`
+      )
+        throw generateError(
+          "La contraseña debe tener al menos 8 carácteres",
+          401
+        );
+
+      if (
+        validation.error.message ===
+        `"password" length must be less than or equal to 20 characters long`
+      )
+        throw generateError(
+          "La contraseña debe tener más de 20 carácteres",
+          401
+        );
+
+      if (
+        validation.error.message ===
+        `"password" should not contain white spaces`
+      )
+        throw generateError(
+          "La contraseña no debe contener espacios en blanco",
+          401
+        );
+
+      if (
+        validation.error.message ===
+        `"password" should contain at least 1 special character`
+      )
+        throw generateError(
+          "La contraseña debe contener al menos un carácter especial",
+          401
+        );
+
+      if (
+        validation.error.message ===
+        `"password" should contain at least 1 uppercase character`
+      )
+        throw generateError(
+          "La contraseña debe contener al menos una letra en mayúscula",
+          401
+        );
+
+      if (
+        validation.error.message ===
+        `"password" should contain at least 1 numeric character`
+      )
+        throw generateError(
+          "La contraseña debe contener al menos un número",
+          401
+        );
+
+      if (
+        validation.error.message ===
+        `"user" length must be at least 4 characters long`
+      )
+        throw generateError(
+          "El nombre de usuario debe contener al menos 4 carácteres",
+          401
+        );
+
+      if (
+        validation.error.message ===
+        `"user" length must be less than or equal to 15 characters long`
+      )
+        throw generateError(
+          "El nombre de usuario no debe contener más de 15 carácteres",
+          401
+        );
     }
 
     // Query: Create new user

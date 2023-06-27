@@ -19,7 +19,7 @@ const offerUrlRepeat = async (req, res, next) => {
     );
 
     if (urlRepeat.length > 0) {
-      throw generateError("Esta url ya tiene una publicación", 409);
+      throw generateError("Este enlace ya tiene una publicación", 409);
     }
 
     next();

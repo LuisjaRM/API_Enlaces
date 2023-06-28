@@ -29,11 +29,11 @@ const voteOfferJoi = Joi.object().keys({
 });
 
 const newCommentOfferJoi = Joi.object().keys({
-  comment: Joi.string().max(280).required(),
+  comment: Joi.string().max(170).required(),
 });
 
 const commentOfferJoi = Joi.object().keys({
-  newComment: Joi.string().max(280).required(),
+  newComment: Joi.string().max(170).required(),
 });
 
 module.exports = {

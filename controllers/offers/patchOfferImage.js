@@ -1,3 +1,7 @@
+// Function require ↓
+
+const { generateError } = require("../../services/generateError");
+
 // Querie require ↓
 
 const {
@@ -10,8 +14,13 @@ const patchOfferImage = async (req, res, next) => {
   try {
     const { offerId } = req.params;
 
-    //  Save offerPhoto in a var
-    const filesOfferPhoto = req.files.image;
+    let filesOfferPhoto;
+    try {
+      //  Save offerPhoto in a var
+      filesOfferPhoto = req.files.image;
+    } catch (error) {
+      throw generateError("No has seleccionado ninguna imagen", 401);
+    }
 
     // Query : Change Photo
     await patchOfferImageQuery(offerId, filesOfferPhoto);

@@ -79,6 +79,18 @@ const patchOffer = async (req, res, next) => {
         );
     }
 
+    if (offer_expiry) {
+      const offerExpiry = new Date(offer_expiry);
+      const date = new Date();
+
+      if (date.getTime() > offerExpiry.getTime()) {
+        throw generateError(
+          "La fecha de caducidad no puede ser anterior a hoy",
+          401
+        );
+      }
+    }
+
     // Check if exists changes in body
     if (Object.entries(req.body).length === 0) {
       throw generateError("No hay ninguna modificación realizada", 409);

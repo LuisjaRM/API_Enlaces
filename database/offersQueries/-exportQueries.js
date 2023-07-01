@@ -5,8 +5,9 @@ const { getCheckIsFavoriteQuery } = require("./getCheckIsFavoriteQuery");
 const { getDailyOffersQuery } = require("./getDailyOffersQuery");
 const { getFavoritesOffersQuery } = require("./getFavoritesOffersQuery");
 const { getOffersOrderByVotesQuery } = require("./getOffersOrderByVotesQuery");
-const { getSingleOfferQuery } = require("./getSingleOfferQuery");
+const { getSearchQuery } = require("./getSearchQuery");
 const { getSingleCommentQuery } = require("./getSingleCommentQuery");
+const { getSingleOfferQuery } = require("./getSingleOfferQuery");
 const { patchCommentQuery } = require("./patchCommentQuery");
 const { patchFavoriteQuery } = require("./patchFavoriteQuery");
 const { patchOfferImageQuery } = require("./patchOfferImageQuery");
@@ -24,8 +25,9 @@ module.exports = {
   getDailyOffersQuery,
   getFavoritesOffersQuery,
   getOffersOrderByVotesQuery,
-  getSingleOfferQuery,
+  getSearchQuery,
   getSingleCommentQuery,
+  getSingleOfferQuery,
   patchCommentQuery,
   patchFavoriteQuery,
   patchOfferImageQuery,

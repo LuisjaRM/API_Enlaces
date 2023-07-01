@@ -17,6 +17,7 @@ const {
   deleteOffer,
   getFavoritesOffers,
   getOffers,
+  getSearch,
   getSingleOffer,
   patchComment,
   patchFavorite,
@@ -36,6 +37,7 @@ router.delete("/comment/:commentId", authUser, deleteComment);
 router.delete("/offer/:id", authUser, deleteOffer);
 router.get("/favorites", authUser, getFavoritesOffers);
 router.get("/offers", checkIsLogin, getOffers);
+router.get("/search", checkIsLogin, getSearch);
 router.get("/offer/:id", authUser, getSingleOffer);
 router.patch("/comment/:commentId", authUser, patchComment);
 router.patch("/favorite/:offerId", authUser, patchFavorite);

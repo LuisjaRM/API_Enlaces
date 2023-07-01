@@ -2,6 +2,7 @@ const { deleteComment } = require("./deleteComment");
 const { deleteOffer } = require("./deleteOffer");
 const { getFavoritesOffers } = require("./getFavoritesOffers");
 const { getOffers } = require("./getOffers");
+const { getSearch } = require("./getSearch");
 const { getSingleOffer } = require("./getSingleOffer");
 const { patchComment } = require("./patchComment");
 const { patchFavorite } = require("./patchFavorite");
@@ -17,6 +18,7 @@ module.exports = {
   deleteOffer,
   getFavoritesOffers,
   getOffers,
+  getSearch,
   getSingleOffer,
   patchComment,
   patchFavorite,

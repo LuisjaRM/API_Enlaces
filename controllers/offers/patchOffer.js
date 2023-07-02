@@ -68,15 +68,6 @@ const patchOffer = async (req, res, next) => {
 
       if (validation.error.message === `"price" must be a positive number`)
         throw generateError("El precio no puede ser negativo", 401);
-
-      if (
-        validation.error.message ===
-        `"plataform" length must be less than or equal to 60 characters long`
-      )
-        throw generateError(
-          "La plataforma no puede superar los 60 carácteres",
-          401
-        );
     }
 
     if (offer_expiry) {

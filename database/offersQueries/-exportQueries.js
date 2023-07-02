@@ -4,6 +4,7 @@ const { getAllOffersQuery } = require("./getAllOffersQuery");
 const { getCheckIsFavoriteQuery } = require("./getCheckIsFavoriteQuery");
 const { getDailyOffersQuery } = require("./getDailyOffersQuery");
 const { getFavoritesOffersQuery } = require("./getFavoritesOffersQuery");
+const { getFilterOffersQuery } = require("./getFilterOffersQuery");
 const { getOffersOrderByVotesQuery } = require("./getOffersOrderByVotesQuery");
 const { getSearchQuery } = require("./getSearchQuery");
 const { getSingleCommentQuery } = require("./getSingleCommentQuery");
@@ -24,6 +25,7 @@ module.exports = {
   getCheckIsFavoriteQuery,
   getDailyOffersQuery,
   getFavoritesOffersQuery,
+  getFilterOffersQuery,
   getOffersOrderByVotesQuery,
   getSearchQuery,
   getSingleCommentQuery,

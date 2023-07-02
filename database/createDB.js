@@ -51,7 +51,7 @@ async function createDB() {
         descrip VARCHAR(280),
         price decimal(10,2),
         offer_price decimal(10,2),
-        plataform VARCHAR(60),
+        plataform ENUM("Playstation-5", "Playstation-4", "Xbox-One", "Xbox-Series", "Nintendo-Switch", "PC-Gaming"),
         offer_expiry date,
         photo VARCHAR(250),
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,

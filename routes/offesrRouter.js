@@ -16,6 +16,7 @@ const {
   deleteComment,
   deleteOffer,
   getFavoritesOffers,
+  getFilterOffers,
   getOffers,
   getSearch,
   getSingleOffer,
@@ -36,6 +37,7 @@ const router = express.Router();
 router.delete("/comment/:commentId", authUser, deleteComment);
 router.delete("/offer/:id", authUser, deleteOffer);
 router.get("/favorites", authUser, getFavoritesOffers);
+router.get("/offers/:plataform", checkIsLogin, getFilterOffers);
 router.get("/offers", checkIsLogin, getOffers);
 router.get("/search", checkIsLogin, getSearch);
 router.get("/offer/:id", authUser, getSingleOffer);

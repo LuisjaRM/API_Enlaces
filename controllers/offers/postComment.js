@@ -26,14 +26,7 @@ const postComment = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      if (
-        validation.error.message ===
-        `"comment" length must be less than or equal to 170 characters long`
-      )
-        throw generateError(
-          "El comentario no puede superar los 170 carácteres",
-          401
-        );
+      throw generateError(validation.error.message, 401);
     }
 
     // Query: Get information of the offer that we want to comment

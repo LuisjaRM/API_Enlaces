@@ -37,18 +37,20 @@ const getFavoritesOffersQuery = async (user_id) => {
         [offer_id]
       );
 
-      const [offersWithoutVotesQuery] = await connection.query(
-        `
-           SELECT o.*, u.user, u.avatar
-           FROM offers o
-           INNER JOIN users u ON o.user_id = u.id
-           WHERE o.id = ?;
-     `,
-        [offer_id]
-      );
-
       offersWithVotesQuery.map((offer) => offersWithVotes.push(offer));
-      offersWithoutVotesQuery.map((offer) => offersWithoutVotes.push(offer));
+
+      if (offersWithVotesQuery.length < 1) {
+        const [offersWithoutVotesQuery] = await connection.query(
+          `
+             SELECT o.*, u.user, u.avatar
+             FROM offers o
+             INNER JOIN users u ON o.user_id = u.id
+             WHERE o.id = ?;
+       `,
+          [offer_id]
+        );
+        offersWithoutVotesQuery.map((offer) => offersWithoutVotes.push(offer));
+      }
     }
 
     // Save the offers with and without votes in the array offers

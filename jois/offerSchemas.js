@@ -6,7 +6,7 @@ const Joi = require("joi");
 
 const newOfferJoi = Joi.object().keys({
   url: Joi.string().uri().max(280).required(),
-  title: Joi.string().max(60).required(),
+  title: Joi.string().max(30).required(),
   descrip: Joi.string().max(280),
   price: Joi.number().positive().precision(2),
   offer_price: Joi.number().positive().precision(2),
@@ -16,7 +16,7 @@ const newOfferJoi = Joi.object().keys({
 
 const modifyOfferJoi = Joi.object().keys({
   url: Joi.string().uri().max(280),
-  title: Joi.string().max(60),
+  title: Joi.string().max(30),
   descrip: Joi.string().max(280),
   price: Joi.number().positive().precision(2),
   offer_price: Joi.number().positive().precision(2),

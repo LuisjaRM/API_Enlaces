@@ -17,7 +17,7 @@ const postResetPasswordQuery = async (recoverCode, newPassword) => {
     // Check if recoverCode is correct
     const [user] = await connection.query(
       `
-          SELECT id
+          SELECT *
           FROM users
           WHERE recoverCode = ?
         `,
@@ -26,6 +26,13 @@ const postResetPasswordQuery = async (recoverCode, newPassword) => {
 
     if (user.length === 0) {
       throw generateError("Código de recuperación incorrecto", 401);
+    }
+
+    if (user.user === newPassword) {
+      throw generateError(
+        "La contraseña no puede coincidir con el nombre de usuario",
+        401
+      );
     }
 
     // Crypt newPassword

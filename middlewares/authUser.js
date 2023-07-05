@@ -38,19 +38,17 @@ const authUser = async (req, res, next) => {
         [tokenInfo.id]
       );
 
-      if (user.length > 0) {
-        // Transfrom lastAuthUpdate and timestamp to Date format
-        const lastAuthUpdate = new Date(user[0].lastAuthUpdate);
-        const timestampCreateToken = new Date(tokenInfo.iat * 1000);
+      // Transfrom lastAuthUpdate and timestamp to Date format
+      const lastAuthUpdate = new Date(user[0].lastAuthUpdate);
+      const timestampCreateToken = new Date(tokenInfo.iat * 1000);
 
-        // Check if token is expired
-        if (timestampCreateToken < lastAuthUpdate) {
-          throw generateError("Token caducado", 401);
-        }
-
-        // Introduces token info in req
-        req.userInfo = tokenInfo;
+      // Check if token is expired
+      if (timestampCreateToken < lastAuthUpdate) {
+        throw generateError("Token caducado", 401);
       }
+
+      // Introduces token info in req
+      req.userInfo = tokenInfo;
     }
 
     next();

@@ -10,7 +10,7 @@ const newOfferJoi = Joi.object().keys({
   descrip: Joi.string().max(280),
   price: Joi.number().positive().precision(2),
   offer_price: Joi.number().positive().precision(2),
-  plataform: Joi.required(),
+  plataform: Joi.string(),
   offer_expiry: Joi.date().required(),
 });
 
@@ -20,7 +20,7 @@ const modifyOfferJoi = Joi.object().keys({
   descrip: Joi.string().max(280),
   price: Joi.number().positive().precision(2),
   offer_price: Joi.number().positive().precision(2),
-  plataform: Joi.required(),
+  plataform: Joi.string(),
   offer_expiry: Joi.date(),
 });
 

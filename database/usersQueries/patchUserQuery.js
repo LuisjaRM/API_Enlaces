@@ -41,7 +41,7 @@ const patchUserQuery = async ({ id, email, user, filesAvatar }) => {
       );
     } else if (email) {
       //  Check is not the same that old email
-      if (userSelected.email === email) {
+      if (userSelected[0].email === email) {
         throw generateError("Ya estás registrado con este email", 409);
       }
 
@@ -87,7 +87,7 @@ const patchUserQuery = async ({ id, email, user, filesAvatar }) => {
       );
     } else {
       //  Check is not the same that old username
-      if (userSelected.user === user) {
+      if (userSelected[0].user === user) {
         throw generateError("Ya estás registrado con este username", 409);
       }
 
